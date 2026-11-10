@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Entrar — PET Lock</title>
+<link rel="stylesheet" href="../../design-system/tokens.css">
+<link rel="stylesheet" href="../../design-system/petlock.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:var(--lock-ink)}a:hover{color:var(--ink)}
+
+</style>
+</head>
+<body>
+<div data-theme="light" style="min-height: 100vh; background: var(--bg); color: var(--ink); font-family: var(--font-sans); display: flex; flex-wrap: wrap">
+<section style="flex: 1 1 520px; background: var(--chassis); color: var(--on-chassis); padding: 56px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; min-height: 100vh">
+<img src="../../design-system/assets/petlock-logo-fundo-escuro.svg" alt="PET Lock" style="height: 64px; align-self: flex-start">
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 24px; max-width: 460px">
+<div class="pl-lock" style="background: var(--chassis-raised); border-color: transparent; box-shadow: none; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; align-items: center"><span style="font: 600 15px/22px var(--font-display)">Porta da sala do PET</span><span class="pl-pill online live" style="background: rgba(255,255,255,.08); color: var(--lock)"><span class="dot"></span>Online</span></div>
+<div class="pl-lcd" role="img" aria-label="Display: Aguardando acesso..." style="width: 100%; font-size: 18px; line-height: 24px; padding: 14px 18px">Aguardando
+acesso...</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; gap: 10px; align-items: center; padding: 12px; border-radius: var(--radius-md); background: rgba(255,255,255,.06)"><span class="pl-cred-ico finger"><svg class="pl-ico" viewBox="19 75 36 36" aria-hidden="true" style="stroke-width:3.2"><path d="M28.349 103.019C28.3757 102.974 28.4031 102.929 28.4312 102.885C30.4779 99.6311 31.6627 95.7836 31.6627 91.6406C31.6627 88.3026 34.3687 85.5965 37.7069 85.5965C41.045 85.5965 43.751 88.3026 43.751 91.6406C43.751 93.1775 43.6463 94.6907 43.4438 96.1738M40.2443 106.515C41.1687 104.67 41.9265 102.727 42.4981 100.707M48.299 102.417C49.2736 98.9926 49.7953 95.3776 49.7953 91.6405C49.7953 84.9643 44.3833 79.5522 37.7071 79.5522C35.5053 79.5522 33.441 80.1409 31.663 81.1694M24.1078 98.2348C25.0759 96.2421 25.6189 94.0047 25.6189 91.6405C25.6189 89.4387 26.2075 87.3744 27.2361 85.5963M37.7069 91.6408C37.7069 96.9554 36.1826 101.914 33.5474 106.103"/></svg></span><span style="font-size: 13px">Digital</span></div>
+<div style="display: flex; gap: 10px; align-items: center; padding: 12px; border-radius: var(--radius-md); background: rgba(255,255,255,.06)"><span class="pl-cred-ico rfid"><svg class="pl-ico" viewBox="72.9 72.65 40 40" aria-hidden="true" style="stroke-width:3.4"><path d="M100.633 84.9447C104.889 89.2008 104.889 96.1012 100.633 100.357M85.2208 100.357C80.9648 96.101 80.9648 89.2006 85.2208 84.9447M80.0833 105.495C72.99 98.4013 72.99 86.9006 80.0833 79.8072M105.771 79.8073C112.864 86.9007 112.864 98.4013 105.771 105.495M96.5598 92.651C96.5598 94.6572 94.9334 96.2837 92.927 96.2837C90.9207 96.2837 89.2943 94.6572 89.2943 92.651C89.2943 90.6446 90.9207 89.0182 92.927 89.0182C94.9334 89.0182 96.5598 90.6446 96.5598 92.651Z"/></svg></span><span style="font-size: 13px">Cartão RFID</span></div>
+</div>
+</div>
+<p style="margin: 0; font-size: 14px; line-height: 22px; color: var(--on-chassis-muted)">A fechadura continua funcionando sem internet. Este painel cadastra membros, identifica digitais e cartões e mostra quem entrou na sala.</p>
+</div>
+<span style="font-size: 12px; color: var(--on-chassis-muted)">PET Engenharia de Computação · UFC Campus Sobral</span>
+</section>
+<section style="flex: 1 1 520px; display: flex; align-items: center; justify-content: center; padding: 56px 32px; box-sizing: border-box">
+<form style="width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 24px" action="Main.dc.html">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<h1 style="margin: 0; font: 700 32px/38px var(--font-display); letter-spacing: -0.02em">Entrar no painel</h1>
+<p style="margin: 0; color: var(--ink-muted)">Acesso para petianos e tutores com conta da UFC.</p>
+</div>
+<a href="02-visao-geral.html" class="pl-btn pl-btn-lg pl-btn-block" style="gap: 12px"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.4h6.5a5.6 5.6 0 0 1-2.4 3.6v3h3.9c2.3-2.1 3.5-5.2 3.5-8.7z"/><path fill="#34A853" d="M12 24c3.2 0 6-1.1 8-2.9l-3.9-3c-1.1.7-2.5 1.2-4.1 1.2-3.1 0-5.8-2.1-6.7-5H1.3v3.1A12 12 0 0 0 12 24z"/><path fill="#FBBC05" d="M5.3 14.3a7.2 7.2 0 0 1 0-4.6V6.6h-4a12 12 0 0 0 0 10.8z"/><path fill="#EA4335" d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4A12 12 0 0 0 1.3 6.6l4 3.1c.9-2.8 3.6-4.9 6.7-4.9z"/></svg>Entrar com Google</a>
+<div style="display: flex; align-items: center; gap: 12px; color: var(--ink-subtle); font-size: 12px"><span style="flex: 1; height: 1px; background: var(--line)"></span>ou com e-mail<span style="flex: 1; height: 1px; background: var(--line)"></span></div>
+<div class="pl-field"><label class="pl-label" for="email">E-mail institucional</label><input id="email" class="pl-input" type="email" placeholder="voce@alu.ufc.br" style="height: 48px"></div>
+<div class="pl-field"><div style="display: flex; justify-content: space-between"><label class="pl-label" for="senha">Senha</label><a href="#" style="font-size: 13px; font-weight: 500">Esqueci a senha</a></div><input id="senha" class="pl-input" type="password" value="senhasecreta" style="height: 48px"></div>
+<a href="02-visao-geral.html" class="pl-btn pl-btn-primary pl-btn-lg pl-btn-block">Entrar</a>
+<div class="pl-alert info"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg><div>Ainda não tem acesso? Peça a um administrador do PET para cadastrar você na fechadura.</div></div>
+</form>
+</section>
+</div>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Credenciais — PET Lock</title>
+<link rel="stylesheet" href="../../design-system/tokens.css">
+<link rel="stylesheet" href="../../design-system/petlock.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:var(--lock-ink)}a:hover{color:var(--ink)}
+
+</style>
+</head>
+<body>
+<div data-theme="light" style="min-height: 100vh; background: var(--bg); color: var(--ink); font-family: var(--font-sans); display: flex; flex-wrap: wrap; align-items: stretch">
+<aside class="pl-side" style="flex: 1 1 248px; width: auto; max-width: 248px; min-height: 100vh; box-sizing: border-box">
+<a href="02-visao-geral.html" class="brand" style="display: flex; text-decoration: none"><img src="../../design-system/assets/petlock-logo-fundo-escuro.svg" alt="PET Lock" style="height: 44px"></a>
+<nav class="pl-nav" aria-label="Principal">
+<a href="02-visao-geral.html"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Visão geral</a><a href="03-membros.html"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Membros</a><a href="05-cadastro-formulario.html"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Novo cadastro</a><a href="07-registros.html"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Registros de acesso</a><div class="grp">Fechadura</div><a href="06-credenciais.html" aria-current="page"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10v4M11 10v4M15 10v4M7 18v3M12 18v3M17 18v3"/></svg>Credenciais<span class="badge">2</span></a><a href="08-dispositivo.html"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><rect x="6" y="6" width="12" height="4" rx="1"/><rect x="6" y="13" width="5" height="5" rx="1"/><rect x="13" y="13" width="5" height="5" rx="1"/></svg>Dispositivo</a>
+</nav>
+<a href="08-dispositivo.html" class="pl-side-lock" style="text-decoration: none; color: var(--on-chassis)">
+<div style="display: flex; justify-content: space-between; align-items: center"><span>Sala do PET</span><span class="pl-pill online live" style="background: rgba(255,255,255,.08); color: var(--lock); height: 20px"><span class="dot"></span>Online</span></div>
+<div class="pl-lcd" role="img" aria-label="Display: Aguardando acesso..." style="">Aguardando
+acesso...</div>
+</a>
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 12px">
+<span class="pl-avatar" style="background: var(--chassis-raised); color: var(--on-chassis)">VF</span>
+<div style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 13px; font-weight: 600; color: var(--on-chassis)">Vanderlei F.</span><span style="font-size: 12px; color: var(--on-chassis-muted)">Administrador</span></div>
+<a href="01-login.html" class="pl-btn pl-btn-ghost pl-btn-icon pl-btn-sm" aria-label="Sair" style="margin-left: auto; color: var(--on-chassis-muted)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></a>
+</div>
+</aside>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+<header class="pl-top" style="flex-wrap: wrap; height: auto; min-height: 64px; padding: 12px 32px; gap: 12px">
+<div style="display: flex; flex-direction: column"><h1>Credenciais na fechadura</h1><span style="font-size: 13px; color: var(--ink-subtle)">O que está gravado no sensor e na EEPROM, e de quem é</span></div>
+<div class="right" style="flex-wrap: wrap">
+<div class="pl-input-wrap" style="width: 320px; max-width: 100%"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><label class="pl-sr" for="busca">Buscar</label><input id="busca" class="pl-input" placeholder="Buscar membro, UID ou ID da digital"></div>
+<button class="pl-btn pl-btn-ghost pl-btn-icon" aria-label="Notificações"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button>
+<button class="pl-btn"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/></svg>Ler inventário agora</button>
+</div>
+</header>
+<main style="padding: 32px; display: flex; flex-direction: column; gap: 24px; max-width: 1280px; width: 100%; box-sizing: border-box">
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px"><section class="pl-card">
+<div style="padding: 0 24px; border-bottom: 1px solid var(--line)"><div class="pl-tabs" role="tablist" style="border-bottom: 0">
+<button role="tab" aria-selected="true"><svg class="pl-ico sm" viewBox="19 75 36 36" aria-hidden="true" style="stroke-width:3.2"><path d="M28.349 103.019C28.3757 102.974 28.4031 102.929 28.4312 102.885C30.4779 99.6311 31.6627 95.7836 31.6627 91.6406C31.6627 88.3026 34.3687 85.5965 37.7069 85.5965C41.045 85.5965 43.751 88.3026 43.751 91.6406C43.751 93.1775 43.6463 94.6907 43.4438 96.1738M40.2443 106.515C41.1687 104.67 41.9265 102.727 42.4981 100.707M48.299 102.417C49.2736 98.9926 49.7953 95.3776 49.7953 91.6405C49.7953 84.9643 44.3833 79.5522 37.7071 79.5522C35.5053 79.5522 33.441 80.1409 31.663 81.1694M24.1078 98.2348C25.0759 96.2421 25.6189 94.0047 25.6189 91.6405C25.6189 89.4387 26.2075 87.3744 27.2361 85.5963M37.7069 91.6408C37.7069 96.9554 36.1826 101.914 33.5474 106.103"/></svg>Digitais <span class="count">34/127</span></button>
+<button role="tab"><svg class="pl-ico sm" viewBox="72.9 72.65 40 40" aria-hidden="true" style="stroke-width:3.4"><path d="M100.633 84.9447C104.889 89.2008 104.889 96.1012 100.633 100.357M85.2208 100.357C80.9648 96.101 80.9648 89.2006 85.2208 84.9447M80.0833 105.495C72.99 98.4013 72.99 86.9006 80.0833 79.8072M105.771 79.8073C112.864 86.9007 112.864 98.4013 105.771 105.495M96.5598 92.651C96.5598 94.6572 94.9334 96.2837 92.927 96.2837C90.9207 96.2837 89.2943 94.6572 89.2943 92.651C89.2943 90.6446 90.9207 89.0182 92.927 89.0182C94.9334 89.0182 96.5598 90.6446 96.5598 92.651Z"/></svg>Cartões <span class="count">21/126</span></button>
+<button role="tab">Sem dono <span class="count">2</span></button>
+</div></div>
+<div class="pl-card-b" style="display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center">
+<p style="margin: 0; color: var(--ink-muted); max-width: 560px">Cada quadrado é uma posição de memória do sensor DY50. O número é o ID que aparece nos registros de acesso.</p>
+<span class="pl-subtle" style="display: inline-flex; gap: 6px; align-items: center"><svg class="pl-ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/></svg>Inventário lido da fechadura às 14:30</span>
+</div>
+<div class="pl-slots" role="listbox" aria-label="Posições do sensor de digitais" style="grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); grid-auto-rows: 36px">
+
+<button class="pl-slot finger" title="Digital #1, Prof. Gustavo Teixeira" aria-label="Digital #1, Prof. Gustavo Teixeira" style="height: 36px">1</button>
+
+<button class="pl-slot finger" title="Digital #2, membro do PET" aria-label="Digital #2, membro do PET" style="height: 36px">2</button>
+
+<button class="pl-slot finger" title="Digital #3, Rafael Albuquerque" aria-label="Digital #3, Rafael Albuquerque" style="height: 36px">3</button>
+
+<button class="pl-slot finger" title="Digital #4, membro do PET" aria-label="Digital #4, membro do PET" style="height: 36px">4</button>
+
+<button class="pl-slot finger" title="Digital #5, Ana Beatriz Rocha" aria-label="Digital #5, Ana Beatriz Rocha" style="height: 36px">5</button>
+
+<button class="pl-slot finger" title="Digital #6, membro do PET" aria-label="Digital #6, membro do PET" style="height: 36px">6</button>
+
+<button class="pl-slot finger" title="Digital #7, membro do PET" aria-label="Digital #7, membro do PET" style="height: 36px">7</button>
+
+<button class="pl-slot finger" title="Digital #8, membro do PET" aria-label="Digital #8, membro do PET" style="height: 36px">8</button>
+
+<button class="pl-slot finger" title="Digital #9, Lucas Ferreira" aria-label="Digital #9, Lucas Ferreira" style="height: 36px">9</button>
+
+<button class="pl-slot finger" title="Digital #10, membro do PET" aria-label="Digital #10, membro do PET" style="height: 36px">10</button>
+
+<button class="pl-slot finger" title="Digital #11, membro do PET" aria-label="Digital #11, membro do PET" style="height: 36px">11</button>
+
+<button class="pl-slot finger" title="Digital #12, Maria Clara Sousa" aria-label="Digital #12, Maria Clara Sousa" style="height: 36px">12</button>
+
+<button class="pl-slot finger" title="Digital #13, membro do PET" aria-label="Digital #13, membro do PET" style="height: 36px">13</button>
+
+<button class="pl-slot finger" title="Digital #14, membro do PET" aria-label="Digital #14, membro do PET" style="height: 36px">14</button>
+
+<button class="pl-slot finger" title="Digital #15, membro do PET" aria-label="Digital #15, membro do PET" style="height: 36px">15</button>
+
+<button class="pl-slot finger" title="Digital #16, membro do PET" aria-label="Digital #16, membro do PET" style="height: 36px">16</button>
+
+<button class="pl-slot finger" title="Digital #17, membro do PET" aria-label="Digital #17, membro do PET" style="height: 36px">17</button>
+
+<button class="pl-slot finger" title="Digital #18, Isabela Martins" aria-label="Digital #18, Isabela Martins" style="height: 36px">18</button>
+
+<button class="pl-slot finger" title="Digital #19, membro do PET" aria-label="Digital #19, membro do PET" style="height: 36px">19</button>
+
+<button class="pl-slot finger" title="Digital #20, membro do PET" aria-label="Digital #20, membro do PET" style="height: 36px">20</button>
+
+<button class="pl-slot finger" title="Digital #21, Larissa Souza" aria-label="Digital #21, Larissa Souza" style="height: 36px">21</button>
+
+<button class="pl-slot finger" title="Digital #22, membro do PET" aria-label="Digital #22, membro do PET" style="height: 36px">22</button>
+
+<button class="pl-slot finger" title="Digital #23, membro do PET" aria-label="Digital #23, membro do PET" style="height: 36px">23</button>
+
+<button class="pl-slot finger" title="Digital #24, membro do PET" aria-label="Digital #24, membro do PET" style="height: 36px">24</button>
+
+<button class="pl-slot finger" title="Digital #25, membro do PET" aria-label="Digital #25, membro do PET" style="height: 36px">25</button>
+
+<button class="pl-slot finger" title="Digital #26, membro do PET" aria-label="Digital #26, membro do PET" style="height: 36px">26</button>
+
+<button class="pl-slot orphan is-selected" title="Digital #27, sem dono" aria-label="Digital #27, sem dono" style="height: 36px">27</button>
+
+<button class="pl-slot finger" title="Digital #28, membro do PET" aria-label="Digital #28, membro do PET" style="height: 36px">28</button>
+
+<button class="pl-slot finger" title="Digital #29, membro do PET" aria-label="Digital #29, membro do PET" style="height: 36px">29</button>
+
+<button class="pl-slot finger" title="Digital #30, membro do PET" aria-label="Digital #30, membro do PET" style="height: 36px">30</button>
+
+<button class="pl-slot orphan" title="Digital #31, sem dono" aria-label="Digital #31, sem dono" style="height: 36px">31</button>
+
+<button class="pl-slot finger" title="Digital #32, membro do PET" aria-label="Digital #32, membro do PET" style="height: 36px">32</button>
+
+<button class="pl-slot finger" title="Digital #33, membro do PET" aria-label="Digital #33, membro do PET" style="height: 36px">33</button>
+
+<button class="pl-slot finger" title="Digital #34, membro do PET" aria-label="Digital #34, membro do PET" style="height: 36px">34</button>
+
+<button class="pl-slot " title="Posição 35, livre" aria-label="Posição 35, livre" style="height: 36px">35</button>
+
+<button class="pl-slot " title="Posição 36, livre" aria-label="Posição 36, livre" style="height: 36px">36</button>
+
+<button class="pl-slot " title="Posição 37, livre" aria-label="Posição 37, livre" style="height: 36px">37</button>
+
+<button class="pl-slot " title="Posição 38, livre" aria-label="Posição 38, livre" style="height: 36px">38</button>
+
+<button class="pl-slot " title="Posição 39, livre" aria-label="Posição 39, livre" style="height: 36px">39</button>
+
+<button class="pl-slot " title="Posição 40, livre" aria-label="Posição 40, livre" style="height: 36px">40</button>
+
+<button class="pl-slot " title="Posição 41, livre" aria-label="Posição 41, livre" style="height: 36px">41</button>
+
+<button class="pl-slot " title="Posição 42, livre" aria-label="Posição 42, livre" style="height: 36px">42</button>
+
+<button class="pl-slot " title="Posição 43, livre" aria-label="Posição 43, livre" style="height: 36px">43</button>
+
+<button class="pl-slot " title="Posição 44, livre" aria-label="Posição 44, livre" style="height: 36px">44</button>
+
+<button class="pl-slot " title="Posição 45, livre" aria-label="Posição 45, livre" style="height: 36px">45</button>
+
+<button class="pl-slot " title="Posição 46, livre" aria-label="Posição 46, livre" style="height: 36px">46</button>
+
+<button class="pl-slot " title="Posição 47, livre" aria-label="Posição 47, livre" style="height: 36px">47</button>
+
+<button class="pl-slot " title="Posição 48, livre" aria-label="Posição 48, livre" style="height: 36px">48</button>
+
+<button class="pl-slot " title="Posição 49, livre" aria-label="Posição 49, livre" style="height: 36px">49</button>
+
+<button class="pl-slot " title="Posição 50, livre" aria-label="Posição 50, livre" style="height: 36px">50</button>
+
+<button class="pl-slot " title="Posição 51, livre" aria-label="Posição 51, livre" style="height: 36px">51</button>
+
+<button class="pl-slot " title="Posição 52, livre" aria-label="Posição 52, livre" style="height: 36px">52</button>
+
+<button class="pl-slot " title="Posição 53, livre" aria-label="Posição 53, livre" style="height: 36px">53</button>
+
+<button class="pl-slot " title="Posição 54, livre" aria-label="Posição 54, livre" style="height: 36px">54</button>
+
+<button class="pl-slot " title="Posição 55, livre" aria-label="Posição 55, livre" style="height: 36px">55</button>
+
+<button class="pl-slot " title="Posição 56, livre" aria-label="Posição 56, livre" style="height: 36px">56</button>
+
+<button class="pl-slot " title="Posição 57, livre" aria-label="Posição 57, livre" style="height: 36px">57</button>
+
+<button class="pl-slot " title="Posição 58, livre" aria-label="Posição 58, livre" style="height: 36px">58</button>
+
+<button class="pl-slot " title="Posição 59, livre" aria-label="Posição 59, livre" style="height: 36px">59</button>
+
+<button class="pl-slot " title="Posição 60, livre" aria-label="Posição 60, livre" style="height: 36px">60</button>
+
+<button class="pl-slot " title="Posição 61, livre" aria-label="Posição 61, livre" style="height: 36px">61</button>
+
+<button class="pl-slot " title="Posição 62, livre" aria-label="Posição 62, livre" style="height: 36px">62</button>
+
+<button class="pl-slot " title="Posição 63, livre" aria-label="Posição 63, livre" style="height: 36px">63</button>
+
+<button class="pl-slot " title="Posição 64, livre" aria-label="Posição 64, livre" style="height: 36px">64</button>
+
+<button class="pl-slot " title="Posição 65, livre" aria-label="Posição 65, livre" style="height: 36px">65</button>
+
+<button class="pl-slot " title="Posição 66, livre" aria-label="Posição 66, livre" style="height: 36px">66</button>
+
+<button class="pl-slot " title="Posição 67, livre" aria-label="Posição 67, livre" style="height: 36px">67</button>
+
+<button class="pl-slot " title="Posição 68, livre" aria-label="Posição 68, livre" style="height: 36px">68</button>
+
+<button class="pl-slot " title="Posição 69, livre" aria-label="Posição 69, livre" style="height: 36px">69</button>
+
+<button class="pl-slot " title="Posição 70, livre" aria-label="Posição 70, livre" style="height: 36px">70</button>
+
+<button class="pl-slot " title="Posição 71, livre" aria-label="Posição 71, livre" style="height: 36px">71</button>
+
+<button class="pl-slot " title="Posição 72, livre" aria-label="Posição 72, livre" style="height: 36px">72</button>
+
+<button class="pl-slot " title="Posição 73, livre" aria-label="Posição 73, livre" style="height: 36px">73</button>
+
+<button class="pl-slot " title="Posição 74, livre" aria-label="Posição 74, livre" style="height: 36px">74</button>
+
+<button class="pl-slot " title="Posição 75, livre" aria-label="Posição 75, livre" style="height: 36px">75</button>
+
+<button class="pl-slot " title="Posição 76, livre" aria-label="Posição 76, livre" style="height: 36px">76</button>
+
+<button class="pl-slot " title="Posição 77, livre" aria-label="Posição 77, livre" style="height: 36px">77</button>
+
+<button class="pl-slot " title="Posição 78, livre" aria-label="Posição 78, livre" style="height: 36px">78</button>
+
+<button class="pl-slot " title="Posição 79, livre" aria-label="Posição 79, livre" style="height: 36px">79</button>
+
+<button class="pl-slot " title="Posição 80, livre" aria-label="Posição 80, livre" style="height: 36px">80</button>
+
+<button class="pl-slot " title="Posição 81, livre" aria-label="Posição 81, livre" style="height: 36px">81</button>
+
+<button class="pl-slot " title="Posição 82, livre" aria-label="Posição 82, livre" style="height: 36px">82</button>
+
+<button class="pl-slot " title="Posição 83, livre" aria-label="Posição 83, livre" style="height: 36px">83</button>
+
+<button class="pl-slot " title="Posição 84, livre" aria-label="Posição 84, livre" style="height: 36px">84</button>
+
+<button class="pl-slot " title="Posição 85, livre" aria-label="Posição 85, livre" style="height: 36px">85</button>
+
+<button class="pl-slot " title="Posição 86, livre" aria-label="Posição 86, livre" style="height: 36px">86</button>
+
+<button class="pl-slot " title="Posição 87, livre" aria-label="Posição 87, livre" style="height: 36px">87</button>
+
+<button class="pl-slot " title="Posição 88, livre" aria-label="Posição 88, livre" style="height: 36px">88</button>
+
+<button class="pl-slot " title="Posição 89, livre" aria-label="Posição 89, livre" style="height: 36px">89</button>
+
+<button class="pl-slot " title="Posição 90, livre" aria-label="Posição 90, livre" style="height: 36px">90</button>
+
+<button class="pl-slot " title="Posição 91, livre" aria-label="Posição 91, livre" style="height: 36px">91</button>
+
+<button class="pl-slot " title="Posição 92, livre" aria-label="Posição 92, livre" style="height: 36px">92</button>
+
+<button class="pl-slot " title="Posição 93, livre" aria-label="Posição 93, livre" style="height: 36px">93</button>
+
+<button class="pl-slot " title="Posição 94, livre" aria-label="Posição 94, livre" style="height: 36px">94</button>
+
+<button class="pl-slot " title="Posição 95, livre" aria-label="Posição 95, livre" style="height: 36px">95</button>
+
+<button class="pl-slot " title="Posição 96, livre" aria-label="Posição 96, livre" style="height: 36px">96</button>
+
+<button class="pl-slot " title="Posição 97, livre" aria-label="Posição 97, livre" style="height: 36px">97</button>
+
+<button class="pl-slot " title="Posição 98, livre" aria-label="Posição 98, livre" style="height: 36px">98</button>
+
+<button class="pl-slot " title="Posição 99, livre" aria-label="Posição 99, livre" style="height: 36px">99</button>
+
+<button class="pl-slot " title="Posição 100, livre" aria-label="Posição 100, livre" style="height: 36px">100</button>
+
+<button class="pl-slot " title="Posição 101, livre" aria-label="Posição 101, livre" style="height: 36px">101</button>
+
+<button class="pl-slot " title="Posição 102, livre" aria-label="Posição 102, livre" style="height: 36px">102</button>
+
+<button class="pl-slot " title="Posição 103, livre" aria-label="Posição 103, livre" style="height: 36px">103</button>
+
+<button class="pl-slot " title="Posição 104, livre" aria-label="Posição 104, livre" style="height: 36px">104</button>
+
+<button class="pl-slot " title="Posição 105, livre" aria-label="Posição 105, livre" style="height: 36px">105</button>
+
+<button class="pl-slot " title="Posição 106, livre" aria-label="Posição 106, livre" style="height: 36px">106</button>
+
+<button class="pl-slot " title="Posição 107, livre" aria-label="Posição 107, livre" style="height: 36px">107</button>
+
+<button class="pl-slot " title="Posição 108, livre" aria-label="Posição 108, livre" style="height: 36px">108</button>
+
+<button class="pl-slot " title="Posição 109, livre" aria-label="Posição 109, livre" style="height: 36px">109</button>
+
+<button class="pl-slot " title="Posição 110, livre" aria-label="Posição 110, livre" style="height: 36px">110</button>
+
+<button class="pl-slot " title="Posição 111, livre" aria-label="Posição 111, livre" style="height: 36px">111</button>
+
+<button class="pl-slot " title="Posição 112, livre" aria-label="Posição 112, livre" style="height: 36px">112</button>
+
+<button class="pl-slot " title="Posição 113, livre" aria-label="Posição 113, livre" style="height: 36px">113</button>
+
+<button class="pl-slot " title="Posição 114, livre" aria-label="Posição 114, livre" style="height: 36px">114</button>
+
+<button class="pl-slot " title="Posição 115, livre" aria-label="Posição 115, livre" style="height: 36px">115</button>
+
+<button class="pl-slot " title="Posição 116, livre" aria-label="Posição 116, livre" style="height: 36px">116</button>
+
+<button class="pl-slot " title="Posição 117, livre" aria-label="Posição 117, livre" style="height: 36px">117</button>
+
+<button class="pl-slot " title="Posição 118, livre" aria-label="Posição 118, livre" style="height: 36px">118</button>
+
+<button class="pl-slot " title="Posição 119, livre" aria-label="Posição 119, livre" style="height: 36px">119</button>
+
+<button class="pl-slot " title="Posição 120, livre" aria-label="Posição 120, livre" style="height: 36px">120</button>
+
+<button class="pl-slot " title="Posição 121, livre" aria-label="Posição 121, livre" style="height: 36px">121</button>
+
+<button class="pl-slot " title="Posição 122, livre" aria-label="Posição 122, livre" style="height: 36px">122</button>
+
+<button class="pl-slot " title="Posição 123, livre" aria-label="Posição 123, livre" style="height: 36px">123</button>
+
+<button class="pl-slot " title="Posição 124, livre" aria-label="Posição 124, livre" style="height: 36px">124</button>
+
+<button class="pl-slot " title="Posição 125, livre" aria-label="Posição 125, livre" style="height: 36px">125</button>
+
+<button class="pl-slot " title="Posição 126, livre" aria-label="Posição 126, livre" style="height: 36px">126</button>
+
+<button class="pl-slot " title="Posição 127, livre" aria-label="Posição 127, livre" style="height: 36px">127</button>
+
+</div>
+<div class="pl-legend"><span><i style="background: var(--finger-soft); border: 1px solid var(--finger)"></i>Vinculada a um membro (32)</span><span><i style="border: 1.5px dashed var(--offline)"></i>Sem dono (2)</span><span><i style="background: var(--surface-sunken)"></i>Livre (93)</span></div>
+</div>
+</section><section class="pl-card" style="border-color: var(--danger)">
+<div class="pl-card-b" style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
+<span class="pl-cred-ico" style="background: var(--danger-soft); color: var(--danger-ink)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+<div style="flex: 1 1 320px"><div style="font-weight: 600">Limpar toda a memória da fechadura</div><div class="pl-subtle">Apaga todas as digitais e cartões, como segurar o botão de wipe por 10 s. O cartão mestre continua.</div></div>
+<button class="pl-btn pl-btn-danger"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>Limpar memória…</button>
+</div>
+</section></div>
+<div style="flex: 1 1 340px; min-width: 0"><aside class="pl-card" aria-label="Detalhe da posição" style="overflow: hidden">
+<div style="padding: 20px 24px; display: flex; gap: 14px; align-items: center; border-bottom: 1px solid var(--line)">
+<span class="pl-cred-ico finger lg"><svg class="pl-ico" viewBox="19 75 36 36" aria-hidden="true" style="stroke-width:3.2"><path d="M28.349 103.019C28.3757 102.974 28.4031 102.929 28.4312 102.885C30.4779 99.6311 31.6627 95.7836 31.6627 91.6406C31.6627 88.3026 34.3687 85.5965 37.7069 85.5965C41.045 85.5965 43.751 88.3026 43.751 91.6406C43.751 93.1775 43.6463 94.6907 43.4438 96.1738M40.2443 106.515C41.1687 104.67 41.9265 102.727 42.4981 100.707M48.299 102.417C49.2736 98.9926 49.7953 95.3776 49.7953 91.6405C49.7953 84.9643 44.3833 79.5522 37.7071 79.5522C35.5053 79.5522 33.441 80.1409 31.663 81.1694M24.1078 98.2348C25.0759 96.2421 25.6189 94.0047 25.6189 91.6405C25.6189 89.4387 26.2075 87.3744 27.2361 85.5963M37.7069 91.6408C37.7069 96.9554 36.1826 101.914 33.5474 106.103"/></svg></span>
+<div style="flex: 1; min-width: 0"><div style="font: 600 18px/24px var(--font-display)">Digital <span style="font-family: var(--font-mono)">#27</span></div><div class="pl-subtle">Sensor DY50 · posição 27 de 127</div></div>
+</div>
+
+<div style="padding: 24px; display: flex; flex-direction: column; gap: 20px">
+<div class="pl-alert offline"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><div><div class="t">Sem dono no banco</div><p>Gravada pelo cartão mestre em 06/11 às 19:12, sem cadastro pelo site. Ela abre a porta, mas os acessos aparecem como “Desconhecido”.</p></div></div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px">
+<div><dt class="pl-subtle">Último uso</dt><dd class="pl-mono" style="margin: 0">hoje 11:05</dd></div>
+<div><dt class="pl-subtle">Usos em 7 dias</dt><dd class="pl-mono" style="margin: 0">9</dd></div>
+</dl>
+<div class="pl-field"><label class="pl-label" for="dono">Vincular a um membro</label><div class="pl-input-wrap"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="dono" class="pl-input" value="Thiago Car"></div></div>
+<div class="pl-card" style="box-shadow: var(--shadow-md); padding: 6px" role="listbox" aria-label="Sugestões">
+<button class="pl-btn pl-btn-ghost pl-btn-block" style="justify-content: flex-start; height: auto; padding: 8px 10px; color: var(--ink); background: var(--surface-hover)"><span class="pl-avatar">TC</span><span style="display: flex; flex-direction: column; align-items: flex-start"><span>Thiago Carvalho</span><span class="pl-subtle" style="font-weight: 400">só cartão · slot 19</span></span></button>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><button class="pl-btn pl-btn-primary" style="flex: 1"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>Vincular a Thiago</button><button class="pl-btn pl-btn-ghost" style="color: var(--danger-ink)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>Apagar</button></div>
+<p class="pl-subtle" style="margin: 0">Dica: o último acesso com esta digital foi às 11:05. Confira quem estava na sala nesse horário.</p>
+</div>
+
+
+
+</aside></div>
+</div>
+</main>
+</div>
+</div>
+</body>
+</html>

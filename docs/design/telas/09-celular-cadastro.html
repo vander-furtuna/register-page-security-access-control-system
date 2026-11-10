@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Cadastro na porta — PET Lock</title>
+<link rel="stylesheet" href="../../design-system/tokens.css">
+<link rel="stylesheet" href="../../design-system/petlock.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:var(--lock-ink)}a:hover{color:var(--ink)}
+
+</style>
+</head>
+<body>
+<div data-theme="light" style="width: 390px; height: 844px; background: var(--bg); color: var(--ink); font-family: var(--font-sans); display: flex; flex-direction: column; overflow: hidden">
+<header style="display: flex; align-items: center; gap: 12px; padding: 16px 20px 12px; background: var(--chassis); color: var(--on-chassis)">
+<img src="../../design-system/assets/petlock-simbolo.svg" alt="PET Lock" style="width: 32px; height: 32px">
+<span style="font: 600 17px/24px var(--font-display); flex: 1">Novo cadastro</span>
+<button class="pl-btn pl-btn-ghost pl-btn-icon" aria-label="Notificações" style="color: var(--on-chassis-muted); width: 44px; height: 44px"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button>
+</header>
+<div style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 16px">
+<div class="pl-alert master" role="status"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8"/><path d="m17 6 3 3"/><path d="m14 9 2 2"/></svg><div><div class="t">Modo mestre ativo</div><p>Cadastrando Maria Clara · Cartão + digital</p></div></div>
+<section class="pl-lock is-master">
+<div class="pl-lock-top" style="padding: 16px; gap: 12px">
+<div class="row"><span class="name">Porta da sala do PET</span><span class="pl-pill online live"><span class="dot"></span>01:42</span></div>
+<div class="pl-lcd" role="img" aria-label="Display: Passo 2/2 Dedo 1. Encoste o ded" style="width: 100%; font-size: 17px; line-height: 23px; padding: 12px 14px; min-width: 0">Passo 2/2 Dedo
+1. Encoste o ded</div>
+</div>
+<div style="padding: 20px 16px; display: flex; flex-direction: column; gap: 16px; align-items: center; text-align: center">
+<span class="pl-cred-ico finger" style="width: 88px; height: 88px; border-radius: 20px"><svg class="pl-ico" viewBox="19 75 36 36" aria-hidden="true" style="stroke-width:3.2; width: 48px; height: 48px"><path d="M28.349 103.019C28.3757 102.974 28.4031 102.929 28.4312 102.885C30.4779 99.6311 31.6627 95.7836 31.6627 91.6406C31.6627 88.3026 34.3687 85.5965 37.7069 85.5965C41.045 85.5965 43.751 88.3026 43.751 91.6406C43.751 93.1775 43.6463 94.6907 43.4438 96.1738M40.2443 106.515C41.1687 104.67 41.9265 102.727 42.4981 100.707M48.299 102.417C49.2736 98.9926 49.7953 95.3776 49.7953 91.6405C49.7953 84.9643 44.3833 79.5522 37.7071 79.5522C35.5053 79.5522 33.441 80.1409 31.663 81.1694M24.1078 98.2348C25.0759 96.2421 25.6189 94.0047 25.6189 91.6405C25.6189 89.4387 26.2075 87.3744 27.2361 85.5963M37.7069 91.6408C37.7069 96.9554 36.1826 101.914 33.5474 106.103"/></svg></span>
+<div style="font: 600 20px/28px var(--font-display)">Encoste o dedo no sensor</div>
+<p style="margin: 0; color: var(--ink-muted); font-size: 15px; line-height: 22px">Segure até o bipe. Depois retire e encoste o mesmo dedo de novo.</p>
+</div>
+</section>
+<ol class="pl-steps" style="padding: 4px 4px 0">
+<li class="pl-step is-done"><span class="n"><svg class="pl-ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><div class="t">Pedido enviado</div></div></li>
+<li class="pl-step is-done"><span class="n"><svg class="pl-ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span><div><div class="t">Cartão lido</div><div class="d"><span class="pl-mono">A3 F2 1C 9D</span> · slot 22</div></div></li>
+<li class="pl-step is-active"><span class="n">3</span><div><div class="t">Digital</div><div class="d">aguardando a 1ª leitura</div></div></li>
+<li class="pl-step"><span class="n">4</span><div><div class="t">Pronto para usar</div></div></li>
+</ol>
+<button class="pl-btn pl-btn-danger-soft pl-btn-lg pl-btn-block"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>Cancelar cadastro</button>
+</div>
+<nav aria-label="Principal" style="display: flex; border-top: 1px solid var(--line); background: var(--surface); padding-bottom: 18px"><a href="10-celular-inicio.html" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0 8px; text-decoration: none; color: var(--ink-subtle); font-size: 11px; font-weight: 600; min-height: 44px"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Início</a><a href="03-membros.html" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0 8px; text-decoration: none; color: var(--ink-subtle); font-size: 11px; font-weight: 600; min-height: 44px"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Membros</a><a href="09-celular-cadastro.html" aria-current="page" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0 8px; text-decoration: none; color: var(--lock-ink); font-size: 11px; font-weight: 600; min-height: 44px"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Cadastro</a><a href="07-registros.html" style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 0 8px; text-decoration: none; color: var(--ink-subtle); font-size: 11px; font-weight: 600; min-height: 44px"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Registros</a></nav>
+</div>
+</body>
+</html>

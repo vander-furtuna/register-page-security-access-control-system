@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dispositivo — PET Lock</title>
+<link rel="stylesheet" href="../../design-system/tokens.css">
+<link rel="stylesheet" href="../../design-system/petlock.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:var(--lock-ink)}a:hover{color:var(--ink)}
+
+</style>
+</head>
+<body>
+<div data-theme="light" style="min-height: 100vh; background: var(--bg); color: var(--ink); font-family: var(--font-sans); display: flex; flex-wrap: wrap; align-items: stretch">
+<aside class="pl-side" style="flex: 1 1 248px; width: auto; max-width: 248px; min-height: 100vh; box-sizing: border-box">
+<a href="02-visao-geral.html" class="brand" style="display: flex; text-decoration: none"><img src="../../design-system/assets/petlock-logo-fundo-escuro.svg" alt="PET Lock" style="height: 44px"></a>
+<nav class="pl-nav" aria-label="Principal">
+<a href="02-visao-geral.html"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Visão geral</a><a href="03-membros.html"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Membros</a><a href="05-cadastro-formulario.html"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Novo cadastro</a><a href="07-registros.html"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>Registros de acesso</a><div class="grp">Fechadura</div><a href="06-credenciais.html"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10v4M11 10v4M15 10v4M7 18v3M12 18v3M17 18v3"/></svg>Credenciais<span class="badge">2</span></a><a href="08-dispositivo.html" aria-current="page"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><rect x="6" y="6" width="12" height="4" rx="1"/><rect x="6" y="13" width="5" height="5" rx="1"/><rect x="13" y="13" width="5" height="5" rx="1"/></svg>Dispositivo</a>
+</nav>
+<a href="08-dispositivo.html" class="pl-side-lock" style="text-decoration: none; color: var(--on-chassis)">
+<div style="display: flex; justify-content: space-between; align-items: center"><span>Sala do PET</span><span class="pl-pill online live" style="background: rgba(255,255,255,.08); color: var(--lock); height: 20px"><span class="dot"></span>Online</span></div>
+<div class="pl-lcd" role="img" aria-label="Display: Aguardando acesso..." style="">Aguardando
+acesso...</div>
+</a>
+<div style="display: flex; align-items: center; gap: 10px; padding: 0 12px">
+<span class="pl-avatar" style="background: var(--chassis-raised); color: var(--on-chassis)">VF</span>
+<div style="display: flex; flex-direction: column; min-width: 0"><span style="font-size: 13px; font-weight: 600; color: var(--on-chassis)">Vanderlei F.</span><span style="font-size: 12px; color: var(--on-chassis-muted)">Administrador</span></div>
+<a href="01-login.html" class="pl-btn pl-btn-ghost pl-btn-icon pl-btn-sm" aria-label="Sair" style="margin-left: auto; color: var(--on-chassis-muted)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg></a>
+</div>
+</aside>
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+<header class="pl-top" style="flex-wrap: wrap; height: auto; min-height: 64px; padding: 12px 32px; gap: 12px">
+<div style="display: flex; flex-direction: column"><h1>Dispositivo</h1><span style="font-size: 13px; color: var(--ink-subtle)">Saúde da fechadura e funcionamento sem internet</span></div>
+<div class="right" style="flex-wrap: wrap">
+<div class="pl-input-wrap" style="width: 320px; max-width: 100%"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><label class="pl-sr" for="busca">Buscar</label><input id="busca" class="pl-input" placeholder="Buscar membro, UID ou ID da digital"></div>
+<button class="pl-btn pl-btn-ghost pl-btn-icon" aria-label="Notificações"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></button>
+
+</div>
+</header>
+<main style="padding: 32px; display: flex; flex-direction: column; gap: 24px; max-width: 1280px; width: 100%; box-sizing: border-box">
+<section class="pl-lock" aria-label="Fechadura">
+<div class="pl-lock-top" style="flex-direction: row; flex-wrap: wrap; gap: 24px; align-items: center; padding: 24px">
+<img src="../../design-system/assets/petlock-simbolo.svg" alt="" style="width: 88px; height: 88px">
+<div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span class="name" style="font-size: 20px; line-height: 28px">Porta da sala do PET</span><span class="pl-pill online live"><span class="dot"></span>Online há 3 h 12 min</span></div>
+<span class="sub">ESP32 DOIT DevKit v1 · firmware 2.0.0 (FreeRTOS dual-core) · IP 10.0.4.37</span>
+</div>
+<div class="pl-lcd" role="img" aria-label="Display: Aguardando acesso..." style="font-size: 18px; line-height: 24px; padding: 14px 18px">Aguardando
+acesso...</div>
+</div>
+<dl class="pl-lock-meta" style="margin: 0; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))">
+<div style="border-right: 1px solid var(--line)"><dt>Último contato</dt><dd>há 4 s</dd></div>
+<div style="border-right: 1px solid var(--line)"><dt>Wi-Fi</dt><dd>PET-UFC · -58 dBm</dd></div>
+<div style="border-right: 1px solid var(--line)"><dt>Modo</dt><dd>STANDBY</dd></div>
+<div style="border-right: 1px solid var(--line)"><dt>Memória livre</dt><dd>142 KB</dd></div>
+<div><dt>Fila local</dt><dd>0 eventos</dd></div>
+</dl>
+</section>
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px"><section class="pl-card">
+<div class="pl-card-h"><h2>Conexão nas últimas 24 h</h2><span class="pl-subtle">97,3% online</span></div>
+<div class="pl-card-b" style="display: flex; flex-direction: column; gap: 10px">
+<div role="img" aria-label="Linha do tempo: duas quedas, 15 min ontem às 23:51 e 24 min hoje às 07:40" style="display: flex; height: 28px; border-radius: var(--radius-sm); overflow: hidden; gap: 2px"><span style="flex: 9.85 1 0; background: var(--lock); height: 100%" title="online"></span><span style="flex: 0.25 1 0; background: var(--offline); height: 100%" title="offline"></span><span style="flex: 7.57 1 0; background: var(--lock); height: 100%" title="online"></span><span style="flex: 0.4 1 0; background: var(--offline); height: 100%" title="offline"></span><span style="flex: 5.93 1 0; background: var(--lock); height: 100%" title="online"></span></div>
+<div style="display: flex; justify-content: space-between; font: 500 11px/14px var(--font-mono); color: var(--ink-subtle)"><span>ontem 14h</span><span>20h</span><span>02h</span><span>08h</span><span>agora</span></div>
+<ul style="margin: 8px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px">
+<li style="display: flex; gap: 10px; align-items: center"><span class="pl-pill offline"><span class="dot"></span>24 min offline</span><span class="pl-muted">hoje 07:40–08:04 · 6 acessos guardados e enviados às 09:20</span></li>
+<li style="display: flex; gap: 10px; align-items: center"><span class="pl-pill offline"><span class="dot"></span>15 min offline</span><span class="pl-muted">ontem 23:51–00:06 · nenhum acesso no período</span></li>
+</ul>
+</div>
+</section><section class="pl-card">
+<div class="pl-card-h"><h2>Quando a internet cai</h2></div>
+<div class="pl-card-b" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 8px"><span class="pl-cred-ico" style="background: var(--lock-soft); color: var(--lock-ink)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 7.6-1.7"/></svg></span><div style="font-weight: 600">A porta continua abrindo</div><p style="margin: 0; color: var(--ink-muted); font-size: 13px; line-height: 18px">Cartões são conferidos na EEPROM e digitais no próprio sensor. Nada depende do Firebase.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span class="pl-cred-ico" style="background: var(--offline-soft); color: var(--offline-ink)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div style="font-weight: 600">Os acessos ficam guardados</div><p style="margin: 0; color: var(--ink-muted); font-size: 13px; line-height: 18px">Cada evento entra na fila local com o horário do relógio interno, sincronizado por NTP.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span class="pl-cred-ico" style="background: var(--surface-sunken); color: var(--ink-muted)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/></svg></span><div style="font-weight: 600">Tudo chega quando voltar</div><p style="margin: 0; color: var(--ink-muted); font-size: 13px; line-height: 18px">A fila é enviada em ordem e o painel marca os registros como “chegou atrasado”.</p></div>
+<div style="display: flex; flex-direction: column; gap: 8px"><span class="pl-cred-ico" style="background: var(--master-soft); color: var(--master)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m10.7 12.3 9.8-9.8"/><path d="m17 6 3 3"/><path d="m14 9 2 2"/></svg></span><div style="font-weight: 600">Cadastro pelo cartão mestre</div><p style="margin: 0; color: var(--ink-muted); font-size: 13px; line-height: 18px">Ainda funciona offline. A credencial aparece como “sem dono” até alguém vinculá-la aqui.</p></div>
+</div>
+</section><section class="pl-card" style="overflow: hidden">
+<div class="pl-card-h"><h2>Periféricos</h2><span class="pl-subtle">verificado no boot às 11:20</span></div>
+<div style="overflow-x: auto"><table class="pl-table" style="min-width: 640px"><thead><tr><th>Componente</th><th>Ligação</th><th>Estado</th><th></th></tr></thead><tbody><tr><td><div style="display: flex; gap: 10px; align-items: center"><span class="pl-cred-ico finger" style=""><svg class="pl-ico" viewBox="19 75 36 36" aria-hidden="true" style="stroke-width:3.2"><path d="M28.349 103.019C28.3757 102.974 28.4031 102.929 28.4312 102.885C30.4779 99.6311 31.6627 95.7836 31.6627 91.6406C31.6627 88.3026 34.3687 85.5965 37.7069 85.5965C41.045 85.5965 43.751 88.3026 43.751 91.6406C43.751 93.1775 43.6463 94.6907 43.4438 96.1738M40.2443 106.515C41.1687 104.67 41.9265 102.727 42.4981 100.707M48.299 102.417C49.2736 98.9926 49.7953 95.3776 49.7953 91.6405C49.7953 84.9643 44.3833 79.5522 37.7071 79.5522C35.5053 79.5522 33.441 80.1409 31.663 81.1694M24.1078 98.2348C25.0759 96.2421 25.6189 94.0047 25.6189 91.6405C25.6189 89.4387 26.2075 87.3744 27.2361 85.5963M37.7069 91.6408C37.7069 96.9554 36.1826 101.914 33.5474 106.103"/></svg></span><span style="font-weight: 600">Sensor de digitais DY50</span></div></td><td class="pl-mono pl-muted">UART2 · GPIO 16/17</td><td>34 de 127 posições</td><td><span class="pl-pill allowed"><span class="dot"></span>Funcionando</span></td></tr><tr><td><div style="display: flex; gap: 10px; align-items: center"><span class="pl-cred-ico rfid" style=""><svg class="pl-ico" viewBox="72.9 72.65 40 40" aria-hidden="true" style="stroke-width:3.4"><path d="M100.633 84.9447C104.889 89.2008 104.889 96.1012 100.633 100.357M85.2208 100.357C80.9648 96.101 80.9648 89.2006 85.2208 84.9447M80.0833 105.495C72.99 98.4013 72.99 86.9006 80.0833 79.8072M105.771 79.8073C112.864 86.9007 112.864 98.4013 105.771 105.495M96.5598 92.651C96.5598 94.6572 94.9334 96.2837 92.927 96.2837C90.9207 96.2837 89.2943 94.6572 89.2943 92.651C89.2943 90.6446 90.9207 89.0182 92.927 89.0182C94.9334 89.0182 96.5598 90.6446 96.5598 92.651Z"/></svg></span><span style="font-weight: 600">Leitor RFID RC522</span></div></td><td class="pl-mono pl-muted">SPI · GPIO 18/19/21/22/23</td><td>21 de 126 slots + mestre</td><td><span class="pl-pill allowed"><span class="dot"></span>Funcionando</span></td></tr><tr><td><div style="display: flex; gap: 10px; align-items: center"><span class="pl-cred-ico " style="background: var(--surface-sunken); color: var(--ink-muted)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><rect x="6" y="6" width="12" height="4" rx="1"/><rect x="6" y="13" width="5" height="5" rx="1"/><rect x="13" y="13" width="5" height="5" rx="1"/></svg></span><span style="font-weight: 600">Display LCD 16x2</span></div></td><td class="pl-mono pl-muted">GPIO 15/2/13/25/14/27</td><td>Aguardando acesso…</td><td><span class="pl-pill allowed"><span class="dot"></span>Funcionando</span></td></tr><tr><td><div style="display: flex; gap: 10px; align-items: center"><span class="pl-cred-ico " style="background: var(--surface-sunken); color: var(--ink-muted)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><span style="font-weight: 600">Relé da tranca</span></div></td><td class="pl-mono pl-muted">GPIO 4</td><td>abre por 2 s</td><td><span class="pl-pill allowed"><span class="dot"></span>Funcionando</span></td></tr><tr><td><div style="display: flex; gap: 10px; align-items: center"><span class="pl-cred-ico " style="background: var(--surface-sunken); color: var(--ink-muted)"><svg class="pl-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/></svg></span><span style="font-weight: 600">Buzzer</span></div></td><td class="pl-mono pl-muted">GPIO 33</td><td>ativo</td><td><span class="pl-pill allowed"><span class="dot"></span>Funcionando</span></td></tr></tbody></table></div>
+</section></div>
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 24px"><section class="pl-card">
+<div class="pl-card-h"><h2>Ajustes</h2></div>
+<div class="pl-card-b" style="display: flex; flex-direction: column; gap: 18px">
+<div class="pl-field"><label class="pl-label" for="abre">Tempo com a tranca aberta</label><select id="abre" class="pl-input"><option>2 segundos</option><option>3 segundos</option><option>5 segundos</option></select></div>
+<div class="pl-field"><label class="pl-label" for="tmo">Prazo para concluir um cadastro</label><select id="tmo" class="pl-input"><option>2 minutos</option><option>3 minutos</option></select></div>
+<label style="display: flex; gap: 12px; align-items: flex-start; cursor: pointer"><input type="checkbox" checked readonly style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--lock-ink)"><span><span style="display: block; font-weight: 500">Avisar acessos negados</span><span class="pl-subtle">Toast no painel e e-mail para administradores após 3 tentativas seguidas.</span></span></label>
+<label style="display: flex; gap: 12px; align-items: flex-start; cursor: pointer"><input type="checkbox" checked readonly style="width: 18px; height: 18px; margin-top: 2px; accent-color: var(--lock-ink)"><span><span style="display: block; font-weight: 500">Mostrar o nome no display</span><span class="pl-subtle">“Bem Vindo(a), Maria Clara” depois de liberar.</span></span></label>
+<button class="pl-btn pl-btn-primary" style="align-self: flex-start">Salvar ajustes</button>
+</div>
+</section><section class="pl-card" style="border-color: var(--danger)">
+<div class="pl-card-h"><h2>Manutenção</h2></div>
+<ul style="list-style: none; margin: 0; padding: 0">
+<li style="display: flex; gap: 12px; align-items: center; padding: 14px 24px; border-bottom: 1px solid var(--line); flex-wrap: wrap"><div style="flex: 1 1 200px"><div style="font-weight: 600">Reiniciar a fechadura</div><div class="pl-subtle">A porta fica ~8 s sem responder.</div></div><button class="pl-btn pl-btn-sm"><svg class="pl-ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M3 21v-5h5"/></svg>Reiniciar</button></li>
+<li style="display: flex; gap: 12px; align-items: center; padding: 14px 24px; border-bottom: 1px solid var(--line); flex-wrap: wrap"><div style="flex: 1 1 200px"><div style="font-weight: 600">Trocar o cartão mestre</div><div class="pl-subtle">Só pela porta: limpe a memória e aproxime o novo cartão.</div></div><span class="pl-pill neutral">Presencial</span></li>
+<li style="display: flex; gap: 12px; align-items: center; padding: 14px 24px; flex-wrap: wrap"><div style="flex: 1 1 200px"><div style="font-weight: 600; color: var(--danger-ink)">Limpar toda a memória</div><div class="pl-subtle">Apaga digitais e cartões. Digite LIMPAR para confirmar.</div></div><button class="pl-btn pl-btn-danger pl-btn-sm"><svg class="pl-ico sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>Limpar…</button></li>
+</ul>
+</section></div>
+</div>
+</main>
+</div>
+</div>
+</body>
+</html>

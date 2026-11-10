@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PET Lock — painel web
 
-## Getting Started
+Painel de cadastro e controle de acesso da fechadura eletrônica da sala do PET Engenharia de Computação (UFC Sobral), ligado à fechadura pelo Firebase Realtime Database.
 
-First, run the development server:
+> **v2 em desenvolvimento** na branch `v2`: reescrita com Next.js 16, Tailwind CSS 4 e shadcn/ui (o HeroUI sai). A versão anterior fica preservada na branch `release/v1` (tags `v1.0.0` e `v1.1.0`). Plano em [`docs/`](docs/README.md), histórico em [`CHANGELOG.md`](CHANGELOG.md).
+
+## Rodando
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+nvm use                      # Node 24 (.nvmrc)
+cp .env.example .env.local   # preencha com as credenciais do Firebase
+npm install
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Contribuindo: [`CONTRIBUTING.md`](CONTRIBUTING.md) · branches, tags e PR para o repositório original: [`docs/versionamento.md`](docs/versionamento.md).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Documentação
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- [Visão do produto](docs/produto/visao.md)
+- [Telas](docs/produto/telas.md) · [referências visuais](docs/design/telas/index.html)
+- [Design system](docs/design-system/README.md)
+- [Stack da v2](docs/arquitetura/stack.md) · [Dados no Firebase](docs/arquitetura/dados-firebase.md) · [Contrato com o firmware](docs/arquitetura/contrato-firmware.md)
+- [Versionamento](docs/versionamento.md)
+- [Roadmap](docs/roadmap.md)
 
-## Learn More
+## Desenvolvendo com o Claude Code
 
-To learn more about Next.js, take a look at the following resources:
+O repositório já vem com `CLAUDE.md` (contexto). Instale uma vez a configuração extra (permissões, skill `petlock-ui`, comandos e MCP do Figma/Firebase):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```powershell
+powershell -ExecutionPolicy Bypass -File claude-setup\instalar.ps1
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Depois:
 
-## Deploy on Vercel
+```bash
+claude            # na pasta do projeto
+/fase 0           # implementa a fase 0 do roadmap
+/tela 05          # trabalha numa tela específica
+/revisar-ui       # revisa a UI contra o design system
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Na primeira vez, aprove os servidores MCP do projeto e autentique o Figma em `/mcp`. O servidor do Firebase usa o login do `firebase login`.
