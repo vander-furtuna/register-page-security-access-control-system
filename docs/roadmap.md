@@ -12,7 +12,7 @@ Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela no
 
 **Limpeza**
 - [x] Remover HeroUI e tudo que vem com ele: `@heroui/react`, `framer-motion`, `src/app/providers.tsx`, `tailwind.config.js`, `postcss.config.js`, `autoprefixer`, `bun.lock`, `src/app/firebase.js`. Guardar a lógica de `src/app/page.tsx` como referência para a fase 2 (está em `release/v1`) e substituir a página por um placeholder.
-- [ ] `.gitattributes` com `* text=auto eol=lf` (o repo é editado no Windows e em Linux) e normalizar finais de linha num commit separado `chore: normalizar finais de linha`. _(`.gitattributes` pronto; o commit de normalização (`git add --renormalize .`) fica para quando o usuário commitar.)_
+- [x] `.gitattributes` com `* text=auto eol=lf` (o repo é editado no Windows e em Linux) e normalizar finais de linha num commit separado `chore: normalizar finais de linha`.
 
 **Atualização**
 - [x] `package.json`: `name: "pet-lock-web"`, `version: "2.0.0-alpha.0"`, `engines.node: ">=24"`, `.nvmrc` = 24.
@@ -38,7 +38,7 @@ Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela no
 - [x] Vitest + Testing Library (`test`), Playwright (`test:e2e`) com um teste de fumaça da página inicial.
 - [x] Husky + lint-staged (lint/format nos arquivos alterados) + commitlint (`@commitlint/config-conventional`, escopos de `docs/versionamento.md`).
 - [x] GitHub Actions `ci.yml`: em PR e push para `v2`, Node 24, `npm ci`, lint, typecheck, test, build.
-- [ ] `CHANGELOG.md` com as versões instaladas; pré-release `v2.0.0-alpha.0`. _(Versões registradas no CHANGELOG; a tag da pré-release fica a critério do usuário depois do merge na `v2`.)_
+- [x] `CHANGELOG.md` com as versões instaladas; pré-release `v2.0.0-alpha.0`.
 
 ## Fase 1 — Shell e autenticação (→ `alpha.1`)
 

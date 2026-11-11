@@ -4,7 +4,9 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
-Reescrita do painel com Next.js 16, Tailwind CSS 4 e shadcn/ui, no lugar de Next.js 15, Tailwind 3 e HeroUI. Plano em [`docs/roadmap.md`](docs/roadmap.md).
+## [2.0.0-alpha.0] — 2026-11-10
+
+Fase 0 — nova base. Reescrita do painel com Next.js 16, Tailwind CSS 4 e shadcn/ui, no lugar de Next.js 15, Tailwind 3 e HeroUI. Plano em [`docs/roadmap.md`](docs/roadmap.md).
 
 ### Adicionado
 - Nova base (fase 0): Next.js 16.4.6, React 19.3.1, TypeScript 6.0.3 (strict), Tailwind CSS 4.3.5 (`@tailwindcss/postcss` 4.3.5, configuração no CSS), shadcn/ui CLI 4.23.0 com Base UI 1.9.0, Firebase JS SDK 13.2.0, zod 4.6.7, react-hook-form 7.91.0, lucide-react 1.71.0, next-themes 0.4.6, sonner 2.0.8, date-fns 4.4.0. Node.js 24 (`engines`, `.nvmrc`).
@@ -33,6 +35,7 @@ Reescrita do painel com Next.js 16, Tailwind CSS 4 e shadcn/ui, no lugar de Next
 
 Versão original de JonasFortes12: formulário de cadastro com HeroUI que grava `pendingUser/current` no Firebase.
 
-[Não lançado]: https://github.com/JonasFortes12/register-page-security-access-control-system/compare/v1.1.0...v2
+[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.0...v2
+[2.0.0-alpha.0]: https://github.com/vander-furtuna/register-page-security-access-control-system/releases/tag/v2.0.0-alpha.0
 [1.1.0]: https://github.com/JonasFortes12/register-page-security-access-control-system/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/JonasFortes12/register-page-security-access-control-system/releases/tag/v1.0.0
