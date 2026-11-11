@@ -1,0 +1,32 @@
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": false,
+
+    "system": { ".write": "auth != null" },
+    "users": { ".write": "auth != null" },
+    "logs": { ".write": "auth != null" },
+
+    "pendingRegistration": {
+      ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || !newData.exists())"
+    },
+    "pendingUser": {
+      ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || !newData.exists())"
+    },
+
+    "members": { ".write": "auth != null && root.child('admins').child(auth.uid).val() === true" },
+    "admins": { ".write": false },
+
+    "devices": {
+      "$deviceId": {
+        "status": { ".write": "auth != null" },
+        "inventory": { ".write": "auth != null" },
+        "commands": {
+          "$commandId": {
+            ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || data.exists())"
+          }
+        }
+      }
+    }
+  }
+}

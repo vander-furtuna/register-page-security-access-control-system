@@ -1,14 +1,152 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "../styles/tokens.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Tema escuro via next-themes (data-theme="dark" no <html>). */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+@theme {
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Escala tipográfica do design system (tokens.json › type). */
+  --text-display-xl: 40px;
+  --text-display-xl--line-height: 44px;
+  --text-display-xl--letter-spacing: -0.02em;
+  --text-display-xl--font-weight: 700;
+  --text-display: 28px;
+  --text-display--line-height: 34px;
+  --text-display--letter-spacing: -0.015em;
+  --text-display--font-weight: 600;
+  --text-h1: 24px;
+  --text-h1--line-height: 32px;
+  --text-h1--letter-spacing: -0.01em;
+  --text-h1--font-weight: 600;
+  --text-h2: 18px;
+  --text-h2--line-height: 26px;
+  --text-h2--font-weight: 600;
+  --text-h3: 15px;
+  --text-h3--line-height: 22px;
+  --text-h3--font-weight: 600;
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 24px;
+  --text-body: 14px;
+  --text-body--line-height: 20px;
+  --text-label: 13px;
+  --text-label--line-height: 18px;
+  --text-label--font-weight: 500;
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-overline: 11px;
+  --text-overline--line-height: 16px;
+  --text-overline--letter-spacing: 0.08em;
+  --text-overline--font-weight: 600;
+  --text-lcd: 15px;
+  --text-lcd--line-height: 20px;
+  --text-lcd--letter-spacing: 0.06em;
+  --text-lcd--font-weight: 600;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  /* fontes (next/font define --font-sora, --font-plex-sans, --font-plex-mono) */
+  --font-display: var(--font-sora);
+  --font-sans: var(--font-plex-sans);
+  --font-mono: var(--font-plex-mono);
+
+  /* sombras mudam com o tema (tokens.css) */
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  /* tokens PET Lock como utilitários: bg-surface, text-ink-muted, bg-finger-soft, text-rfid-ink… */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-hover: var(--surface-hover);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-subtle: var(--ink-subtle);
+  --color-chassis: var(--chassis);
+  --color-chassis-raised: var(--chassis-raised);
+  --color-steel: var(--steel);
+  --color-on-chassis: var(--on-chassis);
+  --color-on-chassis-muted: var(--on-chassis-muted);
+  --color-lock: var(--lock);
+  --color-lock-hover: var(--lock-hover);
+  --color-on-lock: var(--on-lock);
+  --color-lock-ink: var(--lock-ink);
+  --color-lock-soft: var(--lock-soft);
+  --color-lock-lime: var(--lock-lime);
+  --color-lock-teal: var(--lock-teal);
+  --color-lcd-ink: var(--lcd-ink);
+  --color-finger: var(--finger);
+  --color-finger-ink: var(--finger-ink);
+  --color-finger-soft: var(--finger-soft);
+  --color-rfid: var(--rfid);
+  --color-on-rfid: var(--on-rfid);
+  --color-rfid-ink: var(--rfid-ink);
+  --color-rfid-soft: var(--rfid-soft);
+  --color-danger: var(--danger);
+  --color-on-danger: var(--on-danger);
+  --color-danger-ink: var(--danger-ink);
+  --color-danger-soft: var(--danger-soft);
+  --color-offline: var(--offline);
+  --color-offline-ink: var(--offline-ink);
+  --color-offline-soft: var(--offline-soft);
+  --color-master: var(--master);
+  --color-master-soft: var(--master-soft);
+  --color-focus: var(--focus);
+  --color-overlay: var(--overlay);
+
+  /* variáveis semânticas que os componentes do shadcn/ui usam */
+  --color-background: var(--bg);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--ink);
+  --color-primary: var(--lock);
+  --color-primary-foreground: var(--on-lock);
+  --color-secondary: var(--surface-sunken);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--surface-sunken);
+  --color-muted-foreground: var(--ink-muted);
+  --color-accent: var(--surface-hover);
+  --color-accent-foreground: var(--ink);
+  --color-destructive: var(--danger);
+  --color-border: var(--line);
+  --color-input: var(--line-strong);
+  --color-ring: var(--focus);
+  --color-chart-1: var(--lock);
+  --color-chart-2: var(--danger);
+  --color-chart-3: var(--finger);
+  --color-chart-4: var(--rfid);
+  --color-chart-5: var(--offline);
+  --color-sidebar: var(--chassis);
+  --color-sidebar-foreground: var(--on-chassis);
+  --color-sidebar-primary: var(--lock);
+  --color-sidebar-primary-foreground: var(--on-lock);
+  --color-sidebar-accent: var(--chassis-raised);
+  --color-sidebar-accent-foreground: var(--on-chassis);
+  --color-sidebar-border: var(--chassis-raised);
+  --color-sidebar-ring: var(--lock);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: light;
+  }
+  html[data-theme="dark"] {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background font-sans text-body text-foreground antialiased;
+  }
 }

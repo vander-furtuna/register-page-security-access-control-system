@@ -7,11 +7,21 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 Reescrita do painel com Next.js 16, Tailwind CSS 4 e shadcn/ui, no lugar de Next.js 15, Tailwind 3 e HeroUI. Plano em [`docs/roadmap.md`](docs/roadmap.md).
 
 ### Adicionado
+- Nova base (fase 0): Next.js 16.4.6, React 19.3.1, TypeScript 6.0.3 (strict), Tailwind CSS 4.3.5 (`@tailwindcss/postcss` 4.3.5, configuração no CSS), shadcn/ui CLI 4.23.0 com Base UI 1.9.0, Firebase JS SDK 13.2.0, zod 4.6.7, react-hook-form 7.91.0, lucide-react 1.71.0, next-themes 0.4.6, sonner 2.0.8, date-fns 4.4.0. Node.js 24 (`engines`, `.nvmrc`).
+- Design system ligado ao Tailwind: `src/styles/tokens.css`, `@theme inline` com os tokens PET Lock e as variáveis do shadcn, escala tipográfica (`text-h1`, `text-label`, `text-lcd`…), fontes Sora, IBM Plex Sans e IBM Plex Mono, tema claro/escuro por `data-theme`.
+- Componentes base do shadcn adaptados (Button `default | secondary | ghost | destructive | destructive-soft`, Badge com as pílulas de estado, Alert `info | offline | master | danger | success`, Input, Select, Field, Tabs, ToggleGroup segmentado, Card, Table, Dialog, AlertDialog, Sheet, Sidebar, Toast em `chassis`…) e vitrine em `/dev/ui` (só em desenvolvimento).
+- Marca: `Logo`, `LogoSymbol`, `FingerIcon`, `RfidIcon`, `LockDeviceIcon`, SVGs em `public/brand/` e favicon com o símbolo.
+- Camada do Firebase em `src/lib/firebase/` (`client`, `paths`, `schemas` zod, `types`, `useRtdbValue` com estado `missing` para o firmware 2.0) e emulador local (`firebase.json`, `database.rules.json` inicial, `npm run emulators`, `npm run seed:emulator` com os dados das telas de referência).
+- `src/lib/format.ts` com testes: UID em grupos de 2, normalização de UID, horário da fechadura (UTC-3, `1970-01-01` = sem NTP), tempo relativo em pt-BR e nome para o LCD.
+- Qualidade: ESLint 9.39.5 (flat, `eslint-config-next` 16.4.6) + Prettier 3.9.10 com `prettier-plugin-tailwindcss`, Vitest 5.1.0 + Testing Library, Playwright 1.65.0 (fumaça da página inicial, desktop e 390px), Husky 9.1.7 + lint-staged 17.6.0 + commitlint 21.2.4 com os escopos do projeto, GitHub Actions (`ci.yml`), `.gitattributes` com LF.
 - Documentação da v2: visão do produto, especificação das telas, dados do Firebase, contrato com o firmware, stack e versionamento (`docs/`).
 - Design system PET Lock (tokens, componentes de referência, logos e ícones) em `docs/design-system/`.
 - Referências visuais das 10 telas (PNG + HTML) em `docs/design/telas/`.
 - Contexto e configuração para o Claude Code (`CLAUDE.md`, `claude-setup/`).
 - Template de pull request e guia de contribuição.
+
+### Removido
+- HeroUI, framer-motion, autoprefixer, `tailwind.config.js`, `postcss.config.js`, `src/app/providers.tsx`, `src/app/firebase.js` e `bun.lock`. A página de cadastro da v1 sai da v2 (continua em `release/v1`) e volta reescrita na fase 2.
 
 ## [1.1.0] — 2026-11-10
 

@@ -8,10 +8,16 @@ Painel de cadastro e controle de acesso da fechadura eletrônica da sala do PET 
 
 ```bash
 nvm use                      # Node 24 (.nvmrc)
-cp .env.example .env.local   # preencha com as credenciais do Firebase
+cp .env.example .env.local   # credenciais do Firebase; NEXT_PUBLIC_USE_EMULATOR=true em desenvolvimento
 npm install
-npm run dev                  # http://localhost:3000
+npm run emulators            # outro terminal: Realtime Database + Auth locais (UI em http://127.0.0.1:4000)
+npm run seed:emulator        # dados de exemplo das telas (-- --firmware-2.1 para incluir devices/*)
+npm run dev                  # http://localhost:3000 · componentes em /dev/ui
 ```
+
+Outros comandos: `npm run lint`, `npm run format`, `npm run typecheck`, `npm run test`, `npm run test:e2e` (na primeira vez: `npx playwright install chromium`), `npm run build`.
+
+O emulador usa o projeto `demo-pet-lock` e nunca toca o banco de produção. O seed cria o admin `admin@ufc.br` / `petlock-dev` no Auth do emulador.
 
 Contribuindo: [`CONTRIBUTING.md`](CONTRIBUTING.md) · branches, tags e PR para o repositório original: [`docs/versionamento.md`](docs/versionamento.md).
 
