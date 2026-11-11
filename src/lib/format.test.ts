@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   formatLockDate,
+  formatLockLongDate,
   formatLockTime,
   formatUid,
   lcdName,
@@ -73,6 +74,9 @@ describe("formatLockTime / formatLockDate", () => {
     expect(formatLockTime(date)).toBe("14:32:08");
     expect(formatLockTime(date, { seconds: false })).toBe("14:32");
     expect(formatLockDate(date)).toBe("10/11/2026");
+    expect(formatLockLongDate(date)).toBe("Terça, 10 de novembro");
+    // 23:30 de domingo em Sobral já é segunda em UTC
+    expect(formatLockLongDate(new Date("2026-11-09T02:30:00.000Z"))).toBe("Domingo, 8 de novembro");
   });
 });
 
@@ -82,6 +86,12 @@ describe("relativeTime", () => {
   it("usa 'agora' para menos de um minuto e para o futuro", () => {
     expect(relativeTime(new Date(now.getTime() - 20_000), now)).toBe("agora");
     expect(relativeTime(new Date(now.getTime() + 60_000), now)).toBe("agora");
+  });
+
+  it("mostra segundos quando pedido", () => {
+    expect(relativeTime(new Date(now.getTime() - 4_000), now, { seconds: true })).toBe("há 4 s");
+    expect(relativeTime(new Date(now.getTime() - 500), now, { seconds: true })).toBe("agora");
+    expect(relativeTime(new Date(now.getTime() - 3 * 60_000), now, { seconds: true })).toBe("há 3 min");
   });
 
   it("conta minutos e horas no mesmo dia", () => {
