@@ -1,0 +1,7 @@
+# O repo é editado no Windows e no Linux: tudo em LF no repositório e no working tree.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff2 binary
