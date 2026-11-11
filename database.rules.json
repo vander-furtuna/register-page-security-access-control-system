@@ -8,13 +8,15 @@
     "logs": { ".write": "auth != null" },
 
     "pendingRegistration": {
-      ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || !newData.exists())"
+      ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/) || !newData.exists())"
     },
     "pendingUser": {
-      ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || !newData.exists())"
+      ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/) || !newData.exists())"
     },
 
-    "members": { ".write": "auth != null && root.child('admins').child(auth.uid).val() === true" },
+    "members": {
+      ".write": "auth != null && root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/)"
+    },
     "admins": { ".write": false },
 
     "devices": {
@@ -23,7 +25,7 @@
         "inventory": { ".write": "auth != null" },
         "commands": {
           "$commandId": {
-            ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true || data.exists())"
+            ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/) || data.exists())"
           }
         }
       }
