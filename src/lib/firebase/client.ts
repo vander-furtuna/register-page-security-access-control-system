@@ -5,7 +5,7 @@ import { connectDatabaseEmulator, getDatabase, type Database } from "firebase/da
 /**
  * Cliente Firebase do navegador. Configuração só por `NEXT_PUBLIC_*` (`.env.local`), sem valores
  * reais no código. Com `NEXT_PUBLIC_USE_EMULATOR=true`, conecta no emulador local
- * (`npm run emulators`) e usa o projeto de demonstração `demo-pet-lock`.
+ * (`pnpm emulators`) e usa o projeto de demonstração `demo-pet-lock`.
  */
 
 export const useEmulator = process.env.NEXT_PUBLIC_USE_EMULATOR === "true";

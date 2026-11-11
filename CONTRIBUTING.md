@@ -2,16 +2,17 @@
 
 ## Ambiente
 
-- Node.js 24 LTS (`nvm use` lê o `.nvmrc`) e npm.
+- Node.js 24 LTS (`nvm use` lê o `.nvmrc`) e pnpm 12. A versão exata está em `packageManager` no `package.json`: com pnpm ≥ 12 instalado (`npm i -g pnpm` ou `corepack enable`), ele baixa e usa a versão fixada sozinho.
 - `cp .env.example .env.local` e peça as credenciais a um admin do PET. Nunca commite `.env*`.
-- Para desenvolver sem tocar no banco real: `npm run emulators` em um terminal e `npm run seed:emulator` em outro (disponível a partir da fase 0).
+- Para desenvolver sem tocar no banco real: `pnpm emulators` em um terminal e `pnpm seed:emulator` em outro.
 
 ## Fluxo
 
 1. Parta da branch `v2` atualizada: `git switch v2 && git pull`.
 2. Crie uma branch: `feat/<tema>`, `fix/<tema>`, `docs/<tema>` ou `chore/<tema>`.
 3. Commits no padrão [Conventional Commits](https://www.conventionalcommits.org/pt-br/v1.0.0/) (o commitlint confere): `feat(cadastro): …`.
-4. Antes de abrir o PR: `npm run lint && npm run typecheck && npm run test && npm run build`.
+4. Antes de abrir o PR: `pnpm lint && pnpm typecheck && pnpm test && pnpm build`.
+   Dependência nova com script de instalação: o pnpm bloqueia até ela ser aprovada (`pnpm approve-builds <pacote>` ou `!<pacote>` para negar), e a decisão fica em `allowBuilds` no `pnpm-workspace.yaml`. Aprove só o que precisa rodar.
 5. PR para `v2` usando o template, com prints das telas alteradas (claro, escuro e celular) e uma linha no `CHANGELOG.md` em **Não lançado**.
 6. Merge com squash depois da CI verde.
 

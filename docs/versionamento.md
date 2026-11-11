@@ -50,7 +50,7 @@ O campo `version` do `package.json` acompanha a tag (o `name` passa a ser `pet-l
 Criar uma pré-release:
 
 ```bash
-npm version 2.0.0-alpha.1 --no-git-tag-version   # atualiza package.json
+pnpm version 2.0.0-alpha.1 --no-git-tag-version  # atualiza package.json
 # atualizar CHANGELOG.md (mover itens de "Não lançado" para a nova versão)
 git commit -am "chore(release): v2.0.0-alpha.1"
 git tag -a v2.0.0-alpha.1 -m "v2.0.0-alpha.1 — fase 1: shell e autenticação"

@@ -27,27 +27,27 @@ A porta valida digitais (no DY50) e cartões (na EEPROM) **sem internet**. O sit
 
 ## Stack (detalhes e motivos em `docs/arquitetura/stack.md`)
 
-- Node.js 24 LTS · npm (só `package-lock.json`)
+- Node.js 24 LTS · pnpm 12 (só `pnpm-lock.yaml`; versão em `packageManager`). Script de instalação de dependência nova só roda com aprovação em `allowBuilds` (`pnpm-workspace.yaml`, via `pnpm approve-builds`)
 - Next.js 16 (App Router, Turbopack) · React 19 · TypeScript strict
 - Tailwind CSS 4 (configuração no CSS com `@theme`; sem `tailwind.config.js`)
 - shadcn/ui (CLI v4, primitivas Base UI) em `src/components/ui/` · lucide-react · next-themes · sonner
 - react-hook-form + zod · @tanstack/react-table · shadcn Chart (Recharts) · date-fns (`ptBR`)
 - Firebase JS SDK 13 (Realtime Database + Auth), hooks próprios em `src/lib/firebase/`
 - Vitest + Testing Library · Playwright · ESLint 9 + Prettier · Husky + lint-staged + commitlint
-- **Não use** HeroUI, framer-motion, styled-components, MUI, Chakra ou outra lib de componentes. Precisa de um componente? `npx shadcn@latest add <nome>` e adapte ao design system.
+- **Não use** HeroUI, framer-motion, styled-components, MUI, Chakra ou outra lib de componentes. Precisa de um componente? `pnpm dlx shadcn@latest add <nome>` (troque `from "cn"` por `from "@/lib/utils"`) e adapte ao design system.
 
 ## Comandos (a partir da fase 0)
 
 ```bash
-npm install
-npm run dev            # http://localhost:3000
-npm run lint
-npm run typecheck      # tsc --noEmit
-npm run test           # vitest
-npm run test:e2e       # playwright
-npm run build          # precisa passar antes de considerar uma tarefa pronta
-npm run emulators      # Firebase emulator (RTDB + Auth)
-npm run seed:emulator  # dados de exemplo no emulador
+pnpm install
+pnpm dev               # http://localhost:3000
+pnpm lint
+pnpm typecheck         # tsc --noEmit
+pnpm test              # vitest
+pnpm test:e2e          # playwright
+pnpm build             # precisa passar antes de considerar uma tarefa pronta
+pnpm emulators         # Firebase emulator (RTDB + Auth)
+pnpm seed:emulator     # dados de exemplo no emulador (--firmware-2.1, --master)
 ```
 
 Desenvolva contra o emulador. **Nunca** escreva no banco de produção em testes nem rode seed contra ele.
@@ -108,7 +108,7 @@ Arquivos em kebab-case (padrão shadcn); componentes exportados em PascalCase.
 
 ## Definição de pronto
 
-- `npm run lint`, `npm run typecheck`, `npm run test` e `npm run build` passam.
+- `pnpm lint`, `pnpm typecheck`, `pnpm test` e `pnpm build` passam.
 - A tela bate com o PNG de referência nos temas claro e escuro e em 390px.
 - Estados de carregando, vazio, erro e fechadura offline existem.
 - Funciona com o firmware 2.0 (sem `devices/*`) e melhora quando os dados novos existem.

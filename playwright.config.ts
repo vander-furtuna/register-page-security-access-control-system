@@ -16,7 +16,7 @@ export default defineConfig({
   ],
   webServer: {
     // Contra o emulador: nunca rode e2e contra o banco de produção.
-    command: process.env.CI ? `npm run start -- -p ${PORT}` : `npm run dev -- -p ${PORT}`,
+    command: process.env.CI ? `pnpm start -p ${PORT}` : `pnpm dev -p ${PORT}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     env: { NEXT_PUBLIC_USE_EMULATOR: "true" },

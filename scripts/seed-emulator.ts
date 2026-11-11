@@ -2,10 +2,10 @@
  * Popula o EMULADOR do Firebase com os mesmos dados das telas de referência
  * (`docs/design/telas/`). Recusa rodar contra qualquer coisa que não seja o emulador local.
  *
- *   npm run emulators                     # em outro terminal
- *   npm run seed:emulator                 # firmware 2.0 (sem devices/*)
- *   npm run seed:emulator -- --firmware-2.1   # também devices/sala-pet/status e inventory
- *   npm run seed:emulator -- --master     # fechadura em Modo mestre
+ *   pnpm emulators                     # em outro terminal
+ *   pnpm seed:emulator                 # firmware 2.0 (sem devices/*)
+ *   pnpm seed:emulator --firmware-2.1  # também devices/sala-pet/status e inventory
+ *   pnpm seed:emulator --master        # fechadura em Modo mestre
  *
  * Cria também um admin no emulador de Auth: admin@ufc.br / petlock-dev.
  */
@@ -56,7 +56,7 @@ async function assertEmulatorRunning() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
   } catch (error) {
     throw new Error(
-      `Emulador do Realtime Database não respondeu em ${DATABASE_HOST} (${String(error)}). Rode "npm run emulators" antes.`,
+      `Emulador do Realtime Database não respondeu em ${DATABASE_HOST} (${String(error)}). Rode "pnpm emulators" antes.`,
     );
   }
 }

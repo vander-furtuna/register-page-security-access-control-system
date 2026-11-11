@@ -26,7 +26,7 @@ Versões de referência (novembro/2026): Next.js 16.4, Tailwind CSS 4.3, Firebas
 | Qualidade | ESLint 9 (FlatCompat) | **ESLint 9 flat** (`eslint-config-next`) + **Prettier** + `prettier-plugin-tailwindcss` | |
 | Commits | livre | **Conventional Commits** com **commitlint**, **Husky + lint-staged** | Ver `docs/versionamento.md` |
 | CI | — | **GitHub Actions**: lint, typecheck, test, build em todo PR | |
-| Pacotes | `package-lock.json` + `bun.lock` | **npm** e só `package-lock.json` | Remover `bun.lock` |
+| Pacotes | `package-lock.json` + `bun.lock` | **pnpm 12** e só `pnpm-lock.yaml` | Versão fixada em `packageManager`; scripts de instalação só com aprovação em `allowBuilds` (`pnpm-workspace.yaml`) |
 
 Sai da v2: `@heroui/react`, `framer-motion`, `autoprefixer`, `postcss.config.js`, `tailwind.config.js`, `src/app/providers.tsx` (HeroUIProvider), `src/app/firebase.js`.
 
@@ -135,7 +135,7 @@ Sai da v2: `@heroui/react`, `framer-motion`, `autoprefixer`, `postcss.config.js`
 
 Regras:
 
-- Depois de `npx shadcn@latest init` e de cada `npx shadcn@latest add`, **apague** os blocos `:root { --background: … }` e `.dark { … }` que o CLI escrever no `globals.css`. As cores vêm só do `tokens.css`.
+- Depois de `pnpm dlx shadcn@latest init` e de cada `pnpm dlx shadcn@latest add`, troque `from "cn"` por `from "@/lib/utils"` nos arquivos gerados e **apague** os blocos `:root { --background: … }` e `.dark { … }` que o CLI escrever no `globals.css`. As cores vêm só do `tokens.css`.
 - O token do cartão RFID chama `rfid` justamente porque `--card` é do shadcn (fundo de card).
 - Ajuste as variantes dos componentes do shadcn (Button, Badge, Alert…) para as do design system em vez de criar componentes paralelos. Ex.: `Button` com `variant: default | secondary | ghost | destructive | destructive-soft` e `size: sm | default | lg | icon`.
 
