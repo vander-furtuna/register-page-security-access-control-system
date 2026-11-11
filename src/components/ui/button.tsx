@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  * - destructive: fundo `danger`. Só dentro de modal de confirmação.
  * - destructive-soft: interromper algo em andamento sem perda de dados.
  */
-const buttonVariants = cva(
+const buttonVariantsBase = cva(
   "group/button inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 rounded-md border border-transparent font-sans font-semibold whitespace-nowrap transition-[background-color,border-color,color,box-shadow] outline-none select-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-45 aria-disabled:cursor-not-allowed aria-disabled:opacity-45 aria-invalid:border-danger [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-[18px]",
   {
     variants: {
@@ -45,14 +45,23 @@ function Button({
   variant = "default",
   size = "default",
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: ButtonPrimitive.Props & VariantProps<typeof buttonVariantsBase>) {
   return (
     <ButtonPrimitive
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(buttonVariantsBase({ variant, size, className }))}
       {...props}
     />
   );
+}
+
+/**
+ * Classes do botão já resolvidas pelo `cn` (tailwind-merge). Use em links com cara de botão:
+ * `<Link className={buttonVariants({ variant: "secondary" })}>`. Sem o merge, `border-transparent`
+ * da base e a borda da variante disputariam pela ordem do CSS.
+ */
+function buttonVariants(props?: Parameters<typeof buttonVariantsBase>[0]) {
+  return cn(buttonVariantsBase(props));
 }
 
 export { Button, buttonVariants };

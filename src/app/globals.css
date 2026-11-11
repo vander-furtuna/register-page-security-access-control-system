@@ -150,3 +150,13 @@
     @apply bg-background font-sans text-body text-foreground antialiased;
   }
 }
+
+/* Anel pulsante do passo ativo do cadastro (RegistrationStepper). */
+@keyframes pl-ring {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--lock) 55%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 10px color-mix(in oklch, var(--lock) 0%, transparent);
+  }
+}

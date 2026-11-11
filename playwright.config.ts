@@ -9,7 +9,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? "github" : "list",
-  use: { baseURL, trace: "on-first-retry" },
+  use: { baseURL, trace: "on-first-retry", actionTimeout: 10_000 },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
     { name: "celular", use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 } } },

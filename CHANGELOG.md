@@ -4,6 +4,15 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+### Adicionado
+- Fase 2 — novo cadastro (`/cadastro`, telas 05 e 09): formulário com react-hook-form + zod (nome com prévia do LCD, e-mail da UFC exceto visitantes, vínculo, validade), `MethodPicker` e `RegistrationStepper`, painel da porta com tempo restante e instrução em destaque no celular.
+- Máquina de estados do cadastro em `src/lib/registration/` (testada com fakes): pedido em `pendingRegistration/current` + espelho `pendingUser/current` numa escrita só; retomada de pedido em andamento; prazo de 120 s pelo horário do pedido; cancelamento se a fechadura sai do Modo mestre; concluído × cancelado na porta pelo `users/*` novo com o e-mail do pedido; "Cartão salvo, digital falhou"; `members/{key}` com vínculo, validade e quem cadastrou.
+- Firmware 2.1 (com fallback): passo ativo e erros pelo `step`, `result.userKey` e LCD espelhado no painel.
+- E2E do cadastro contra o emulador, com o teste fazendo o papel da fechadura (concluído, digital falhou, cancelado na porta e pelo site, Modo mestre caindo, celular).
+
+### Corrigido
+- `buttonVariants()` agora passa pelo `cn`: links com cara de botão perdiam a borda (`border-transparent` da base disputava com a da variante).
+
 ## [2.0.0-alpha.1] — 2026-11-11
 
 Fase 1 — shell e autenticação. Também troca o gerenciador de pacotes para o pnpm 12.

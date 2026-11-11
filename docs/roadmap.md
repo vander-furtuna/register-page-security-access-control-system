@@ -51,14 +51,14 @@ Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela no
 
 ## Fase 2 — Novo cadastro (→ `alpha.2`)
 
-- [ ] `/cadastro` (tela 05) reescrevendo a lógica da v1 (`release/v1:src/app/page.tsx`) com react-hook-form + zod, `MethodPicker` e `RegistrationStepper`.
-- [ ] `usePendingRegistration` (criar, cancelar, observar); manter o espelho `pendingUser/current`.
-- [ ] Bloquear sem `MASTER`; reagir se o modo cair no meio; timer de 120 s.
-- [ ] Distinguir concluído × cancelado na porta; "Cartão salvo, digital falhou".
-- [ ] Gravar `members/{key}` (vínculo, validade) após concluir.
-- [ ] 🔌 `step` do cadastro e LCD espelhado quando existirem.
-- [ ] Layout de celular (tela 09). Teste ponta a ponta com a fechadura real (combinar com o usuário) e e2e com emulador.
-- [ ] Abrir issue/PR rascunho no upstream apresentando a v2 (ver `versionamento.md`).
+- [x] `/cadastro` (tela 05) reescrevendo a lógica da v1 (`release/v1:src/app/page.tsx`) com react-hook-form + zod, `MethodPicker` e `RegistrationStepper`.
+- [x] `usePendingRegistration` (criar, cancelar, observar); manter o espelho `pendingUser/current`.
+- [x] Bloquear sem `MASTER`; reagir se o modo cair no meio; timer de 120 s.
+- [x] Distinguir concluído × cancelado na porta; "Cartão salvo, digital falhou".
+- [x] Gravar `members/{key}` (vínculo, validade) após concluir.
+- [x] 🔌 `step` do cadastro e LCD espelhado quando existirem. _(Pronto e testado com dados simulados; falta o firmware 2.1 publicar `step`/`result` e `devices/*/status.lcd`.)_
+- [ ] Layout de celular (tela 09). Teste ponta a ponta com a fechadura real (combinar com o usuário) e e2e com emulador. _(Layout de celular e e2e com emulador prontos (`e2e/cadastro.spec.ts`); falta o teste com a fechadura real, a combinar.)_
+- [ ] Abrir issue/PR rascunho no upstream apresentando a v2 (ver `versionamento.md`). _(Ação pública no repositório original: fica para o usuário decidir.)_
 
 ## Fase 3 — Membros (→ `alpha.3`)
 

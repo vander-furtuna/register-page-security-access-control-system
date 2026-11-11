@@ -89,6 +89,12 @@ export function formatLockTime(date: Date, { seconds = true }: { seconds?: boole
     : `${pad(p.hours)}:${pad(p.minutes)}`;
 }
 
+/** `"2026-11-10"` no fuso da fechadura (valor de `<input type="date">`). */
+export function lockDateISO(date: Date): string {
+  const p = lockParts(date);
+  return `${p.year}-${pad(p.month)}-${pad(p.day)}`;
+}
+
 /** `"10/11/2026"` no fuso da fechadura. */
 export function formatLockDate(date: Date): string {
   const p = lockParts(date);
@@ -144,6 +150,16 @@ export function relativeTime(
   if (days <= 1) return "ontem";
   if (days < 7) return `há ${days} dias`;
   return formatLockDate(date);
+}
+
+/** Primeiro e segundo nome, para textos curtos: "Maria Clara Sousa" → "Maria Clara". */
+export function shortName(name: string): string {
+  return name
+    .trim()
+    .replace(/^Prof(a)?\.\s+/i, "")
+    .split(/\s+/)
+    .slice(0, 2)
+    .join(" ");
 }
 
 // ---------------------------------------------------------------------------
