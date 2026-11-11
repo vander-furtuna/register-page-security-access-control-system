@@ -4,6 +4,9 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+### Alterado
+- Gerenciador de pacotes: npm → pnpm 12.18.0 (`packageManager`, `pnpm-lock.yaml`). Scripts de instalação só com aprovação em `allowBuilds` (`pnpm-workspace.yaml`): `esbuild` liberado; `@firebase/util`, `protobufjs` e `re2` negados. CI com `pnpm/action-setup@v6`, hooks do Husky e docs atualizados.
+
 ## [2.0.0-alpha.0] — 2026-11-10
 
 Fase 0 — nova base. Reescrita do painel com Next.js 16, Tailwind CSS 4 e shadcn/ui, no lugar de Next.js 15, Tailwind 3 e HeroUI. Plano em [`docs/roadmap.md`](docs/roadmap.md).

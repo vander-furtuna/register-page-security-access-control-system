@@ -19,7 +19,7 @@
 
 ## Checklist
 
-- [ ] `npm run lint`, `npm run typecheck`, `npm run test` e `npm run build` passam
+- [ ] `pnpm lint`, `pnpm typecheck`, `pnpm test` e `pnpm build` passam
 - [ ] Estados de carregando, vazio, erro e fechadura offline
 - [ ] Linha no `CHANGELOG.md` (Não lançado)
 - [ ] Nenhum segredo ou `.env` no diff

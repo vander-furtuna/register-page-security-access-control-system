@@ -11,7 +11,7 @@ Fonte da verdade: `docs/design-system/` (tokens, CSS dos componentes, guia) e `d
 
 - Stack de UI: Tailwind CSS 4 + shadcn/ui (Base UI) + lucide-react. Nada de HeroUI ou outra lib de componentes.
 - Tokens: variáveis de `src/styles/tokens.css`, expostas como utilitários pelo `@theme inline` do `globals.css` (`bg-surface`, `text-ink-muted`, `bg-lock text-on-lock`, `bg-finger-soft text-finger-ink`, `bg-rfid-soft text-rfid-ink`, `border-line-strong`, `rounded-md`…). As variáveis semânticas do shadcn (`primary`, `muted`, `destructive`, `sidebar`…) já apontam para os tokens. **Nunca** escreva hex.
-- Precisa de um componente? `npx shadcn@latest add <nome>`, depois ajuste variantes/classes ao design system. Remova qualquer bloco de cor `:root`/`.dark` que o CLI adicionar ao `globals.css`.
+- Precisa de um componente? `pnpm dlx shadcn@latest add <nome>` (troque `from "cn"` por `from "@/lib/utils"` no que ele gerar), depois ajuste variantes/classes ao design system. Remova qualquer bloco de cor `:root`/`.dark` que o CLI adicionar ao `globals.css`.
 - As classes `pl-*` em `docs/design-system/petlock.css` e os `.html` de `docs/design/telas/` são **referência visual**: leia para copiar medidas, espaçamentos e estrutura, e reproduza com utilitários Tailwind. Não importe `petlock.css` no app.
 
 ## Significado das cores (não negociável)
