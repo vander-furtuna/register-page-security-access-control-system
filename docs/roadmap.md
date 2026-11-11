@@ -42,12 +42,12 @@ Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela no
 
 ## Fase 1 — Shell e autenticação (→ `alpha.1`)
 
-- [ ] Firebase Auth: Google (restrito a `@ufc.br`/`@alu.ufc.br`) + e-mail/senha. `AuthProvider` + `useAuth`.
-- [ ] Autorização por `admins/{uid} === true`; tela "sem permissão".
-- [ ] `/login` (tela 01).
-- [ ] `(painel)/layout.tsx` protegido: `AppSidebar` (shadcn Sidebar com tokens `chassis`, mini status da porta com LCD, badge de sem dono), `Topbar` (busca, notificações, ação principal), `MobileNav` ≤ 640px, drawer (Sheet) ≤ 1024px, `ThemeToggle`.
-- [ ] Componentes do domínio em `components/pet/`: `StatusPill`, `CredentialChip`, `LcdMirror`, `LockStatusCard`, `EmptyState`, `StatTile`.
-- [ ] Hooks `useSystemMode`, `useDeviceStatus` (`missing` sem `devices/*`).
+- [x] Firebase Auth: Google (restrito a `@ufc.br`/`@alu.ufc.br`) + e-mail/senha. `AuthProvider` + `useAuth`.
+- [x] Autorização por `admins/{uid} === true`; tela "sem permissão".
+- [x] `/login` (tela 01).
+- [x] `(painel)/layout.tsx` protegido: `AppSidebar` (shadcn Sidebar com tokens `chassis`, mini status da porta com LCD, badge de sem dono), `Topbar` (busca, notificações, ação principal), `MobileNav` ≤ 640px, drawer (Sheet) ≤ 1024px, `ThemeToggle`. _(Busca da Topbar envia para `/membros?q=`, que é implementada na fase 3; avisos mostram estado vazio até a fase 4.)_
+- [x] Componentes do domínio em `components/pet/`: `StatusPill`, `CredentialChip`, `LcdMirror`, `LockStatusCard`, `EmptyState`, `StatTile`.
+- [x] Hooks `useSystemMode`, `useDeviceStatus` (`missing` sem `devices/*`).
 
 ## Fase 2 — Novo cadastro (→ `alpha.2`)
 
