@@ -11,34 +11,34 @@ Legenda: 🔌 depende do firmware 2.1 (`docs/arquitetura/contrato-firmware.md`) 
 Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela nova ainda; a página de cadastro antiga é removida (ela vive em `release/v1` e volta reescrita na fase 2).
 
 **Limpeza**
-- [ ] Remover HeroUI e tudo que vem com ele: `@heroui/react`, `framer-motion`, `src/app/providers.tsx`, `tailwind.config.js`, `postcss.config.js`, `autoprefixer`, `bun.lock`, `src/app/firebase.js`. Guardar a lógica de `src/app/page.tsx` como referência para a fase 2 (está em `release/v1`) e substituir a página por um placeholder.
-- [ ] `.gitattributes` com `* text=auto eol=lf` (o repo é editado no Windows e em Linux) e normalizar finais de linha num commit separado `chore: normalizar finais de linha`.
+- [x] Remover HeroUI e tudo que vem com ele: `@heroui/react`, `framer-motion`, `src/app/providers.tsx`, `tailwind.config.js`, `postcss.config.js`, `autoprefixer`, `bun.lock`, `src/app/firebase.js`. Guardar a lógica de `src/app/page.tsx` como referência para a fase 2 (está em `release/v1`) e substituir a página por um placeholder.
+- [ ] `.gitattributes` com `* text=auto eol=lf` (o repo é editado no Windows e em Linux) e normalizar finais de linha num commit separado `chore: normalizar finais de linha`. _(`.gitattributes` pronto; o commit de normalização (`git add --renormalize .`) fica para quando o usuário commitar.)_
 
 **Atualização**
-- [ ] `package.json`: `name: "pet-lock-web"`, `version: "2.0.0-alpha.0"`, `engines.node: ">=24"`, `.nvmrc` = 24.
-- [ ] Next.js 16, React 19, React DOM, `eslint-config-next` na última estável. TypeScript strict. Conferir `next.config.ts` e breaking changes do 15→16 (`next lint` foi removido: usar `eslint .`).
-- [ ] Tailwind CSS 4 + `@tailwindcss/postcss` (único `postcss.config.mjs`), `globals.css` no formato de `docs/arquitetura/stack.md`.
-- [ ] Firebase JS SDK 13.
+- [x] `package.json`: `name: "pet-lock-web"`, `version: "2.0.0-alpha.0"`, `engines.node: ">=24"`, `.nvmrc` = 24.
+- [x] Next.js 16, React 19, React DOM, `eslint-config-next` na última estável. TypeScript strict. Conferir `next.config.ts` e breaking changes do 15→16 (`next lint` foi removido: usar `eslint .`).
+- [x] Tailwind CSS 4 + `@tailwindcss/postcss` (único `postcss.config.mjs`), `globals.css` no formato de `docs/arquitetura/stack.md`.
+- [x] Firebase JS SDK 13.
 
 **Design system**
-- [ ] `npx shadcn@latest init` (base **Base UI**, estilo padrão, `src/components/ui`, alias `@/`). Apagar os blocos de cor `:root`/`.dark` que ele gerar.
-- [ ] Copiar `docs/design-system/tokens.css` para `src/styles/tokens.css` e ligar no `globals.css` (`@theme inline` completo de `stack.md`).
-- [ ] Fontes em `src/app/fonts.ts` (Sora, IBM Plex Sans, IBM Plex Mono via `next/font/google`); `layout.tsx` com `lang="pt-BR"`, título "PET Lock", `ThemeProvider` do `next-themes` (`attribute="data-theme"`, padrão `light`), `Toaster` do sonner.
-- [ ] Componentes base do shadcn: `button`, `badge`, `input`, `label`, `select`, `checkbox`, `radio-group`, `tabs`, `toggle-group`, `card`, `table`, `dialog`, `alert-dialog`, `alert`, `dropdown-menu`, `tooltip`, `sheet`, `sidebar`, `skeleton`, `separator`, `avatar`, `sonner`, `field`/`form`. Ajustar variantes ao design system (ver `docs/design-system/componentes.md`): Button `default | secondary | ghost | destructive | destructive-soft`, tamanhos `sm | default | lg | icon`, raios 4/8/12.
-- [ ] `src/components/brand/`: `Logo` (claro/escuro), `FingerIcon`, `RfidIcon`, `LockDeviceIcon` a partir de `docs/design-system/assets/*.svg` (`stroke="currentColor"`). SVGs em `public/brand/`, favicon/`icon.svg` com o símbolo.
-- [ ] Página `/dev/ui` (só em desenvolvimento) mostrando os componentes nos dois temas, para comparar com `docs/design-system/componentes/*.html`.
+- [x] `npx shadcn@latest init` (base **Base UI**, estilo padrão, `src/components/ui`, alias `@/`). Apagar os blocos de cor `:root`/`.dark` que ele gerar.
+- [x] Copiar `docs/design-system/tokens.css` para `src/styles/tokens.css` e ligar no `globals.css` (`@theme inline` completo de `stack.md`).
+- [x] Fontes em `src/app/fonts.ts` (Sora, IBM Plex Sans, IBM Plex Mono via `next/font/google`); `layout.tsx` com `lang="pt-BR"`, título "PET Lock", `ThemeProvider` do `next-themes` (`attribute="data-theme"`, padrão `light`), `Toaster` do sonner.
+- [x] Componentes base do shadcn: `button`, `badge`, `input`, `label`, `select`, `checkbox`, `radio-group`, `tabs`, `toggle-group`, `card`, `table`, `dialog`, `alert-dialog`, `alert`, `dropdown-menu`, `tooltip`, `sheet`, `sidebar`, `skeleton`, `separator`, `avatar`, `sonner`, `field`/`form`. Ajustar variantes ao design system (ver `docs/design-system/componentes.md`): Button `default | secondary | ghost | destructive | destructive-soft`, tamanhos `sm | default | lg | icon`, raios 4/8/12.
+- [x] `src/components/brand/`: `Logo` (claro/escuro), `FingerIcon`, `RfidIcon`, `LockDeviceIcon` a partir de `docs/design-system/assets/*.svg` (`stroke="currentColor"`). SVGs em `public/brand/`, favicon/`icon.svg` com o símbolo.
+- [x] Página `/dev/ui` (só em desenvolvimento) mostrando os componentes nos dois temas, para comparar com `docs/design-system/componentes/*.html`.
 
 **Dados**
-- [ ] `src/lib/firebase/{client,paths,schemas,types}.ts` e `use-rtdb-value.ts` conforme `dados-firebase.md` e `stack.md`. Config só por `NEXT_PUBLIC_*`; `.env.example` com `NEXT_PUBLIC_LOCK_DEVICE_ID` e `NEXT_PUBLIC_USE_EMULATOR`.
-- [ ] Emulador: `firebase.json` (database + auth), `database.rules.json` inicial, `firebase-tools` como devDependency, `scripts/seed-emulator.ts` (recusa rodar fora do emulador) com os mesmos dados das telas de referência. Scripts `emulators` e `seed:emulator`.
-- [ ] `src/lib/format.ts` com testes: `formatUid("A3:F2:1C:9D") → "A3 F2 1C 9D"`, `normalizeUid`, `parseLockTimestamp("2026-11-10 14:32:08")` (UTC-3), `relativeTime` pt-BR, `lcdName(nome)` (sem acento, 16 colunas).
+- [x] `src/lib/firebase/{client,paths,schemas,types}.ts` e `use-rtdb-value.ts` conforme `dados-firebase.md` e `stack.md`. Config só por `NEXT_PUBLIC_*`; `.env.example` com `NEXT_PUBLIC_LOCK_DEVICE_ID` e `NEXT_PUBLIC_USE_EMULATOR`.
+- [x] Emulador: `firebase.json` (database + auth), `database.rules.json` inicial, `firebase-tools` como devDependency, `scripts/seed-emulator.ts` (recusa rodar fora do emulador) com os mesmos dados das telas de referência. Scripts `emulators` e `seed:emulator`.
+- [x] `src/lib/format.ts` com testes: `formatUid("A3:F2:1C:9D") → "A3 F2 1C 9D"`, `normalizeUid`, `parseLockTimestamp("2026-11-10 14:32:08")` (UTC-3), `relativeTime` pt-BR, `lcdName(nome)` (sem acento, 16 colunas).
 
 **Qualidade e versionamento**
-- [ ] ESLint 9 flat + Prettier + `prettier-plugin-tailwindcss`; scripts `lint`, `format`, `typecheck`.
-- [ ] Vitest + Testing Library (`test`), Playwright (`test:e2e`) com um teste de fumaça da página inicial.
-- [ ] Husky + lint-staged (lint/format nos arquivos alterados) + commitlint (`@commitlint/config-conventional`, escopos de `docs/versionamento.md`).
-- [ ] GitHub Actions `ci.yml`: em PR e push para `v2`, Node 24, `npm ci`, lint, typecheck, test, build.
-- [ ] `CHANGELOG.md` com as versões instaladas; pré-release `v2.0.0-alpha.0`.
+- [x] ESLint 9 flat + Prettier + `prettier-plugin-tailwindcss`; scripts `lint`, `format`, `typecheck`.
+- [x] Vitest + Testing Library (`test`), Playwright (`test:e2e`) com um teste de fumaça da página inicial.
+- [x] Husky + lint-staged (lint/format nos arquivos alterados) + commitlint (`@commitlint/config-conventional`, escopos de `docs/versionamento.md`).
+- [x] GitHub Actions `ci.yml`: em PR e push para `v2`, Node 24, `npm ci`, lint, typecheck, test, build.
+- [ ] `CHANGELOG.md` com as versões instaladas; pré-release `v2.0.0-alpha.0`. _(Versões registradas no CHANGELOG; a tag da pré-release fica a critério do usuário depois do merge na `v2`.)_
 
 ## Fase 1 — Shell e autenticação (→ `alpha.1`)
 
