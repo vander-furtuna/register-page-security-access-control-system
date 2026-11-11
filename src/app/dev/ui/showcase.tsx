@@ -72,6 +72,8 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { formatUid, lcdName, lcdNameChanges } from "@/lib/format";
 
+import { DomainShowcase } from "./domain-showcase";
+
 const roles = [
   { value: "petiano", label: "Petiano(a)" },
   { value: "tutor", label: "Tutor(a)" },
@@ -506,6 +508,10 @@ export function Showcase() {
             Toast negado
           </Button>
         </Row>
+      </Section>
+
+      <Section title="Componentes do domínio" reference="components/pet/">
+        <DomainShowcase />
       </Section>
 
       <Section title="Skeleton e Separator">

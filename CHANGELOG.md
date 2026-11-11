@@ -4,7 +4,15 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+### Adicionado
+- Fase 1 — shell e autenticação: login com Google (só `@ufc.br`/`@alu.ufc.br`) e e-mail/senha, com "Esqueci a senha" (`/login`, tela 01); autorização por `admins/{uid}` com tela "Sem permissão"; `AuthProvider`/`useAuth` e `AuthGate` no painel.
+- Shell do painel: `AppSidebar` em `chassis` (248px, drawer abaixo de 1024px) com badge de credenciais sem dono e mini estado da porta com LCD, `Topbar` (busca, avisos, ação principal; header `chassis` no celular), `MobileNav` (≤ 640px) e telas provisórias "Em construção" para as rotas do menu.
+- Componentes do domínio em `components/pet/`: `StatusPill`, `CredentialChip`, `LcdMirror`, `LockStatusCard`, `EmptyState`, `StatTile` (vitrine em `/dev/ui`).
+- Hooks `useSystemMode`, `useDeviceStatus` (`missing` no firmware 2.0), `useRecentLogs`, `useOrphans` e `useLockSnapshot`; regras puras em `src/lib/lock-state.ts` (offline após 30 s sem heartbeat, LCD apagado após 2 min, logs pelo horário real, sem dono pelo inventário ou pelos logs), com testes.
+- E2E de login contra o emulador (admin, senha errada, conta sem permissão).
+
 ### Alterado
+- `database.rules.json`: escritas de admin também exigem e-mail `@ufc.br`/`@alu.ufc.br`.
 - Gerenciador de pacotes: npm → pnpm 12.18.0 (`packageManager`, `pnpm-lock.yaml`). Scripts de instalação só com aprovação em `allowBuilds` (`pnpm-workspace.yaml`): `esbuild` liberado; `@firebase/util`, `protobufjs` e `re2` negados. CI com `pnpm/action-setup@v6`, hooks do Husky e docs atualizados.
 
 ## [2.0.0-alpha.0] — 2026-11-10

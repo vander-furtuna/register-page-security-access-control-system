@@ -109,7 +109,7 @@ Depois de um cadastro concluído, o site encontra o novo `users/*` pelo e-mail d
 
 ## 3. Regras de segurança (fase 6)
 
-Hoje não há `database.rules.json` no repo. Proposta mínima:
+O `database.rules.json` do repo é a versão inicial (fase 0/1): leitura para qualquer autenticado e escritas de admin exigindo `admins/{auth.uid} === true` **e** e-mail `@ufc.br`/`@alu.ufc.br` (`auth.token.email`). O ESP autentica anonimamente e não é admin, então a checagem de e-mail nunca roda para ele. Proposta para produção:
 
 - Leitura: só autenticados (admins ou o dispositivo).
 - `pendingRegistration`, `members`, `devices/*/commands`: escrita só de `admins/{auth.uid} === true`.

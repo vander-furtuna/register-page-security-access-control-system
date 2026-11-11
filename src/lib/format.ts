@@ -95,6 +95,29 @@ export function formatLockDate(date: Date): string {
   return `${pad(p.day)}/${pad(p.month)}/${p.year}`;
 }
 
+const WEEKDAYS = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+const MONTHS = [
+  "janeiro",
+  "fevereiro",
+  "março",
+  "abril",
+  "maio",
+  "junho",
+  "julho",
+  "agosto",
+  "setembro",
+  "outubro",
+  "novembro",
+  "dezembro",
+];
+
+/** `"Terça, 10 de novembro"` no fuso da fechadura (subtítulo da Visão geral). */
+export function formatLockLongDate(date: Date): string {
+  const p = lockParts(date);
+  const weekday = new Date(Date.UTC(p.year, p.month - 1, p.day)).getUTCDay();
+  return `${WEEKDAYS[weekday]}, ${p.day} de ${MONTHS[p.month - 1]}`;
+}
+
 /** Dias de calendário (no fuso da fechadura) entre `date` e `now`. */
 function calendarDaysBetween(date: Date, now: Date): number {
   const a = lockParts(date);
@@ -103,11 +126,17 @@ function calendarDaysBetween(date: Date, now: Date): number {
 }
 
 /**
- * Tempo relativo em pt-BR, curto: "agora", "há 3 min", "há 2 h", "ontem", "há 4 dias",
+ * Tempo relativo em pt-BR, curto: "agora" (ou "há 4 s" com `seconds`), "há 3 min", "há 2 h", "ontem", "há 4 dias",
  * e a data absoluta depois de 7 dias. Datas no futuro (relógio do ESP adiantado) viram "agora".
  */
-export function relativeTime(date: Date, now: Date = new Date()): string {
+export function relativeTime(
+  date: Date,
+  now: Date = new Date(),
+  { seconds = false }: { seconds?: boolean } = {},
+): string {
   const diff = now.getTime() - date.getTime();
+  // `seconds`: para "Último contato" da fechadura, que muda a cada heartbeat (10 s)
+  if (seconds && diff >= 1000 && diff < MINUTE) return `há ${Math.floor(diff / 1000)} s`;
   if (diff < MINUTE) return "agora";
   if (diff < HOUR) return `há ${Math.floor(diff / MINUTE)} min`;
   const days = calendarDaysBetween(date, now);
