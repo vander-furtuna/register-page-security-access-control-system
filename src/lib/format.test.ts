@@ -3,6 +3,8 @@ import { describe, expect, it } from "vitest";
 import {
   formatLockDate,
   formatLockLongDate,
+  lockDateISO,
+  shortName,
   formatLockTime,
   formatUid,
   lcdName,
@@ -131,5 +133,17 @@ describe("lcdName", () => {
     expect(lcdNameChanges("Ana Lima")).toBe(false);
     expect(lcdNameChanges("Ana Lúcia")).toBe(true);
     expect(lcdNameChanges("Maria Clara Sousa")).toBe(true);
+  });
+});
+
+describe("lockDateISO e shortName", () => {
+  it("dá a data de hoje no fuso da sala", () => {
+    expect(lockDateISO(new Date("2026-11-11T02:00:00.000Z"))).toBe("2026-11-10");
+  });
+
+  it("encurta o nome para os dois primeiros", () => {
+    expect(shortName("Maria Clara Sousa")).toBe("Maria Clara");
+    expect(shortName("Prof. Gustavo Teixeira")).toBe("Gustavo Teixeira");
+    expect(shortName("  Ana ")).toBe("Ana");
   });
 });
