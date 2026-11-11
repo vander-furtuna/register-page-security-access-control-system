@@ -54,7 +54,9 @@ Fonte: leitura de `pet-lock-new/src/firebase_service.cpp`, `src/main.cpp` e do `
 
 - **Nome no LCD:** `showLines` corta em 16 colunas e o LCD não tem acentos. Avise no formulário.
 - **Falha de digital no modo CARD_AND_FINGER:** o cartão é salvo mesmo assim (`users/user_card_id_N` só com `rfid`). O site deve mostrar "Cartão salvo, digital falhou".
-- **Cancelamento pela porta:** aproximar o cartão mestre durante um cadastro apaga o pendente → para o site isso parece "sucesso". Diferencie checando se apareceu um `users/*` com o e-mail do pedido nos segundos seguintes; se não apareceu, é cancelamento.
+- **Cancelamento pela porta:** aproximar o cartão mestre durante um cadastro apaga o pendente → para o site isso parece "sucesso". Diferencie checando se apareceu um `users/*` com o e-mail do pedido nos segundos seguintes; se não apareceu, é cancelamento. A v2 espera até **10 s** depois que o pedido some (`src/lib/registration/controller.ts`); por isso o firmware deve gravar o `users/*` **antes** de apagar o pedido, como faz hoje.
+- **Modo mestre caindo no meio:** se `system/mode` sai de `MASTER` com o pedido ainda no banco, o site apaga o pedido (e o espelho) e avisa. O mesmo vale para um pedido esquecido quando a porta já está em espera.
+- **Prazo:** o site conta 120 s a partir do `timestamp` do pedido (não de quando a tela abriu) e apaga o pedido ao fim. Qualquer aba aberta pode fazer isso.
 - **Acesso negado** grava `id = 0` → `userPath` aponta para `user_*_id_0` e `userName = "Desconhecido"`. Use `cardUID` para identificar o cartão.
 - **Credencial sem dono:** cadastro autônomo (cartão mestre + passar cartão/dedo, sem pedido web) grava na fechadura mas **não cria `users/*`**. Os acessos dela chegam como `status: "ALLOWED"` e `userName: "Desconhecido"`. → Dá para detectar "sem dono" a partir dos logs mesmo sem firmware novo: `ALLOWED` + `Desconhecido` + (`accessType`, id do `userPath`).
 - **Exclusão autônoma** (no Modo mestre, passar um cartão/dedo já cadastrado) apaga da fechadura e o `users/*` correspondente.
