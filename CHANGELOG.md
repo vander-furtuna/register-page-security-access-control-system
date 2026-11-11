@@ -4,6 +4,10 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+## [2.0.0-alpha.1] — 2026-11-11
+
+Fase 1 — shell e autenticação. Também troca o gerenciador de pacotes para o pnpm 12.
+
 ### Adicionado
 - Fase 1 — shell e autenticação: login com Google (só `@ufc.br`/`@alu.ufc.br`) e e-mail/senha, com "Esqueci a senha" (`/login`, tela 01); autorização por `admins/{uid}` com tela "Sem permissão"; `AuthProvider`/`useAuth` e `AuthGate` no painel.
 - Shell do painel: `AppSidebar` em `chassis` (248px, drawer abaixo de 1024px) com badge de credenciais sem dono e mini estado da porta com LCD, `Topbar` (busca, avisos, ação principal; header `chassis` no celular), `MobileNav` (≤ 640px) e telas provisórias "Em construção" para as rotas do menu.
@@ -46,7 +50,8 @@ Fase 0 — nova base. Reescrita do painel com Next.js 16, Tailwind CSS 4 e shadc
 
 Versão original de JonasFortes12: formulário de cadastro com HeroUI que grava `pendingUser/current` no Firebase.
 
-[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.0...v2
+[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.1...v2
+[2.0.0-alpha.1]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.0...v2.0.0-alpha.1
 [2.0.0-alpha.0]: https://github.com/vander-furtuna/register-page-security-access-control-system/releases/tag/v2.0.0-alpha.0
 [1.1.0]: https://github.com/JonasFortes12/register-page-security-access-control-system/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/JonasFortes12/register-page-security-access-control-system/releases/tag/v1.0.0
