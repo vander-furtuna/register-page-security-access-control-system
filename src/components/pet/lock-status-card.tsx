@@ -1,4 +1,5 @@
 import { CircleAlertIcon } from "lucide-react";
+import type { ReactNode } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import type { LockSnapshot } from "@/lib/firebase/hooks";
@@ -27,10 +28,20 @@ export function lockPill(snapshot: Pick<LockSnapshot, "mode" | "connection">): P
 type LockStatusCardProps = {
   snapshot: LockSnapshot;
   name?: string;
+  /** Substitui a linha "ESP32 · firmware …" (ex.: "Cadastrando Maria Clara"). */
+  subtitle?: ReactNode;
+  /** Substitui as métricas (ex.: os passos do cadastro). */
+  children?: ReactNode;
   className?: string;
 };
 
-export function LockStatusCard({ snapshot, name = LOCK_NAME, className }: LockStatusCardProps) {
+export function LockStatusCard({
+  snapshot,
+  name = LOCK_NAME,
+  subtitle,
+  children,
+  className,
+}: LockStatusCardProps) {
   const { mode, connection, status, lcd, lastAccessAt, now, loading, error } = snapshot;
   const master = mode === "MASTER";
   const since = (ms: number | undefined) =>
@@ -74,7 +85,7 @@ export function LockStatusCard({ snapshot, name = LOCK_NAME, className }: LockSt
           <div className="min-w-0">
             <h2 className="font-display text-h3 text-on-chassis">{name}</h2>
             <p className="text-caption text-on-chassis-muted">
-              {status?.firmware ? `ESP32 · firmware ${status.firmware}` : "ESP32"}
+              {subtitle ?? (status?.firmware ? `ESP32 · firmware ${status.firmware}` : "ESP32")}
             </p>
           </div>
           {loading ? (
@@ -108,22 +119,24 @@ export function LockStatusCard({ snapshot, name = LOCK_NAME, className }: LockSt
         </p>
       ) : null}
 
-      <dl className="grid grid-cols-2">
-        {metrics.map((metric, index) => (
-          <div
-            key={metric.label}
-            className={cn(
-              "flex flex-col gap-0.5 border-t border-line px-6 py-3",
-              index % 2 === 0 && "border-r",
-            )}
-          >
-            <dt className="text-caption text-ink-subtle">{metric.label}</dt>
-            <dd className="font-mono text-label font-medium text-ink">
-              {loading ? <Skeleton className="h-5 w-16" /> : metric.value}
-            </dd>
-          </div>
-        ))}
-      </dl>
+      {children ?? (
+        <dl className="grid grid-cols-2">
+          {metrics.map((metric, index) => (
+            <div
+              key={metric.label}
+              className={cn(
+                "flex flex-col gap-0.5 border-t border-line px-6 py-3",
+                index % 2 === 0 && "border-r",
+              )}
+            >
+              <dt className="text-caption text-ink-subtle">{metric.label}</dt>
+              <dd className="font-mono text-label font-medium text-ink">
+                {loading ? <Skeleton className="h-5 w-16" /> : metric.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
     </section>
   );
 }
