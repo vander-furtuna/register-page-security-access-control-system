@@ -17,6 +17,7 @@ export const paths = {
   deviceStatus: `devices/${DEVICE_ID}/status`,
   deviceInventory: `devices/${DEVICE_ID}/inventory`,
   deviceCommands: `devices/${DEVICE_ID}/commands`,
+  deviceOutages: `devices/${DEVICE_ID}/outages`,
   deviceCommand: (id: string) => `devices/${DEVICE_ID}/commands/${id}`,
   // só do site
   members: "members",

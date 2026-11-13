@@ -6,6 +6,7 @@ import type {
   deviceCapabilitySchema,
   deviceCommandSchema,
   deviceInventorySchema,
+  deviceOutageSchema,
   deviceStatusSchema,
   memberMetaSchema,
   memberRoleSchema,
@@ -27,6 +28,7 @@ export type MemberMeta = z.infer<typeof memberMetaSchema>;
 export type DeviceCapability = z.infer<typeof deviceCapabilitySchema>;
 export type DeviceStatus = z.infer<typeof deviceStatusSchema>;
 export type DeviceInventory = z.infer<typeof deviceInventorySchema>;
+export type DeviceOutage = z.infer<typeof deviceOutageSchema>;
 export type CommandType = z.infer<typeof commandTypeSchema>;
 export type DeviceCommand = z.infer<typeof deviceCommandSchema>;
 

@@ -4,7 +4,7 @@
  *
  *   pnpm emulators                     # em outro terminal
  *   pnpm seed:emulator                 # firmware 2.0 (sem devices/*)
- *   pnpm seed:emulator --firmware-2.1  # também devices/sala-pet/status e inventory
+ *   pnpm seed:emulator --firmware-2.1  # também devices/sala-pet (status, inventory, outages, commands)
  *   pnpm seed:emulator --master        # fechadura em Modo mestre
  *   pnpm seed:emulator --muitos        # completa até 40 membros fictícios (tela 03)
  *
@@ -14,7 +14,9 @@ import { z } from "zod";
 
 import {
   accessLogSchema,
+  deviceCommandSchema,
   deviceInventorySchema,
+  deviceOutageSchema,
   deviceStatusSchema,
   memberMetaSchema,
   systemModeSchema,
@@ -366,6 +368,9 @@ function firmware21Nodes() {
     ["30", "5D:22:A0:7F"] as const, // cartão sem dono
   ]);
   const now = Date.now();
+  const MIN = 60_000;
+  const command = (minutesAgo: number, body: Record<string, unknown>, status = "DONE") =>
+    deviceCommandSchema.parse({ requestedBy: "seed", requestedAt: now - minutesAgo * MIN, status, ...body });
   return {
     status: deviceStatusSchema.parse({
       online: true,
@@ -381,8 +386,39 @@ function firmware21Nodes() {
       fingerCount: Object.keys(fingers).length,
       cardCapacity: 126,
       cardCount: Object.keys(cards).length,
-      capabilities: ["status", "inventory", "commands", "registrationStep", "persistentQueue"],
+      onlineSince: now - (3 * 60 + 12) * MIN,
+      ssid: "PET-UFC",
+      board: "ESP32 DOIT DevKit v1",
+      bootAt: now - 26 * 60 * MIN,
+      settings: { unlockSeconds: 2, showName: true, registrationSeconds: 120 },
+      peripherals: { dy50: true, rc522: true, lcd: true, relay: true, buzzer: true },
+      capabilities: [
+        "status",
+        "inventory",
+        "commands",
+        "registrationStep",
+        "persistentQueue",
+        "outages",
+        "settings",
+        "peripherals",
+      ],
     }),
+    // quedas da tela 08: 24 min hoje (6 acessos na fila) e 15 min ontem à noite
+    outages: {
+      o1: deviceOutageSchema.parse({ start: now - 6 * 60 * MIN, end: now - (5 * 60 + 36) * MIN, queued: 6 }),
+      o2: deviceOutageSchema.parse({
+        start: now - 14 * 60 * MIN,
+        end: now - (13 * 60 + 45) * MIN,
+        queued: 0,
+      }),
+    },
+    commands: {
+      c1: command(3 * 24 * 60, { type: "SET_UNLOCK_SECONDS", seconds: 2 }),
+      c2: command(2 * 24 * 60, { type: "DELETE_FINGER", fingerId: 12 }),
+      c3: command(26 * 60, { type: "REBOOT" }),
+      c4: command(90, { type: "DELETE_CARD", slot: 40, error: "Slot vazio" }, "ERROR"),
+      c5: command(1, { type: "REFRESH_INVENTORY" }),
+    },
     inventory: deviceInventorySchema.parse({ updatedAt: now, fingers, cards, masterCard: true }),
   };
 }
@@ -444,7 +480,7 @@ async function main() {
       `Emulador populado (${NAMESPACE}):`,
       `  ${Object.keys(users).length} membros, ${Object.keys(logs).length} registros de acesso`,
       `  system/mode = ${masterMode ? "MASTER" : "STANDBY"}`,
-      `  devices/${DEVICE_ID}: ${withFirmware21 ? "status + inventory (firmware 2.1)" : "ausente (firmware 2.0)"}`,
+      `  devices/${DEVICE_ID}: ${withFirmware21 ? "status, inventory, outages e commands (firmware 2.1)" : "ausente (firmware 2.0)"}`,
       adminUid ? `  admin: ${ADMIN_EMAIL} / ${ADMIN_PASSWORD} (uid ${adminUid})` : "  admin: não criado",
     ].join("\n"),
   );
