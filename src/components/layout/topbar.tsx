@@ -1,6 +1,6 @@
 "use client";
 
-import { BellIcon, MenuIcon, SearchIcon, UserPlusIcon } from "lucide-react";
+import { BellIcon, MenuIcon, UserPlusIcon } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
@@ -8,10 +8,10 @@ import { LogoSymbol } from "@/components/brand/logo";
 import { EmptyState } from "@/components/pet/empty-state";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
 import { useSidebar } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
+import { GlobalSearch } from "./global-search";
 import { ThemeToggle } from "./theme-toggle";
 
 /**
@@ -73,19 +73,7 @@ export function Topbar({ title, subtitle, mobileTitle, action }: TopbarProps) {
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">
-        <form action="/membros" role="search" className="relative hidden md:block">
-          <SearchIcon
-            aria-hidden="true"
-            className="pointer-events-none absolute top-1/2 left-3 size-[18px] -translate-y-1/2 text-ink-subtle"
-          />
-          <Input
-            type="search"
-            name="q"
-            aria-label="Buscar membro, UID ou ID da digital"
-            placeholder="Buscar membro, UID ou ID da digital"
-            className="w-64 pl-10 xl:w-80"
-          />
-        </form>
+        <GlobalSearch className="hidden md:block" />
         <ThemeToggle className="hidden text-ink-muted sm:inline-flex" />
         <Notifications />
         {primary ? <div className="hidden sm:block">{primary}</div> : null}
