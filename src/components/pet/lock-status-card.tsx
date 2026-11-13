@@ -32,6 +32,8 @@ type LockStatusCardProps = {
   subtitle?: ReactNode;
   /** Substitui as métricas (ex.: os passos do cadastro). */
   children?: ReactNode;
+  /** Ação no rodapé do card (ex.: "Cadastrar membro agora" em Modo mestre). */
+  footer?: ReactNode;
   className?: string;
 };
 
@@ -40,6 +42,7 @@ export function LockStatusCard({
   name = LOCK_NAME,
   subtitle,
   children,
+  footer,
   className,
 }: LockStatusCardProps) {
   const { mode, connection, status, lcd, lastAccessAt, now, loading, error } = snapshot;
@@ -50,7 +53,12 @@ export function LockStatusCard({
   const metrics: { label: string; value: string }[] = status
     ? [
         { label: "Último contato", value: since(status.lastSeen) },
-        { label: "Wi-Fi", value: status.rssi !== undefined ? `${status.rssi} dBm` : "—" },
+        connection === "offline"
+          ? {
+              label: "Fila local",
+              value: `${status.queue ?? 0} ${status.queue === 1 ? "evento" : "eventos"}`,
+            }
+          : { label: "Wi-Fi", value: status.rssi !== undefined ? `${status.rssi} dBm` : "—" },
         {
           label: "Digitais",
           value:
@@ -137,6 +145,7 @@ export function LockStatusCard({
           ))}
         </dl>
       )}
+      {footer ? <div className="border-t border-line px-6 py-4">{footer}</div> : null}
     </section>
   );
 }
