@@ -4,6 +4,10 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+## [2.0.0-beta.0] — 2026-11-13
+
+Fase 5 — credenciais na fechadura e dispositivo. Todas as telas prontas; o teste com a fechadura real fica para depois da fase 6.
+
 ### Adicionado
 - Fase 5 — fechadura. `/credenciais` (tela 06): abas Digitais, Cartões e Sem dono com o `SlotMap` (navegação por setas, posição na URL), painel da posição para vincular uma credencial sem dono a um membro, apagar, remover, tirar do cadastro uma posição que não está mais na fechadura ou começar um cadastro; "Ler inventário agora" (`REFRESH_INVENTORY`); mapa parcial com aviso no firmware 2.0; limpar a memória indicado como presencial.
 - `/dispositivo` (tela 08): cabeçalho com "Online há…", placa, firmware, IP, LCD e métricas; conexão nas últimas 24 h com a lista das quedas; "Quando a internet cai"; periféricos com ligações e diagnóstico; ajustes por comando (tempo da tranca, prazo do cadastro, nome no display) que só mudam depois que a fechadura publica; reiniciar com confirmação; fila de comandos com pendente, feito e erro. Tudo com fallback para o firmware 2.0.
@@ -103,7 +107,8 @@ Fase 0 — nova base. Reescrita do painel com Next.js 16, Tailwind CSS 4 e shadc
 
 Versão original de JonasFortes12: formulário de cadastro com HeroUI que grava `pendingUser/current` no Firebase.
 
-[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.4...v2
+[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-beta.0...v2
+[2.0.0-beta.0]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.4...v2.0.0-beta.0
 [2.0.0-alpha.4]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.3...v2.0.0-alpha.4
 [2.0.0-alpha.3]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.2...v2.0.0-alpha.3
 [2.0.0-alpha.2]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.1...v2.0.0-alpha.2
