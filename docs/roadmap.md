@@ -70,11 +70,11 @@ Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela no
 
 ## Fase 4 — Registros e visão geral (→ `alpha.4`)
 
-- [ ] `useLogs({ since, limit })` ordenando por horário real e tratando `1970-01-01`.
-- [ ] `/registros` (tela 07): filtros, agrupamento por dia, paginação, CSV.
-- [ ] `/` (tela 02): stat tiles, gráfico por hora (shadcn Chart), feed ao vivo, card da fechadura, "Precisa de atenção".
-- [ ] Toast (sonner) de acesso em tempo real, com opção de desligar.
-- [ ] Detecção de sem dono pelos logs (`ALLOWED` + `Desconhecido`).
+- [x] `useLogs({ since, limit })` ordenando por horário real e tratando `1970-01-01`.
+- [x] `/registros` (tela 07): filtros, agrupamento por dia, paginação, CSV.
+- [x] `/` (tela 02): stat tiles, gráfico por hora (shadcn Chart), feed ao vivo, card da fechadura, "Precisa de atenção".
+- [x] Toast (sonner) de acesso em tempo real, com opção de desligar.
+- [x] Detecção de sem dono pelos logs (`ALLOWED` + `Desconhecido`). _(Desde a fase 1 em `lock-state.ts`; agora também no feed, nos registros e em "Precisa de atenção".)_
 
 ## Fase 5 — Fechadura (→ `beta.0`)
 

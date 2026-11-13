@@ -4,6 +4,17 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+### Adicionado
+- Fase 4 — registros e visão geral. `/registros` (tela 07): resumo do período, filtros na URL (Hoje, 7 e 30 dias, intervalo de datas, credencial, resultado), tabela agrupada por dia com observações ("Cadastrar este cartão", "Vincular digital #27", "Enviado às … (estava offline)"), grupo "Sem horário confiável" para `1970-01-01`, "Carregar mais" e CSV.
+- `/` Visão geral (tela 02): banner de offline (firmware 2.1) ou Modo mestre, números com link para a lista filtrada, gráfico de acessos por hora (shadcn Chart/Recharts) com tabela equivalente, últimos acessos ao vivo, card da porta com "Cadastrar membro agora" em Modo mestre e "Precisa de atenção".
+- Toast de cada acesso em tempo real, com opção de desligar e de manter negados na tela; sino com os negados do dia.
+- `useLogs({ since, limit })` por `timestamp` (índice nas regras), `useUnsyncedLogs` e funções puras de registros (`src/lib/access-logs.ts`) com testes; `?aba=` na tela de Membros; e2e de registros, visão geral e avisos.
+- Cores do gráfico validadas com o dataviz nos dois temas (`--chart-allowed`, `--chart-denied`).
+
+### Alterado
+- Dependências: `recharts` 3.8.0 (via shadcn Chart) e `react-is`.
+- Contrato com o firmware: proposta de `syncedAt` nos eventos da fila offline.
+
 ## [2.0.0-alpha.3] — 2026-11-13
 
 Fase 3 — membros.
