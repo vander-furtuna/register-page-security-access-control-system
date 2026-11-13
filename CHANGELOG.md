@@ -4,6 +4,10 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+## [2.0.0-alpha.2] — 2026-11-13
+
+Fase 2 — novo cadastro. Testado contra o emulador; ainda falta o teste ponta a ponta com a fechadura real.
+
 ### Adicionado
 - Fase 2 — novo cadastro (`/cadastro`, telas 05 e 09): formulário com react-hook-form + zod (nome com prévia do LCD, e-mail da UFC exceto visitantes, vínculo, validade), `MethodPicker` e `RegistrationStepper`, painel da porta com tempo restante e instrução em destaque no celular.
 - Máquina de estados do cadastro em `src/lib/registration/` (testada com fakes): pedido em `pendingRegistration/current` + espelho `pendingUser/current` numa escrita só; retomada de pedido em andamento; prazo de 120 s pelo horário do pedido; cancelamento se a fechadura sai do Modo mestre; concluído × cancelado na porta pelo `users/*` novo com o e-mail do pedido; "Cartão salvo, digital falhou"; `members/{key}` com vínculo, validade e quem cadastrou.
@@ -59,7 +63,8 @@ Fase 0 — nova base. Reescrita do painel com Next.js 16, Tailwind CSS 4 e shadc
 
 Versão original de JonasFortes12: formulário de cadastro com HeroUI que grava `pendingUser/current` no Firebase.
 
-[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.1...v2
+[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.2...v2
+[2.0.0-alpha.2]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.1...v2.0.0-alpha.2
 [2.0.0-alpha.1]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.0...v2.0.0-alpha.1
 [2.0.0-alpha.0]: https://github.com/vander-furtuna/register-page-security-access-control-system/releases/tag/v2.0.0-alpha.0
 [1.1.0]: https://github.com/JonasFortes12/register-page-security-access-control-system/compare/v1.0.0...v1.1.0
