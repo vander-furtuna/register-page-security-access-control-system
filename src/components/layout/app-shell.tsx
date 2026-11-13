@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 
+import { AccessToaster } from "./access-toaster";
 import { AppSidebar } from "./app-sidebar";
 import { MobileNav } from "./mobile-nav";
 
@@ -16,6 +17,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         {children}
       </SidebarInset>
       <MobileNav />
+      <AccessToaster />
     </SidebarProvider>
   );
 }
