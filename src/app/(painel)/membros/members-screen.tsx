@@ -40,14 +40,23 @@ const ROLE_FILTERS = [
 ] as const;
 type RoleFilter = (typeof ROLE_FILTERS)[number]["value"];
 
+const TAB_PARAM: Record<string, MemberTab> = {
+  ativos: "active",
+  "so-cartao": "card-only",
+  "so-digital": "finger-only",
+  egressos: "alumni",
+};
+
 /** Tela 03 · Membros. */
 export function MembersScreen() {
   const members = useMembers();
   const orphans = useOrphans();
   const router = useRouter();
   const pathname = usePathname();
-  const query = useSearchParams().get("q") ?? "";
-  const [tab, setTab] = useState<MemberTab>("all");
+  const searchParams = useSearchParams();
+  const query = searchParams.get("q") ?? "";
+  // ?aba=so-cartao etc. (links do "Precisa de atenção" na Visão geral)
+  const [tab, setTab] = useState<MemberTab>(() => TAB_PARAM[searchParams.get("aba") ?? ""] ?? "all");
   const [role, setRole] = useState<RoleFilter>("all");
   const minute = useNow(60_000);
   const now = useMemo(() => new Date(minute), [minute]);

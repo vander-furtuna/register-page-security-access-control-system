@@ -95,6 +95,21 @@ export function lockDateISO(date: Date): string {
   return `${p.year}-${pad(p.month)}-${pad(p.day)}`;
 }
 
+/**
+ * `"2026-11-10 14:32:08"`: o formato que o firmware grava em `logs/*.timestamp`. Ordena como
+ * texto, então serve de limite em consultas (`orderByChild("timestamp").startAt(...)`).
+ */
+export function formatLockTimestamp(date: Date): string {
+  const p = lockParts(date);
+  return `${p.year}-${pad(p.month)}-${pad(p.day)} ${pad(p.hours)}:${pad(p.minutes)}:${pad(p.seconds)}`;
+}
+
+/** Início do dia (00:00 no fuso da fechadura) `daysAgo` dias antes de `date`. */
+export function lockStartOfDay(date: Date, daysAgo = 0): Date {
+  const p = lockParts(date);
+  return new Date(Date.UTC(p.year, p.month - 1, p.day - daysAgo) - OFFSET_MS);
+}
+
 /** `"10/11/2026"` no fuso da fechadura. */
 export function formatLockDate(date: Date): string {
   const p = lockParts(date);

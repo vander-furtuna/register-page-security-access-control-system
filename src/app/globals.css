@@ -101,6 +101,8 @@
   --color-master-soft: var(--master-soft);
   --color-focus: var(--focus);
   --color-overlay: var(--overlay);
+  --color-chart-allowed: var(--chart-allowed);
+  --color-chart-denied: var(--chart-denied);
 
   /* variáveis semânticas que os componentes do shadcn/ui usam */
   --color-background: var(--bg);
@@ -159,4 +161,19 @@
   100% {
     box-shadow: 0 0 0 10px color-mix(in oklch, var(--lock) 0%, transparent);
   }
+}
+
+/*
+ * Cores do gráfico de acessos (liberado × negado), validadas com o dataviz
+ * (faixa de luminosidade, separação para daltonismo) nos dois temas. Derivam dos tokens:
+ * no escuro, `lock` e `danger` escurecidos para caber na faixa e se separar pela luz.
+ */
+:root,
+[data-theme="light"] {
+  --chart-allowed: var(--lock-hover);
+  --chart-denied: var(--danger);
+}
+[data-theme="dark"] {
+  --chart-allowed: color-mix(in srgb, var(--lock) 82%, black);
+  --chart-denied: color-mix(in srgb, var(--danger) 85%, black);
 }

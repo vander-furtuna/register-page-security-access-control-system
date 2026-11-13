@@ -42,7 +42,7 @@ test("admin entra e vê o painel com o estado da porta", async ({ page, isMobile
   if (isMobile) {
     await expect(page.getByRole("navigation", { name: "Navegação principal" })).toBeVisible();
   } else {
-    await expect(page.getByRole("link", { name: "Membros" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Membros", exact: true })).toBeVisible();
   }
 });
 

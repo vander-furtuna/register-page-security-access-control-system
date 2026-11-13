@@ -1,17 +1,16 @@
 "use client";
 
-import { BellIcon, MenuIcon, UserPlusIcon } from "lucide-react";
+import { MenuIcon, UserPlusIcon } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { LogoSymbol } from "@/components/brand/logo";
-import { EmptyState } from "@/components/pet/empty-state";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useSidebar } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
 import { GlobalSearch } from "./global-search";
+import { Notifications } from "./notifications";
 import { ThemeToggle } from "./theme-toggle";
 
 /**
@@ -75,37 +74,9 @@ export function Topbar({ title, subtitle, mobileTitle, action }: TopbarProps) {
       <div className="flex items-center gap-2 sm:gap-3">
         <GlobalSearch className="hidden md:block" />
         <ThemeToggle className="hidden text-ink-muted sm:inline-flex" />
-        <Notifications />
+        <Notifications className="text-on-chassis-muted hover:bg-chassis-raised hover:text-on-chassis sm:text-ink-muted sm:hover:bg-surface-hover sm:hover:text-ink" />
         {primary ? <div className="hidden sm:block">{primary}</div> : null}
       </div>
     </header>
-  );
-}
-
-/** Avisos (acessos negados, fechadura offline) chegam na fase 4; por ora o menu explica isso. */
-function Notifications() {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger
-        render={
-          <Button
-            variant="ghost"
-            size="icon"
-            aria-label="Avisos"
-            className="text-on-chassis-muted hover:bg-chassis-raised hover:text-on-chassis sm:text-ink-muted sm:hover:bg-surface-hover sm:hover:text-ink"
-          />
-        }
-      >
-        <BellIcon />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-72">
-        <EmptyState
-          icon={<BellIcon />}
-          title="Nenhum aviso"
-          description="Acessos negados e quedas de conexão da fechadura vão aparecer aqui."
-          className="px-4 py-6"
-        />
-      </DropdownMenuContent>
-    </DropdownMenu>
   );
 }

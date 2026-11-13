@@ -103,6 +103,8 @@ Fica de fora de propósito: entrar/sair do Modo mestre e limpar a memória intei
 - Gravar no evento o horário real (`time(nullptr)`, epoch) além de `millis()`; se o NTP nunca sincronizou, marcar `clockSynced: false` em vez de mandar `1970-01-01`.
 - Chave do log por `push()` (ou `log_<epoch>_<seq>`), não por `millis()`, para não sobrescrever logs depois de reboot.
 - Campos novos no log: `epoch`, `queuedOffline: true` quando o evento passou pela fila, `deviceId`, `credentialId` (slot do cartão ou ID da digital, também nos negados quando houver).
+- `syncedAt` (ms, `{".sv": "timestamp"}`) nos eventos que passaram pela fila: o painel mostra "Enviado às 09:20 (estava offline)" e conta os "chegaram atrasados" (v2, fase 4).
+- Manter `timestamp` ("AAAA-MM-DD HH:MM:SS", hora local) em todo evento: o painel consulta os registros por esse campo (`orderByChild("timestamp")`, índice nas regras). Sem NTP, manter o `1970-01-01 …` que o painel já trata como "sem horário confiável".
 
 ### 2.6 Autenticação do dispositivo
 
