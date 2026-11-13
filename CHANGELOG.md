@@ -4,6 +4,17 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+### Adicionado
+- Fase 3 — membros. `/membros` (tela 03): resumo de digitais, cartões e sem dono; abas com contagem; filtro de vínculo; tabela com TanStack Table 9 (ordenação por nome e último acesso, paginação); busca por `?q=`; Exportar CSV (`;` + BOM).
+- `/membros/[key]` (tela 04): cabeçalho com status e vínculo, cards de digital e cartão (último uso, usos em 30 dias, "Na fechadura" com inventário), histórico com Hoje/7/30 dias, mapa de presença de 5 semanas e edição de vínculo e validade.
+- Busca global na Topbar (combobox do shadcn com Base UI): nome, e-mail, UID em qualquer formato e `#ID`; Enter abre Membros filtrado.
+- Desativar, remover membro e remover credencial com comandos para a fechadura (firmware 2.1): o painel envia, acompanha pendente/feito/erro e só atualiza o banco depois do `DONE`. Sem firmware 2.1, desabilitado com a instrução de remover na porta.
+- "Recadastrar", "Trocar cartão" e "Adicionar digital/cartão" abrem o cadastro preenchido (`?nome=&email=&modo=`).
+- Funções puras de membros (`src/lib/members.ts`) e comandos (`src/lib/commands.ts`) com testes; índice de `logs` por `userPath`/`userEmail` nas regras; `pnpm seed:emulator --muitos` (40 membros); e2e de membros contra o emulador.
+
+### Corrigido
+- Tabelas com rolagem horizontal faziam a página inteira rolar no celular: o `sr-only` do cabeçalho escapava do contêiner de rolagem.
+
 ## [2.0.0-alpha.2] — 2026-11-13
 
 Fase 2 — novo cadastro. Testado contra o emulador; ainda falta o teste ponta a ponta com a fechadura real.
