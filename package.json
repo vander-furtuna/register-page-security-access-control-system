@@ -1,6 +1,6 @@
 {
   "name": "pet-lock-web",
-  "version": "2.0.0-alpha.2",
+  "version": "2.0.0-alpha.3",
   "private": true,
   "description": "Painel web da fechadura eletrônica do PET Engenharia de Computação (UFC Sobral)",
   "engines": {

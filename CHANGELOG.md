@@ -4,6 +4,10 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+## [2.0.0-alpha.3] — 2026-11-13
+
+Fase 3 — membros.
+
 ### Adicionado
 - Fase 3 — membros. `/membros` (tela 03): resumo de digitais, cartões e sem dono; abas com contagem; filtro de vínculo; tabela com TanStack Table 9 (ordenação por nome e último acesso, paginação); busca por `?q=`; Exportar CSV (`;` + BOM).
 - `/membros/[key]` (tela 04): cabeçalho com status e vínculo, cards de digital e cartão (último uso, usos em 30 dias, "Na fechadura" com inventário), histórico com Hoje/7/30 dias, mapa de presença de 5 semanas e edição de vínculo e validade.
@@ -74,7 +78,8 @@ Fase 0 — nova base. Reescrita do painel com Next.js 16, Tailwind CSS 4 e shadc
 
 Versão original de JonasFortes12: formulário de cadastro com HeroUI que grava `pendingUser/current` no Firebase.
 
-[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.2...v2
+[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.3...v2
+[2.0.0-alpha.3]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.2...v2.0.0-alpha.3
 [2.0.0-alpha.2]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.1...v2.0.0-alpha.2
 [2.0.0-alpha.1]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.0...v2.0.0-alpha.1
 [2.0.0-alpha.0]: https://github.com/vander-furtuna/register-page-security-access-control-system/releases/tag/v2.0.0-alpha.0
