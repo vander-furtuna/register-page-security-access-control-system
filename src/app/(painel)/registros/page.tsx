@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
-import { ComingSoon } from "@/components/layout/coming-soon";
-import { PageContent } from "@/components/layout/page-content";
-import { Topbar } from "@/components/layout/topbar";
+import { RegistrosScreen } from "./registros-screen";
 
 export const metadata: Metadata = { title: "Registros de acesso" };
 
-export default function Page() {
+/** Tela 07 · Registros de acesso (`docs/design/telas/07-registros.png`). Filtros na URL. */
+export default function RegistrosPage() {
   return (
-    <>
-      <Topbar title="Registros de acesso" />
-      <PageContent>
-        <ComingSoon what="O histórico de acessos com filtros" />
-      </PageContent>
-    </>
+    <Suspense fallback={null}>
+      <RegistrosScreen />
+    </Suspense>
   );
 }
