@@ -82,7 +82,7 @@ Escritos pelo site (só admins). O ESP processa em ordem e grava o resultado no 
   "status": "PENDING" }   // ESP muda para DONE ou ERROR (+ "error": "…")
 ```
 
-Tipos: `DELETE_FINGER`, `DELETE_CARD` (`slot`), `REFRESH_INVENTORY`, `REBOOT`, `SET_UNLOCK_SECONDS` (`seconds`), `SET_SHOW_NAME` (`enabled`).
+Tipos: `DELETE_FINGER`, `DELETE_CARD` (`slot`), `REFRESH_INVENTORY`, `REBOOT`, `SET_UNLOCK_SECONDS` (`seconds`), `SET_SHOW_NAME` (`enabled`), `SET_REGISTRATION_SECONDS` (`seconds`, proposta da fase 5, ver 2.7).
 
 **O que o site faz depois do `DONE`** (v2, fase 3, `src/lib/commands.ts`). O site só mexe no banco depois que a fechadura confirma; se o firmware 2.1 já fizer alguma destas escritas, o site apenas repete o mesmo valor:
 
@@ -92,6 +92,12 @@ Tipos: `DELETE_FINGER`, `DELETE_CARD` (`slot`), `REFRESH_INVENTORY`, `REBOOT`, `
 | Remover cartão | `DELETE_CARD` (`slot` = `rfid`) | `users/{key}/rfid = null` (idem) |
 | Desativar acesso | os dois | `users/{key}/fingerId` e `rfid` = `null`; `members/{key}.active = false` (a pessoa e o histórico ficam) |
 | Remover membro | os dois | apaga `users/{key}` e `members/{key}` (os `logs/*` antigos ficam) |
+| Apagar credencial sem dono (tela 06) | `DELETE_FINGER` ou `DELETE_CARD` | nada: não há `users/*`; o inventário seguinte mostra a posição livre |
+| Ler inventário agora (tela 06) | `REFRESH_INVENTORY` | nada: o ESP regrava `inventory` |
+| Reiniciar (tela 08) | `REBOOT` | nada; o ESP marca `DONE` antes de reiniciar |
+| Salvar ajustes (tela 08) | `SET_*` só dos campos alterados | nada: o valor novo aparece quando o ESP publica `status.settings` |
+
+**Vincular uma credencial sem dono** (tela 06, sem comando): a credencial já está na fechadura, então o site grava direto `users/{key}/fingerId = <ID>` (ou `rfid = <slot>`) num membro que ainda não tem esse tipo de credencial. O firmware passa a achar o membro pelo campo e grava os próximos acessos com o nome. **Tirar do cadastro** (posição "no banco, fora da fechadura", só com inventário) apaga o campo do `users/{key}`.
 
 Com `ERROR`, nada muda no banco e o painel mostra o `error`. A chave `users/{key}` não é renomeada depois de remover uma credencial (ex.: `user_card_22_finger_12` sem `fingerId`); o firmware deve continuar achando o membro pelos campos `rfid`/`fingerId`, não pela chave.
 
@@ -109,3 +115,32 @@ Fica de fora de propósito: entrar/sair do Modo mestre e limpar a memória intei
 ### 2.6 Autenticação do dispositivo
 
 Trocar `Firebase.signUp(&config, &auth, "", "")` (anônimo) por uma conta própria do dispositivo (e-mail/senha), para as regras do banco distinguirem a fechadura de qualquer visitante anônimo.
+
+### 2.7 Saúde da fechadura (proposta da fase 5, tela 08)
+
+Campos **aditivos** em `devices/sala-pet/status`, cada grupo anunciado por uma capability:
+
+```json
+{
+  "onlineSince": 1794341112000,
+  "ssid": "PET-UFC",
+  "board": "ESP32 DOIT DevKit v1",
+  "bootAt": 1794260000000,
+  "settings": { "unlockSeconds": 2, "showName": true, "registrationSeconds": 120 },
+  "peripherals": { "dy50": true, "rc522": true, "lcd": true, "relay": true, "buzzer": true },
+  "capabilities": ["…", "outages", "settings", "peripherals"]
+}
+```
+
+- `onlineSince` (ms): quando a conexão atual começou; o painel mostra "Online há 3 h 12 min". `bootAt`: último boot.
+- `settings` (capability `settings`): os valores **em uso** na fechadura. O site só os altera por comando (`SET_UNLOCK_SECONDS`, `SET_SHOW_NAME`, `SET_REGISTRATION_SECONDS`) e só mostra o valor novo depois que o ESP o publica aqui. Os ajustes precisam sobreviver a reboot (NVS).
+- `peripherals` (capability `peripherals`): diagnóstico do boot, periférico → respondeu. Chaves: `dy50`, `rc522`, `lcd`, `relay`, `buzzer`.
+
+Quedas de conexão em `devices/sala-pet/outages/<pushId>` (capability `outages`), escritas pelo ESP ao reconectar:
+
+```json
+{ "start": 1794330000000, "end": 1794331440000, "queued": 6 }
+```
+
+- `start`/`end` em ms (relógio do ESP sincronizado por NTP); `queued` = eventos que ficaram na fila durante a queda. O painel lê as últimas 24 h; o ESP pode apagar as quedas com mais de 7 dias.
+- Uma queda em andamento não aparece (o ESP está offline); o painel já mostra "Offline há X" por `lastSeen`.

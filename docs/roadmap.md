@@ -78,10 +78,10 @@ Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela no
 
 ## Fase 5 — Fechadura (→ `beta.0`)
 
-- [ ] `/credenciais` (tela 06): `SlotMap`, painel da posição, vincular sem dono.
-- [ ] 🔌 `useInventory`; sem inventário, mapa parcial com aviso.
-- [ ] `/dispositivo` (tela 08): cabeçalho, conexão 24 h (🔌), periféricos, ajustes e manutenção (🔌 `commands`).
-- [ ] Fila de comandos com estado (pendente/feito/erro).
+- [x] `/credenciais` (tela 06): `SlotMap`, painel da posição, vincular sem dono.
+- [x] 🔌 `useInventory`; sem inventário, mapa parcial com aviso. _(`useDeviceInventory` + `buildSlots` em `src/lib/slots.ts`.)_
+- [x] `/dispositivo` (tela 08): cabeçalho, conexão 24 h (🔌), periféricos, ajustes e manutenção (🔌 `commands`). _(Quedas, ajustes e diagnóstico dos periféricos dependem da proposta 2.7 do contrato. "Avisar acessos negados" por e-mail ficou de fora: precisa de backend; o toast já existe desde a fase 4.)_
+- [x] Fila de comandos com estado (pendente/feito/erro).
 
 ## Fase 6 — Segurança, entrega e PR (→ `rc.N` → PR → `v2.0.0`)
 
@@ -93,4 +93,4 @@ Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela no
 
 ## Firmware 2.1 (repositório `pet-lock-new`, em paralelo)
 
-Itens do `contrato-firmware.md` › Parte 2: heartbeat/LCD, inventário, `step` do cadastro, comandos, fila persistente com horário real e chave de log única, conta do dispositivo.
+Itens do `contrato-firmware.md` › Parte 2: heartbeat/LCD, inventário, `step` do cadastro, comandos, fila persistente com horário real e chave de log única, conta do dispositivo, saúde da fechadura (2.7: quedas, ajustes, periféricos).

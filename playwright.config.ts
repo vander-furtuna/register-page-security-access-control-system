@@ -11,8 +11,20 @@ export default defineConfig({
   reporter: process.env.CI ? "github" : "list",
   use: { baseURL, trace: "on-first-retry", actionTimeout: 10_000 },
   projects: [
-    { name: "desktop", use: { ...devices["Desktop Chrome"] } },
-    { name: "celular", use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 } } },
+    { name: "desktop", use: { ...devices["Desktop Chrome"] }, testIgnore: /fechadura\.spec/ },
+    {
+      name: "celular",
+      use: { ...devices["Pixel 7"], viewport: { width: 390, height: 844 } },
+      testIgnore: /fechadura\.spec/,
+    },
+    // Credenciais e Dispositivo trocam devices/* inteiro (firmware 2.0 ↔ 2.1): rodam depois dos
+    // outros projetos para não disputar o nó com membros.spec.
+    {
+      name: "fechadura",
+      use: { ...devices["Desktop Chrome"] },
+      testMatch: /fechadura\.spec/,
+      dependencies: ["desktop", "celular"],
+    },
   ],
   webServer: {
     // Contra o emulador: nunca rode e2e contra o banco de produção.

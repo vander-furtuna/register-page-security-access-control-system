@@ -32,10 +32,14 @@
         "inventory": {
           ".write": "auth != null"
         },
+        "outages": {
+          ".write": "auth != null"
+        },
         "commands": {
           "$commandId": {
             ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/) || data.exists())"
-          }
+          },
+          ".indexOn": ["requestedAt"]
         }
       }
     }

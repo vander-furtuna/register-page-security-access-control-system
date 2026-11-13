@@ -4,6 +4,16 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+### Adicionado
+- Fase 5 — fechadura. `/credenciais` (tela 06): abas Digitais, Cartões e Sem dono com o `SlotMap` (navegação por setas, posição na URL), painel da posição para vincular uma credencial sem dono a um membro, apagar, remover, tirar do cadastro uma posição que não está mais na fechadura ou começar um cadastro; "Ler inventário agora" (`REFRESH_INVENTORY`); mapa parcial com aviso no firmware 2.0; limpar a memória indicado como presencial.
+- `/dispositivo` (tela 08): cabeçalho com "Online há…", placa, firmware, IP, LCD e métricas; conexão nas últimas 24 h com a lista das quedas; "Quando a internet cai"; periféricos com ligações e diagnóstico; ajustes por comando (tempo da tranca, prazo do cadastro, nome no display) que só mudam depois que a fechadura publica; reiniciar com confirmação; fila de comandos com pendente, feito e erro. Tudo com fallback para o firmware 2.0.
+- `useDeviceOutages`, `useDeviceCommands`, regras puras de slots (`src/lib/slots.ts`) e da tela de dispositivo (`src/lib/device.ts`) com testes; e2e das duas telas no projeto `fechadura` do Playwright (roda depois dos outros, porque troca `devices/*`).
+- Seed `--firmware-2.1` com quedas, ajustes, periféricos e comandos.
+
+### Alterado
+- Contrato com o firmware: proposta 2.7 (`onlineSince`, `ssid`, `board`, `bootAt`, `settings`, `peripherals`, `devices/*/outages`, comando `SET_REGISTRATION_SECONDS`) e as escritas do site ao vincular uma credencial sem dono.
+- Regras: `devices/*/outages` gravável pelo dispositivo; índice `requestedAt` nos comandos.
+
 ## [2.0.0-alpha.4] — 2026-11-13
 
 Fase 4 — registros de acesso e visão geral.

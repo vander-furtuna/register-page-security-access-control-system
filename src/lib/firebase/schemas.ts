@@ -89,6 +89,10 @@ export const deviceCapabilitySchema = z.enum([
   "commands",
   "registrationStep",
   "persistentQueue",
+  // propostas da fase 5 (contrato-firmware.md › 2.7)
+  "outages",
+  "settings",
+  "peripherals",
 ]);
 
 /** `devices/<id>/status` (firmware 2.1). */
@@ -106,6 +110,23 @@ export const deviceStatusSchema = z.object({
   fingerCount: z.number().optional(),
   cardCapacity: z.number().optional(),
   cardCount: z.number().optional(),
+  // propostas da fase 5 (contrato-firmware.md › 2.7)
+  /** Desde quando está online sem cair (ms). */
+  onlineSince: z.number().optional(),
+  ssid: z.string().optional(),
+  /** Placa, ex.: "ESP32 DOIT DevKit v1". */
+  board: z.string().optional(),
+  settings: z
+    .object({
+      unlockSeconds: z.number().optional(),
+      showName: z.boolean().optional(),
+      /** Prazo para concluir um cadastro na porta (s). */
+      registrationSeconds: z.number().optional(),
+    })
+    .optional(),
+  /** Diagnóstico do boot: periférico → respondeu. */
+  peripherals: z.record(z.string(), z.boolean()).optional(),
+  bootAt: z.number().optional(),
   // capacidades desconhecidas são descartadas em vez de invalidar o status inteiro
   capabilities: z
     .array(z.string())
@@ -115,6 +136,15 @@ export const deviceStatusSchema = z.object({
         (c): c is z.infer<typeof deviceCapabilitySchema> => deviceCapabilitySchema.safeParse(c).success,
       ),
     ),
+});
+
+/** `devices/<id>/outages/<pushId>`: uma queda de conexão (proposta 2.1, fase 5). */
+export const deviceOutageSchema = z.object({
+  start: z.number(),
+  /** `null`/ausente enquanto ainda está offline. */
+  end: z.number().nullable().optional(),
+  /** Eventos guardados na fila durante a queda. */
+  queued: z.number().optional(),
 });
 
 /** `devices/<id>/inventory` (firmware 2.1). */
@@ -132,6 +162,7 @@ export const commandTypeSchema = z.enum([
   "REBOOT",
   "SET_UNLOCK_SECONDS",
   "SET_SHOW_NAME",
+  "SET_REGISTRATION_SECONDS",
 ]);
 
 export const deviceCommandSchema = z.object({

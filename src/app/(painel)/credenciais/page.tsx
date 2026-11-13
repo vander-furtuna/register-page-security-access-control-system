@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
-import { ComingSoon } from "@/components/layout/coming-soon";
-import { PageContent } from "@/components/layout/page-content";
-import { Topbar } from "@/components/layout/topbar";
+import { CredenciaisScreen } from "./credenciais-screen";
 
 export const metadata: Metadata = { title: "Credenciais" };
 
-export default function Page() {
+/** Tela 06 · Credenciais na fechadura (`docs/design/telas/06-credenciais.png`). Aba e posição na URL. */
+export default function CredenciaisPage() {
   return (
-    <>
-      <Topbar title="Credenciais" />
-      <PageContent>
-        <ComingSoon what="O mapa da memória da fechadura" />
-      </PageContent>
-    </>
+    <Suspense fallback={null}>
+      <CredenciaisScreen />
+    </Suspense>
   );
 }

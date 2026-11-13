@@ -8,9 +8,11 @@ import type { CommandType, DeviceCommand, MemberRole } from "@/lib/firebase/type
  */
 export type MemberAction = "remove-finger" | "remove-card" | "deactivate" | "remove";
 export type CommandRequest = {
-  type: Extract<CommandType, "DELETE_FINGER" | "DELETE_CARD">;
+  type: CommandType;
   fingerId?: number;
   slot?: number;
+  seconds?: number;
+  enabled?: boolean;
 };
 
 type Credentials = { fingerId?: number; rfid?: number };
