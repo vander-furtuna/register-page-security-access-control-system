@@ -4,6 +4,10 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+## [2.0.0-alpha.4] — 2026-11-13
+
+Fase 4 — registros de acesso e visão geral.
+
 ### Adicionado
 - Fase 4 — registros e visão geral. `/registros` (tela 07): resumo do período, filtros na URL (Hoje, 7 e 30 dias, intervalo de datas, credencial, resultado), tabela agrupada por dia com observações ("Cadastrar este cartão", "Vincular digital #27", "Enviado às … (estava offline)"), grupo "Sem horário confiável" para `1970-01-01`, "Carregar mais" e CSV.
 - `/` Visão geral (tela 02): banner de offline (firmware 2.1) ou Modo mestre, números com link para a lista filtrada, gráfico de acessos por hora (shadcn Chart/Recharts) com tabela equivalente, últimos acessos ao vivo, card da porta com "Cadastrar membro agora" em Modo mestre e "Precisa de atenção".
@@ -89,7 +93,8 @@ Fase 0 — nova base. Reescrita do painel com Next.js 16, Tailwind CSS 4 e shadc
 
 Versão original de JonasFortes12: formulário de cadastro com HeroUI que grava `pendingUser/current` no Firebase.
 
-[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.3...v2
+[Não lançado]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.4...v2
+[2.0.0-alpha.4]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.3...v2.0.0-alpha.4
 [2.0.0-alpha.3]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.2...v2.0.0-alpha.3
 [2.0.0-alpha.2]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.1...v2.0.0-alpha.2
 [2.0.0-alpha.1]: https://github.com/vander-furtuna/register-page-security-access-control-system/compare/v2.0.0-alpha.0...v2.0.0-alpha.1
