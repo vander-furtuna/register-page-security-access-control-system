@@ -153,7 +153,7 @@ test("firmware 2.1: desativar apaga as credenciais e mantém a pessoa", async ({
   await expect(page.getByText(/Aguardando a fechadura \(0 de 2\)/)).toBeVisible();
   await lockAnswers("DELETE_FINGER", "DONE");
   await lockAnswers("DELETE_CARD", "DONE");
-  await expect(page.getByText("Acesso desativado", { exact: true })).toBeVisible();
+  await expect(page.getByRole("dialog").getByText("Acesso desativado", { exact: true })).toBeVisible();
   await expect.poll(() => db.get(`members/${KEY}/active`)).toBe(false);
   expect(await db.get(`users/${KEY}`)).toMatchObject({ username: NAME, email: EMAIL });
   expect(await db.get(`users/${KEY}/rfid`)).toBeNull();
