@@ -58,15 +58,15 @@ Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela no
 - [x] Gravar `members/{key}` (vínculo, validade) após concluir.
 - [x] 🔌 `step` do cadastro e LCD espelhado quando existirem. _(Pronto e testado com dados simulados; falta o firmware 2.1 publicar `step`/`result` e `devices/*/status.lcd`.)_
 - [ ] Layout de celular (tela 09). Teste ponta a ponta com a fechadura real (combinar com o usuário) e e2e com emulador. _(Layout de celular e e2e com emulador prontos (`e2e/cadastro.spec.ts`); falta o teste com a fechadura real, a combinar.)_
-- [ ] Abrir issue/PR rascunho no upstream apresentando a v2 (ver `versionamento.md`). _(Ação pública no repositório original: fica para o usuário decidir.)_
+- [x] Abrir issue/PR rascunho no upstream apresentando a v2 (ver `versionamento.md`). _(Issue [#1](https://github.com/JonasFortes12/register-page-security-access-control-system/issues/1), aberta em 13/11/2026.)_
 
 ## Fase 3 — Membros (→ `alpha.3`)
 
-- [ ] `useMembers` (`users` + `members` + último log).
-- [ ] `/membros` (tela 03) com TanStack Table: filtros, busca normalizada (nome, e-mail, UID, `#ID`), ordenação, Exportar CSV.
-- [ ] `/membros/[key]` (tela 04): credenciais, histórico, presença, editar metadados.
-- [ ] Desativar/remover: 🔌 `commands`; sem firmware 2.1, desabilitado com a instrução de remoção na porta.
-- [ ] Busca global da Topbar (Command/combobox do shadcn).
+- [x] `useMembers` (`users` + `members` + último log).
+- [x] `/membros` (tela 03) com TanStack Table: filtros, busca normalizada (nome, e-mail, UID, `#ID`), ordenação, Exportar CSV.
+- [x] `/membros/[key]` (tela 04): credenciais, histórico, presença, editar metadados.
+- [x] Desativar/remover: 🔌 `commands`; sem firmware 2.1, desabilitado com a instrução de remoção na porta. _(Fluxo com comandos testado contra o emulador simulando o firmware 2.1; o que o site grava após `DONE` está em `contrato-firmware.md` › 2.4.)_
+- [x] Busca global da Topbar (Command/combobox do shadcn). _(Combobox do shadcn com Base UI, sem `cmdk`.)_
 
 ## Fase 4 — Registros e visão geral (→ `alpha.4`)
 

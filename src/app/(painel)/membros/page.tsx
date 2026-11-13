@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
-import { ComingSoon } from "@/components/layout/coming-soon";
-import { PageContent } from "@/components/layout/page-content";
-import { Topbar } from "@/components/layout/topbar";
+import { MembersScreen } from "./members-screen";
 
 export const metadata: Metadata = { title: "Membros" };
 
-export default function Page() {
+/** Tela 03 · Membros (`docs/design/telas/03-membros.png`). `?q=` vem da busca global. */
+export default function MembrosPage() {
   return (
-    <>
-      <Topbar title="Membros" />
-      <PageContent>
-        <ComingSoon what="A lista de membros com credenciais e último acesso" />
-      </PageContent>
-    </>
+    <Suspense fallback={null}>
+      <MembersScreen />
+    </Suspense>
   );
 }

@@ -6,6 +6,7 @@
  *   pnpm seed:emulator                 # firmware 2.0 (sem devices/*)
  *   pnpm seed:emulator --firmware-2.1  # também devices/sala-pet/status e inventory
  *   pnpm seed:emulator --master        # fechadura em Modo mestre
+ *   pnpm seed:emulator --muitos        # completa até 40 membros fictícios (tela 03)
  *
  * Cria também um admin no emulador de Auth: admin@ufc.br / petlock-dev.
  */
@@ -29,6 +30,7 @@ const NAMESPACE = `${PROJECT_ID}-default-rtdb`;
 const args = new Set(process.argv.slice(2));
 const withFirmware21 = args.has("--firmware-2.1");
 const masterMode = args.has("--master");
+const manyMembers = args.has("--muitos");
 
 // ---------------------------------------------------------------------------
 // Trava de segurança: só emulador local, só projeto demo-*.
@@ -187,6 +189,55 @@ const people: Person[] = [
     createdAt: "2024-09-16 16:10:51",
   },
 ];
+
+// --muitos: membros fictícios até 40, com credenciais variadas (posições 40+ para não colidir)
+if (manyMembers) {
+  const first = [
+    "Ana",
+    "Bruno",
+    "Carla",
+    "Diego",
+    "Elisa",
+    "Felipe",
+    "Gabriela",
+    "Heitor",
+    "Íris",
+    "Júlio",
+    "Karen",
+    "Leonardo",
+    "Marina",
+    "Nícolas",
+    "Olívia",
+    "Paulo",
+  ];
+  const last = ["Alves", "Barbosa", "Cardoso", "Dias", "Esteves", "Freitas", "Gomes", "Holanda"];
+  const roles = ["petiano", "petiano", "petiano", "visitante", "egresso"] as const;
+  for (let i = 0; people.length < 40; i++) {
+    const name = `${first[i % first.length]} ${last[(i * 3) % last.length]}`;
+    const kind = i % 3; // 0 = cartão + digital, 1 = só cartão, 2 = só digital
+    const rfid = kind === 2 ? undefined : 40 + i;
+    const fingerId = kind === 1 ? undefined : 40 + i;
+    const role = roles[i % roles.length]!;
+    people.push({
+      key:
+        rfid !== undefined && fingerId !== undefined
+          ? `user_card_${rfid}_finger_${fingerId}`
+          : rfid !== undefined
+            ? `user_card_id_${rfid}`
+            : `user_finger_id_${fingerId}`,
+      username: name,
+      email: `${name.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ /g, ".")}${i}@alu.ufc.br`,
+      ...(rfid !== undefined && {
+        rfid,
+        uid: `${(16 + i).toString(16).toUpperCase()}:4C:${(100 + i).toString(16).toUpperCase()}:0E`,
+      }),
+      ...(fingerId !== undefined && { fingerId }),
+      role,
+      active: role !== "egresso",
+      createdAt: `2026-0${1 + (i % 9)}-1${i % 10} 09:00:00`,
+    });
+  }
+}
 
 const users = Object.fromEntries(
   people.map((p) => [

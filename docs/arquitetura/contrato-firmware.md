@@ -84,6 +84,17 @@ Escritos pelo site (só admins). O ESP processa em ordem e grava o resultado no 
 
 Tipos: `DELETE_FINGER`, `DELETE_CARD` (`slot`), `REFRESH_INVENTORY`, `REBOOT`, `SET_UNLOCK_SECONDS` (`seconds`), `SET_SHOW_NAME` (`enabled`).
 
+**O que o site faz depois do `DONE`** (v2, fase 3, `src/lib/commands.ts`). O site só mexe no banco depois que a fechadura confirma; se o firmware 2.1 já fizer alguma destas escritas, o site apenas repete o mesmo valor:
+
+| Ação no painel | Comandos | Escrita do site após todos `DONE` |
+|---|---|---|
+| Remover digital | `DELETE_FINGER` | `users/{key}/fingerId = null` (se era a única credencial: apaga `users/{key}` e `members/{key}`) |
+| Remover cartão | `DELETE_CARD` (`slot` = `rfid`) | `users/{key}/rfid = null` (idem) |
+| Desativar acesso | os dois | `users/{key}/fingerId` e `rfid` = `null`; `members/{key}.active = false` (a pessoa e o histórico ficam) |
+| Remover membro | os dois | apaga `users/{key}` e `members/{key}` (os `logs/*` antigos ficam) |
+
+Com `ERROR`, nada muda no banco e o painel mostra o `error`. A chave `users/{key}` não é renomeada depois de remover uma credencial (ex.: `user_card_22_finger_12` sem `fingerId`); o firmware deve continuar achando o membro pelos campos `rfid`/`fingerId`, não pela chave.
+
 Fica de fora de propósito: entrar/sair do Modo mestre e limpar a memória inteira continuam **só na porta** (cartão mestre / botão de wipe). O botão "Limpar memória" do site só existe se um dia houver `WIPE` com confirmação física.
 
 ### 2.5 Fila offline persistente e horário real
