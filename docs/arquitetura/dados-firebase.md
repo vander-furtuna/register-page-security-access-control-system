@@ -82,6 +82,7 @@ export const paths = {
   deviceStatus: `devices/${DEVICE_ID}/status`,
   deviceInventory: `devices/${DEVICE_ID}/inventory`,
   deviceCommands: `devices/${DEVICE_ID}/commands`,
+  deviceOutages: `devices/${DEVICE_ID}/outages`,
   // só do site
   members: "members",           // metadados extras por chave de users/* (vínculo, validade, ativo)
   admins: "admins",             // admins/{authUid}: true
@@ -115,5 +116,5 @@ O `database.rules.json` do repo é a versão inicial (fase 0/1): leitura para qu
 
 - Leitura: só autenticados (admins ou o dispositivo).
 - `pendingRegistration`, `members`, `devices/*/commands`: escrita só de `admins/{auth.uid} === true`.
-- `system`, `users`, `logs`, `devices/*/status`, `devices/*/inventory`: escrita do dispositivo.
+- `system`, `users`, `logs`, `devices/*/status`, `devices/*/inventory`, `devices/*/outages`: escrita do dispositivo.
 - O ESP hoje autentica **anonimamente**. Para separar o dispositivo de um visitante anônimo, criar uma conta de serviço (e-mail/senha) para o ESP e liberar por `auth.uid === <uid do dispositivo>`, guardado em `config/deviceUids/{uid}: true`. Exige mudança no firmware (ver contrato).
