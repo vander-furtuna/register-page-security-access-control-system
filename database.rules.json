@@ -10,7 +10,7 @@
     },
     "logs": {
       ".write": "auth != null",
-      ".indexOn": ["userPath", "userEmail"]
+      ".indexOn": ["userPath", "userEmail", "timestamp"]
     },
     "pendingRegistration": {
       ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/) || !newData.exists())"

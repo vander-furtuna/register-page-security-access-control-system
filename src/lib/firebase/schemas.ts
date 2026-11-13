@@ -64,6 +64,8 @@ export const accessLogSchema = z.object({
   epoch: z.number().optional(),
   clockSynced: z.boolean().optional(),
   queuedOffline: z.boolean().optional(),
+  /** Quando o evento chegou ao banco (ms), se passou pela fila offline (proposta 2.1). */
+  syncedAt: z.number().optional(),
   deviceId: z.string().optional(),
   credentialId: z.number().optional(),
 });
