@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { Topbar } from "@/components/layout/topbar";
 
@@ -15,7 +16,9 @@ export default function CadastroPage() {
         subtitle="O site envia o pedido; a fechadura grava a credencial"
         action={null}
       />
-      <RegistrationScreen />
+      <Suspense fallback={null}>
+        <RegistrationScreen />
+      </Suspense>
     </>
   );
 }

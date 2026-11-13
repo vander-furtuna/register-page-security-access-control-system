@@ -1,13 +1,15 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
 
 import { useAuth } from "@/components/auth/auth-provider";
 import { PageContent } from "@/components/layout/page-content";
 import { useLockSnapshot } from "@/lib/firebase/hooks";
 import { usePendingRegistration } from "@/lib/firebase/hooks/use-registration";
+import { registrationModeSchema } from "@/lib/firebase/schemas";
 import { EMPTY_FORM, registrationFormSchema, type RegistrationFormValues } from "@/lib/registration/form";
 import { cn } from "@/lib/utils";
 
@@ -24,9 +26,20 @@ export function RegistrationScreen() {
   const registration = usePendingRegistration(auth.user?.uid);
   const lock = useLockSnapshot();
   const schema = useMemo(() => registrationFormSchema(), []);
+  // Recadastrar / trocar cartão / adicionar credencial chegam com ?nome=&email=&modo=
+  const params = useSearchParams();
+  const [initial] = useState<RegistrationFormValues>(() => {
+    const mode = registrationModeSchema.safeParse(params.get("modo"));
+    return {
+      ...EMPTY_FORM,
+      username: params.get("nome") ?? "",
+      email: params.get("email") ?? "",
+      mode: mode.success ? mode.data : EMPTY_FORM.mode,
+    };
+  });
   const form = useForm<RegistrationFormValues>({
     resolver: zodResolver(schema),
-    defaultValues: EMPTY_FORM,
+    defaultValues: initial,
     mode: "onTouched",
   });
 
