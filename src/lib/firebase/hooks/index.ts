@@ -50,7 +50,7 @@ export function useUsers() {
 }
 
 /** Um registro fora do esquema não derruba a lista inteira: é descartado. */
-function parseLogs(raw: unknown): Record<string, AccessLog> {
+export function parseLogs(raw: unknown): Record<string, AccessLog> {
   const out: Record<string, AccessLog> = {};
   if (raw && typeof raw === "object") {
     for (const [key, value] of Object.entries(raw)) {
