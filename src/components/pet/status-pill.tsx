@@ -25,15 +25,28 @@ const config: Record<
   pending: { variant: "pending", label: "Pendente" },
 };
 
-// No chassis as versões -soft somem; o texto vem do token misturado com on-chassis (contraste ≥ 4.5:1).
+// No chassis as versões -soft somem; o texto vem do token misturado com on-chassis. Proporções
+// conferidas com o axe sobre o fundo da pílula no chassis e no chassis-raised (≥ 4.5:1, fase 6).
 const onChassisTone: Record<PillStatus, string> = {
   online: "text-lock",
-  offline: "text-[color-mix(in_oklch,var(--offline)_70%,var(--on-chassis))]",
-  master: "text-[color-mix(in_oklch,var(--master)_45%,var(--on-chassis))]",
-  standby: "text-on-chassis-muted",
+  offline: "text-[color-mix(in_oklch,var(--offline)_30%,var(--on-chassis))]",
+  master: "text-[color-mix(in_oklch,var(--master)_15%,var(--on-chassis))]",
+  // on-chassis-muted sobre o fundo da pílula fica abaixo de 4,5:1 (axe, fase 6)
+  standby: "text-on-chassis",
   allowed: "text-lock",
-  denied: "text-[color-mix(in_oklch,var(--danger)_60%,var(--on-chassis))]",
-  pending: "text-[color-mix(in_oklch,var(--offline)_70%,var(--on-chassis))]",
+  denied: "text-[color-mix(in_oklch,var(--danger)_20%,var(--on-chassis))]",
+  pending: "text-[color-mix(in_oklch,var(--offline)_30%,var(--on-chassis))]",
+};
+
+// O texto fica claro para o contraste; o ponto mantém a cor cheia do estado.
+const onChassisDot: Record<PillStatus, string> = {
+  online: "",
+  offline: "[&_[data-slot=badge-dot]]:bg-offline",
+  master: "[&_[data-slot=badge-dot]]:bg-[color-mix(in_oklch,var(--master)_70%,var(--on-chassis))]",
+  standby: "[&_[data-slot=badge-dot]]:bg-on-chassis-muted",
+  allowed: "",
+  denied: "[&_[data-slot=badge-dot]]:bg-danger",
+  pending: "[&_[data-slot=badge-dot]]:bg-offline",
 };
 
 type StatusPillProps = {
@@ -54,7 +67,7 @@ export function StatusPill({ status, children, onChassis, size = "default", clas
       live={live}
       className={cn(
         size === "sm" && "h-5 gap-1 pr-2 pl-1.5 text-[11px] [&_[data-slot=badge-dot]]:size-1.5",
-        onChassis && ["bg-on-chassis/10", onChassisTone[status]],
+        onChassis && ["bg-on-chassis/10", onChassisTone[status], onChassisDot[status]],
         className,
       )}
     >

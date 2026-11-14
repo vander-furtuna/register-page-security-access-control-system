@@ -194,7 +194,12 @@ function PeripheralsCard({
           as do hardware atual.
         </p>
       ) : null}
-      <div className="relative overflow-x-auto">
+      <div
+        role="region"
+        aria-label="Tabela de periféricos"
+        tabIndex={0}
+        className="relative overflow-x-auto outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+      >
         <table className="w-full min-w-[640px] text-body">
           <thead className="bg-surface-sunken">
             <tr>
