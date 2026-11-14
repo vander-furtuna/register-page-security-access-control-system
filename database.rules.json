@@ -1,45 +1,116 @@
 {
   "rules": {
-    ".read": "auth != null",
+    ".read": "auth != null && ((root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/)) || root.child('config/deviceUids').child(auth.uid).val() === true || (auth.provider === 'anonymous' && root.child('config/legacyAnonymousDevice').val() !== false))",
     ".write": false,
+
+    "admins": {
+      "$uid": {
+        ".read": "auth != null && auth.uid === $uid"
+      }
+    },
+
     "system": {
-      ".write": "auth != null"
+      ".write": "auth != null && (root.child('config/deviceUids').child(auth.uid).val() === true || (auth.provider === 'anonymous' && root.child('config/legacyAnonymousDevice').val() !== false))",
+      "mode": {
+        ".validate": "newData.val() === 'STANDBY' || newData.val() === 'MASTER'"
+      }
     },
+
     "users": {
-      ".write": "auth != null"
+      ".write": "auth != null && (root.child('config/deviceUids').child(auth.uid).val() === true || (auth.provider === 'anonymous' && root.child('config/legacyAnonymousDevice').val() !== false))",
+      "$key": {
+        ".write": "auth != null && data.exists() && root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/)"
+      }
     },
+
     "logs": {
-      ".write": "auth != null",
+      ".write": "auth != null && (root.child('config/deviceUids').child(auth.uid).val() === true || (auth.provider === 'anonymous' && root.child('config/legacyAnonymousDevice').val() !== false))",
       ".indexOn": ["userPath", "userEmail", "timestamp"]
     },
+
     "pendingRegistration": {
-      ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/) || !newData.exists())"
+      "current": {
+        ".write": "auth != null && ((root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/)) || (data.exists() && (root.child('config/deviceUids').child(auth.uid).val() === true || (auth.provider === 'anonymous' && root.child('config/legacyAnonymousDevice').val() !== false))))",
+        ".validate": "newData.hasChildren(['username', 'email', 'mode', 'timestamp'])",
+        "username": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 80"
+        },
+        "email": {
+          ".validate": "newData.isString() && newData.val().matches(/^[^@ ]+@[^@ ]+$/)"
+        },
+        "mode": {
+          ".validate": "newData.val() === 'CARD_AND_FINGER' || newData.val() === 'CARD_ONLY' || newData.val() === 'FINGER_ONLY'"
+        },
+        "timestamp": {
+          ".validate": "newData.isString()"
+        }
+      }
     },
+
     "pendingUser": {
-      ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/) || !newData.exists())"
+      "current": {
+        ".write": "auth != null && ((root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/)) || (!newData.exists() && (root.child('config/deviceUids').child(auth.uid).val() === true || (auth.provider === 'anonymous' && root.child('config/legacyAnonymousDevice').val() !== false))))",
+        ".validate": "newData.hasChildren(['username', 'email', 'timestamp'])"
+      }
     },
+
     "members": {
-      ".write": "auth != null && root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/)"
+      "$key": {
+        ".write": "auth != null && root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/)",
+        ".validate": "newData.hasChildren(['role', 'active'])",
+        "role": {
+          ".validate": "newData.val() === 'petiano' || newData.val() === 'tutor' || newData.val() === 'visitante' || newData.val() === 'egresso'"
+        },
+        "active": {
+          ".validate": "newData.isBoolean()"
+        },
+        "validUntil": {
+          ".validate": "newData.isString() && newData.val().matches(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/)"
+        },
+        "updatedBy": {
+          ".validate": "newData.isString() && newData.val() === auth.uid"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
     },
-    "admins": {
-      ".write": false
-    },
+
     "devices": {
       "$deviceId": {
         "status": {
-          ".write": "auth != null"
+          ".write": "auth != null && (root.child('config/deviceUids').child(auth.uid).val() === true || (auth.provider === 'anonymous' && root.child('config/legacyAnonymousDevice').val() !== false))"
         },
         "inventory": {
-          ".write": "auth != null"
+          ".write": "auth != null && (root.child('config/deviceUids').child(auth.uid).val() === true || (auth.provider === 'anonymous' && root.child('config/legacyAnonymousDevice').val() !== false))"
         },
         "outages": {
-          ".write": "auth != null"
+          ".write": "auth != null && (root.child('config/deviceUids').child(auth.uid).val() === true || (auth.provider === 'anonymous' && root.child('config/legacyAnonymousDevice').val() !== false))"
         },
         "commands": {
+          ".indexOn": ["requestedAt"],
           "$commandId": {
-            ".write": "auth != null && (root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/) || data.exists())"
-          },
-          ".indexOn": ["requestedAt"]
+            ".write": "auth != null && ((!data.exists() && newData.exists() && root.child('admins').child(auth.uid).val() === true && auth.token.email.matches(/.*@(alu\\.)?ufc\\.br$/)) || (data.exists() && (root.child('config/deviceUids').child(auth.uid).val() === true || (auth.provider === 'anonymous' && root.child('config/legacyAnonymousDevice').val() !== false))))",
+            ".validate": "newData.hasChildren(['type', 'requestedBy', 'requestedAt', 'status'])",
+            "type": {
+              ".validate": "newData.val() === 'DELETE_FINGER' || newData.val() === 'DELETE_CARD' || newData.val() === 'REFRESH_INVENTORY' || newData.val() === 'REBOOT' || newData.val() === 'SET_UNLOCK_SECONDS' || newData.val() === 'SET_SHOW_NAME' || newData.val() === 'SET_REGISTRATION_SECONDS'"
+            },
+            "requestedBy": {
+              ".validate": "newData.isString() && (data.exists() ? newData.val() === data.val() : newData.val() === auth.uid)"
+            },
+            "requestedAt": {
+              ".validate": "newData.isNumber() && (data.exists() ? newData.val() === data.val() : newData.val() <= now)"
+            },
+            "status": {
+              ".validate": "newData.val() === 'PENDING' || (data.exists() && (newData.val() === 'DONE' || newData.val() === 'ERROR'))"
+            },
+            "error": { ".validate": "newData.isString()" },
+            "fingerId": { ".validate": "newData.isNumber()" },
+            "slot": { ".validate": "newData.isNumber()" },
+            "seconds": { ".validate": "newData.isNumber()" },
+            "enabled": { ".validate": "newData.isBoolean()" },
+            "$other": { ".validate": false }
+          }
         }
       }
     }

@@ -17,6 +17,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:rules": "vitest run --config vitest.rules.config.mts",
     "emulators": "firebase emulators:start --project demo-pet-lock",
     "seed:emulator": "tsx scripts/seed-emulator.ts",
     "prepare": "husky"
@@ -44,6 +45,7 @@
     "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
     "@playwright/test": "^1.65.0",
