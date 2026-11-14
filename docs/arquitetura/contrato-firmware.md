@@ -107,7 +107,7 @@ Fica de fora de propósito: entrar/sair do Modo mestre e limpar a memória intei
 
 - Trocar a `accessQueue` em RAM (20 eventos) por uma fila na flash (LittleFS/NVS), com limite de ~500 eventos.
 - Gravar no evento o horário real (`time(nullptr)`, epoch) além de `millis()`; se o NTP nunca sincronizou, marcar `clockSynced: false` em vez de mandar `1970-01-01`.
-- Chave do log por `push()` (ou `log_<epoch>_<seq>`), não por `millis()`, para não sobrescrever logs depois de reboot.
+- Chave do log única, não por `millis()`, para não sobrescrever logs depois de reboot. O firmware 2.1 usa `log_<epoch em s>_<6 hex aleatórios>` (sem relógio: `log_t<millis>_<hex>`). Em ordem de texto essas chaves ficam antes das `log_<millis>` do 2.0, por isso **o painel consulta os registros sempre por `timestamp`**, nunca pela chave.
 - Campos novos no log: `epoch`, `queuedOffline: true` quando o evento passou pela fila, `deviceId`, `credentialId` (slot do cartão ou ID da digital, também nos negados quando houver).
 - `syncedAt` (ms, `{".sv": "timestamp"}`) nos eventos que passaram pela fila: o painel mostra "Enviado às 09:20 (estava offline)" e conta os "chegaram atrasados" (v2, fase 4).
 - Manter `timestamp` ("AAAA-MM-DD HH:MM:SS", hora local) em todo evento: o painel consulta os registros por esse campo (`orderByChild("timestamp")`, índice nas regras). Sem NTP, manter o `1970-01-01 …` que o painel já trata como "sem horário confiável".
@@ -138,7 +138,7 @@ Campos **aditivos** em `devices/sala-pet/status`, cada grupo anunciado por uma c
 
 - `onlineSince` (ms): quando a conexão atual começou; o painel mostra "Online há 3 h 12 min". `bootAt`: último boot.
 - `settings` (capability `settings`): os valores **em uso** na fechadura. O site só os altera por comando (`SET_UNLOCK_SECONDS`, `SET_SHOW_NAME`, `SET_REGISTRATION_SECONDS`) e só mostra o valor novo depois que o ESP o publica aqui. Os ajustes precisam sobreviver a reboot (NVS).
-- `peripherals` (capability `peripherals`): diagnóstico do boot, periférico → respondeu. Chaves: `dy50`, `rc522`, `lcd`, `relay`, `buzzer`.
+- `peripherals` (capability `peripherals`): diagnóstico do boot, periférico → respondeu. Chaves: `dy50`, `rc522`, `lcd`, `relay`, `buzzer`. O firmware 2.1 publica só `dy50` (`verifyPassword`) e `rc522` (registrador de versão no SPI); LCD, relé e buzzer não têm como responder e aparecem como "Sem diagnóstico".
 
 Quedas de conexão em `devices/sala-pet/outages/<pushId>` (capability `outages`), escritas pelo ESP ao reconectar:
 
