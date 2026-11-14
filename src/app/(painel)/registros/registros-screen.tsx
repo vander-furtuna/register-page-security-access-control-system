@@ -312,7 +312,12 @@ export function RegistrosScreen() {
               }
             />
           ) : (
-            <div className="relative overflow-x-auto border-t border-line">
+            <div
+              role="region"
+              aria-label="Tabela de registros"
+              tabIndex={0}
+              className="relative overflow-x-auto border-t border-line outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+            >
               <table className="w-full min-w-[900px] text-body">
                 <thead>
                   <tr className="bg-surface-sunken">

@@ -22,7 +22,7 @@ Versões de referência (novembro/2026): Next.js 16.4, Tailwind CSS 4.3, Firebas
 | Gráficos | — | **shadcn Chart** (Recharts) | Acessos por hora |
 | Datas | `toISOString` | **date-fns** + `ptBR` | Fuso `America/Fortaleza` |
 | Dados | Firebase 11, `onValue` direto no componente | **Firebase JS SDK 13** (modular) + hooks próprios em `src/lib/firebase` | Ver abaixo |
-| Testes | — | **Vitest + Testing Library** (unidade), **Playwright** (fluxos críticos) | Emulador do Firebase nos testes |
+| Testes | — | **Vitest + Testing Library** (unidade), **Playwright** (fluxos críticos) + **@axe-core/playwright** (WCAG 2.2 AA em todas as telas, claro e escuro), testes das regras do banco contra o emulador (`pnpm test:rules`) | Emulador do Firebase nos testes |
 | Qualidade | ESLint 9 (FlatCompat) | **ESLint 9 flat** (`eslint-config-next`) + **Prettier** + `prettier-plugin-tailwindcss` | |
 | Commits | livre | **Conventional Commits** com **commitlint**, **Husky + lint-staged** | Ver `docs/versionamento.md` |
 | CI | — | **GitHub Actions**: lint, typecheck, test, build em todo PR | |

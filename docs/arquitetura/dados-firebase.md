@@ -112,9 +112,28 @@ Depois de um cadastro concluído, o site encontra o novo `users/*` pelo e-mail d
 
 ## 3. Regras de segurança (fase 6)
 
-O `database.rules.json` do repo é a versão inicial (fase 0/1): leitura para qualquer autenticado e escritas de admin exigindo `admins/{auth.uid} === true` **e** e-mail `@ufc.br`/`@alu.ufc.br` (`auth.token.email`). O ESP autentica anonimamente e não é admin, então a checagem de e-mail nunca roda para ele. Proposta para produção:
+`database.rules.json` (fase 6) separa três papéis. Testes: `tests/rules/database-rules.test.ts` (`pnpm emulators` + `pnpm test:rules`).
 
-- Leitura: só autenticados (admins ou o dispositivo).
-- `pendingRegistration`, `members`, `devices/*/commands`: escrita só de `admins/{auth.uid} === true`.
-- `system`, `users`, `logs`, `devices/*/status`, `devices/*/inventory`, `devices/*/outages`: escrita do dispositivo.
-- O ESP hoje autentica **anonimamente**. Para separar o dispositivo de um visitante anônimo, criar uma conta de serviço (e-mail/senha) para o ESP e liberar por `auth.uid === <uid do dispositivo>`, guardado em `config/deviceUids/{uid}: true`. Exige mudança no firmware (ver contrato).
+- **Admin:** `admins/{auth.uid} === true` **e** `auth.token.email` em `@ufc.br`/`@alu.ufc.br`.
+- **Fechadura:** `config/deviceUids/{auth.uid} === true` (conta própria, firmware 2.1) **ou** login anônimo enquanto `config/legacyAnonymousDevice` não for `false` (firmware 2.0). Sem o campo, o anônimo continua valendo: as regras novas não derrubam a porta.
+- **Qualquer outro login** (não-admin, e-mail fora da UFC, anônimo com o legado desligado): só lê o próprio `admins/{uid}`, para a tela "sem permissão".
+
+| Caminho | Lê | Escreve |
+|---|---|---|
+| tudo | admin, fechadura | — |
+| `admins/{uid}` | o próprio uid | ninguém (console) |
+| `config/*` | admin, fechadura | ninguém (console) |
+| `system/mode` | | fechadura (`STANDBY`/`MASTER`); o site nunca liga o Modo mestre |
+| `users/*` | | fechadura; admin só altera ou apaga um `users/{key}` que já existe (vincular, remover) |
+| `logs/*` | | fechadura |
+| `pendingRegistration/current` | | admin cria e apaga (formato conferido); fechadura atualiza (`step`, `result`) e apaga |
+| `pendingUser/current` | | admin; fechadura só apaga |
+| `members/{key}` | | admin (`role`, `active`, `validUntil` AAAA-MM-DD, `updatedBy` = o próprio uid; nada além) |
+| `devices/*/status`, `inventory`, `outages` | | fechadura |
+| `devices/*/commands/{id}` | | admin cria `PENDING` em nome próprio; só a fechadura muda para `DONE`/`ERROR` |
+
+**Implantar (Console › Realtime Database › Regras, ou `firebase deploy --only database`):**
+
+1. Antes de publicar, confira que cada admin está em `admins/{uid}` e entra com e-mail da UFC.
+2. Publique as regras. O firmware 2.0 segue funcionando pelo login anônimo.
+3. Com o firmware 2.1 usando a conta própria (`contrato-firmware.md` › 2.6): crie a conta em Authentication, grave `config/deviceUids/{uid}: true` e, quando a porta estiver estável, `config/legacyAnonymousDevice: false`.

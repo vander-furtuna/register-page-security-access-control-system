@@ -212,7 +212,12 @@ export function AccessHistory({ logs, now, fingerId }: { logs: TimedLog[]; now: 
           className="border-t border-line py-10"
         />
       ) : (
-        <div className="relative overflow-x-auto border-t border-line">
+        <div
+          role="region"
+          aria-label="Histórico de acessos"
+          tabIndex={0}
+          className="relative overflow-x-auto border-t border-line outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-inset"
+        >
           <table className="w-full min-w-[560px] text-body">
             <thead>
               <tr className="bg-surface-sunken">

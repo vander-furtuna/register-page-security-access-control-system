@@ -85,11 +85,11 @@ Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela no
 
 ## Fase 6 — Segurança, entrega e PR (→ `rc.N` → PR → `v2.0.0`)
 
-- [ ] `database.rules.json` de produção + testes de regras no emulador.
-- [ ] 🔌 Conta própria do dispositivo no lugar do login anônimo.
-- [ ] Revisão de acessibilidade (teclado, foco, contraste nos dois temas, leitor de tela no LCD e no mapa de slots).
-- [ ] Deploy de preview (Vercel ou Firebase Hosting) com variáveis de ambiente; atualizar `README.md`.
-- [ ] Sincronizar com `upstream/main`, gerar `v2.0.0-rc.1`, abrir o PR para o upstream com o template e as capturas.
+- [x] `database.rules.json` de produção + testes de regras no emulador. _(19 testes em `tests/rules/`, `pnpm test:rules`, também no CI. **Publicar** as regras no projeto real fica para o admin, com o passo a passo de `dados-firebase.md` › 3; conferir na porta real que o firmware 2.0 segue gravando.)_
+- [x] 🔌 Conta própria do dispositivo no lugar do login anônimo. _(Lado do site pronto: as regras aceitam `config/deviceUids/{uid}` e mantêm o anônimo do firmware 2.0 até `config/legacyAnonymousDevice: false`. Falta o firmware 2.1 usar a conta: `contrato-firmware.md` › 2.6.)_
+- [x] Revisão de acessibilidade (teclado, foco, contraste nos dois temas, leitor de tela no LCD e no mapa de slots). _(axe em todas as telas, claro/escuro, desktop/390px, nos estados firmware 2.0, 2.1, offline e Modo mestre; "Pular para o conteúdo"; setas/Home/End no mapa. O teste com leitor de tela de verdade (NVDA/TalkBack) fica para a rodada com a fechadura real.)_
+- [ ] Deploy de preview (Vercel ou Firebase Hosting) com variáveis de ambiente; atualizar `README.md`. _(README com o passo a passo e cabeçalhos de segurança prontos; o deploy precisa da conta e das chaves do projeto real: decisão e execução com o mantenedor.)_
+- [ ] Sincronizar com `upstream/main`, gerar `v2.0.0-rc.1`, abrir o PR para o upstream com o template e as capturas. _(Depois do merge desta fase e do deploy de preview, quando o mantenedor pedir.)_
 
 ## Firmware 2.1 (repositório `pet-lock-new`, em paralelo)
 

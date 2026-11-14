@@ -116,6 +116,10 @@ Fica de fora de propósito: entrar/sair do Modo mestre e limpar a memória intei
 
 Trocar `Firebase.signUp(&config, &auth, "", "")` (anônimo) por uma conta própria do dispositivo (e-mail/senha), para as regras do banco distinguirem a fechadura de qualquer visitante anônimo.
 
+- As credenciais da conta ficam no `secrets.h` (fora do git), como o Wi-Fi.
+- O uid da conta é liberado em `config/deviceUids/{uid}: true` (pelo console). As regras da fase 6 já aceitam essa conta e, enquanto `config/legacyAnonymousDevice` não for `false`, também o login anônimo do firmware 2.0 (`dados-firebase.md` › 3).
+- Depois que o 2.1 estiver na porta, o admin desliga o legado (`config/legacyAnonymousDevice: false`) e um login anônimo qualquer deixa de ler ou escrever no banco.
+
 ### 2.7 Saúde da fechadura (proposta da fase 5, tela 08)
 
 Campos **aditivos** em `devices/sala-pet/status`, cada grupo anunciado por uma capability:
