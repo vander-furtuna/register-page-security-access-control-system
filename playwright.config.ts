@@ -10,6 +10,9 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   reporter: process.env.CI ? "github" : "list",
   use: { baseURL, trace: "on-first-retry", actionTimeout: 10_000 },
+  // No `pnpm dev` cada rota compila na primeira visita; com a suíte toda em paralelo isso passa
+  // dos 5 s padrão. No CI (`pnpm start`, build pronto) não faz diferença.
+  expect: { timeout: 15_000 },
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] }, testIgnore: /fechadura\.spec/ },
     {
