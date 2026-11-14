@@ -21,6 +21,8 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ### Alterado
 - Dependência de desenvolvimento: `@axe-core/playwright`.
+- Regras: índice `rfid` e `fingerId` em `users` (o firmware 2.1 procura o membro do acesso por consulta filtrada).
+- Contrato com o firmware: Parte 3, com o que o firmware 2.1 implementa (capabilities, erros dos comandos, passos do cadastro, fila em flash, quedas, conta própria).
 
 ## [2.0.0-beta.0] — 2026-11-13
 
