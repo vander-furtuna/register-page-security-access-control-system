@@ -220,6 +220,7 @@ Uma ou poucas palavras de estado com um ponto colorido; cada cor tem um único s
 
 - `live` pulsa o ponto: só para estados que estão acontecendo agora (online, modo mestre). Respeita `prefers-reduced-motion`.
 - Offline é laranja, não vermelho: a porta continua funcionando. Vermelho é reservado para acesso negado e erro.
+- Sobre o `chassis` (sidebar, topo do LockStatusCard) as versões `-soft` somem: o fundo é `on-chassis` a 10% e o **texto** é o token misturado com `on-chassis` (offline 30%, master 15%, negado 20%; em espera usa `on-chassis`), para ficar ≥ 4,5:1 também sobre `chassis-raised`. O **ponto** mantém a cor cheia do estado. Proporções conferidas com o axe (fase 6).
 
 ## Tabs
 

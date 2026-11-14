@@ -4,6 +4,22 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 
 ## [Não lançado] — v2
 
+### Adicionado
+- Fase 6 — segurança. `database.rules.json` de produção: leitura só para admin (`admins/{uid}` + e-mail da UFC) ou para a fechadura; cada caminho com um único dono (o site não liga o Modo mestre nem grava registros; a fechadura não mexe em `members/*`); formato conferido em `pendingRegistration`, `members` e `devices/*/commands` (só a fechadura marca `DONE`/`ERROR`, comandos em nome de quem pediu).
+- Conta própria da fechadura: as regras aceitam `config/deviceUids/{uid}` (firmware 2.1) e mantêm o login anônimo do firmware 2.0 até `config/legacyAnonymousDevice: false`.
+- Testes das regras contra o emulador (`pnpm test:rules`, 19 casos), também num job do CI.
+- Acessibilidade: varredura axe (WCAG 2.2 AA) de todas as telas nos dois temas, no desktop e em 390px; testes de teclado; link "Pular para o conteúdo".
+- Cabeçalhos de segurança (`frame-ancestors 'none'`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP para o popup do Google); README com o passo a passo de publicação.
+
+### Corrigido
+- Contraste das pílulas sobre o chassis (em espera, offline, Modo mestre, negado) abaixo de 4,5:1 na sidebar e no card da fechadura; o ponto mantém a cor do estado.
+- Tabelas com rolagem lateral (histórico do membro, registros, periféricos) agora recebem foco pelo teclado.
+- Busca global: a escolha de um membro não se perde quando chega um acesso novo no meio dela.
+- e2e estável com a suíte inteira em paralelo no `pnpm dev` (tempo de `expect` de 15 s).
+
+### Alterado
+- Dependência de desenvolvimento: `@axe-core/playwright`.
+
 ## [2.0.0-beta.0] — 2026-11-13
 
 Fase 5 — credenciais na fechadura e dispositivo. Todas as telas prontas; o teste com a fechadura real fica para depois da fase 6.
