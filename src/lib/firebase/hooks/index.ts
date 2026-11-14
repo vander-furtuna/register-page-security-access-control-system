@@ -1,6 +1,6 @@
 "use client";
 
-import { limitToLast, query, ref } from "firebase/database";
+import { limitToLast, orderByChild, query, ref, type Database } from "firebase/database";
 import { useMemo } from "react";
 
 import { useNow } from "@/hooks/use-now";
@@ -62,13 +62,20 @@ export function parseLogs(raw: unknown): Record<string, AccessLog> {
 }
 
 /**
- * Últimos `limit` registros de acesso, do mais recente para o mais antigo pelo horário real.
- * Busca uma margem a mais pela chave (`log_<millis>` recomeça no boot do ESP).
+ * Os últimos `count` registros pelo `timestamp` (índice nas regras), nunca pela chave: o
+ * firmware 2.0 grava `log_<millis>` (recomeça a cada boot) e o 2.1 `log_<epoch>_<sufixo>`,
+ * e em ordem de texto as chaves novas ficam antes das antigas. Registros sem horário
+ * (`1970-01-01`) ficam de fora: a tela de Registros mostra esses à parte.
  */
+export function latestLogsQuery(db: Database, count: number) {
+  return query(ref(db, paths.logs), orderByChild("timestamp"), limitToLast(count));
+}
+
+/** Últimos `limit` registros de acesso, do mais recente para o mais antigo pelo horário real. */
 export function useRecentLogs(limit = 20): RtdbState<TimedLog[]> {
   const fetchCount = limit * 2;
-  const state = useRtdbValue(`${paths.logs}?last=${fetchCount}`, parseLogs, (db) =>
-    query(ref(db, paths.logs), limitToLast(fetchCount)),
+  const state = useRtdbValue(`${paths.logs}?latest=${fetchCount}`, parseLogs, (db) =>
+    latestLogsQuery(db, fetchCount),
   );
   return useMemo(() => {
     if (state.status !== "ready") return state;
@@ -87,9 +94,7 @@ export type OrphansState =
 export function useOrphans(): OrphansState {
   const inventory = useDeviceInventory();
   const users = useUsers();
-  const logs = useRtdbValue(`${paths.logs}?last=200`, parseLogs, (db) =>
-    query(ref(db, paths.logs), limitToLast(200)),
-  );
+  const logs = useRtdbValue(`${paths.logs}?latest=200`, parseLogs, (db) => latestLogsQuery(db, 200));
 
   return useMemo<OrphansState>(() => {
     if (inventory.status === "ready" && users.status !== "loading" && users.status !== "error") {
