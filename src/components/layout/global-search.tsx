@@ -43,6 +43,9 @@ export function GlobalSearch({ className }: { className?: string }) {
         items={members.rows}
         filter={(item, q) => matchesQuery(item, q)}
         itemToStringLabel={(item) => item.username}
+        // a lista é refeita a cada acesso novo no banco: compara pela chave, não pelo objeto
+        isItemEqualToValue={(item, value) => item.key === value.key}
+        itemToStringValue={(item) => item.key}
         limit={8}
         inputValue={query}
         onInputValueChange={setQuery}
