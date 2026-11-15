@@ -94,3 +94,5 @@ Objetivo: trocar a fundação inteira sem perder o que funciona. Nenhuma tela no
 ## Firmware 2.1 (repositório `pet-lock-new`, em paralelo)
 
 Itens do `contrato-firmware.md` › Parte 2: heartbeat/LCD, inventário, `step` do cadastro, comandos, fila persistente com horário real e chave de log única, conta do dispositivo, saúde da fechadura (2.7: quedas, ajustes, periféricos).
+
+- [x] Implementado na branch `feat/firmware-2.1` do `pet-lock-new` (contrato › Parte 3), com correções de bugs da EEPROM, da fila offline e da remoção na porta. _(Compila; falta gravar e testar na fechadura real.)_

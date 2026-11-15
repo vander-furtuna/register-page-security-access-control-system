@@ -1,6 +1,6 @@
 "use client";
 
-import { equalTo, limitToLast, orderByChild, query, ref } from "firebase/database";
+import { equalTo, orderByChild, query, ref } from "firebase/database";
 import { useMemo } from "react";
 
 import { useNow } from "@/hooks/use-now";
@@ -12,7 +12,7 @@ import { memberMetaSchema, userRecordSchema } from "../schemas";
 import type { AccessLog, DeviceInventory, DeviceStatus, MemberMeta, UserRecord } from "../types";
 import { useRtdbValue } from "../use-rtdb-value";
 
-import { parseLogs, useDeviceInventory, useDeviceStatus, useUsers } from "./index";
+import { latestLogsQuery, parseLogs, useDeviceInventory, useDeviceStatus, useUsers } from "./index";
 
 /** `members/*` tolerante: uma entrada fora do esquema é ignorada, não derruba a lista. */
 function parseMembers(raw: unknown): Record<string, MemberMeta> {
@@ -47,8 +47,8 @@ const EMPTY: MemberRow[] = [];
 export function useMembers(logLimit = 1000): MembersState {
   const users = useUsers();
   const metas = useMemberMetas();
-  const logs = useRtdbValue(`${paths.logs}?last=${logLimit}`, parseLogs, (db) =>
-    query(ref(db, paths.logs), limitToLast(logLimit)),
+  const logs = useRtdbValue(`${paths.logs}?latest=${logLimit}`, parseLogs, (db) =>
+    latestLogsQuery(db, logLimit),
   );
   const inventory = useDeviceInventory();
   const device = useDeviceStatus();

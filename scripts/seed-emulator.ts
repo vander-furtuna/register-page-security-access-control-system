@@ -72,6 +72,12 @@ const OFFSET_MS = -3 * 60 * 60 * 1000;
 const pad = (n: number) => String(n).padStart(2, "0");
 
 function lockDate(daysAgo: number, time: string): { text: string; epoch: number } {
+  const result = lockDateOn(daysAgo, time);
+  // Nunca grava acesso no futuro: rodando de madrugada, "hoje 14:32" vira "ontem 14:32".
+  return result.epoch > Date.now() ? lockDateOn(daysAgo + 1, time) : result;
+}
+
+function lockDateOn(daysAgo: number, time: string): { text: string; epoch: number } {
   const local = new Date(Date.now() + OFFSET_MS - daysAgo * 24 * 60 * 60 * 1000);
   const day = `${local.getUTCFullYear()}-${pad(local.getUTCMonth() + 1)}-${pad(local.getUTCDate())}`;
   const text = `${day} ${time}`;
