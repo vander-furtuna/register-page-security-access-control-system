@@ -12,6 +12,7 @@ Todas as mudanças relevantes deste projeto. Formato [Keep a Changelog](https://
 - Cabeçalhos de segurança (`frame-ancestors 'none'`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP para o popup do Google); README com o passo a passo de publicação.
 
 ### Corrigido
+- Inventário da fechadura: o RTDB devolve `cards`/`fingers` com chaves 1, 2, 3… como lista; o esquema converte de volta para objeto (a tela de Credenciais recusava o inventário real).
 - Login: quando o banco recusa conferir a permissão (regras não publicadas ou modo de teste vencido), a tela diz isso, com a conta usada e o botão Sair, em vez de "o Firebase não foi configurado". O erro completo vai para o console.
 - Últimos acessos, sem dono e último acesso dos membros consultam os registros pelo `timestamp`, não pela chave: as chaves do firmware 2.1 (`log_<epoch>_…`) ficam antes das `log_<millis>` do 2.0 em ordem de texto e sumiriam das listas.
 - Seed: horários "de hoje" que ainda não chegaram vão para o dia anterior (rodando de madrugada, gravava acessos no futuro).
