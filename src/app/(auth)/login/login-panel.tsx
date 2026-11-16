@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CircleAlertIcon, InfoIcon, Loader2Icon } from "lucide-react";
+import { CircleAlertIcon, InfoIcon, Loader2Icon, LogOutIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -16,6 +16,8 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import {
   authErrorMessage,
+  authFailureKind,
+  authFailureMessage,
   requestPasswordReset,
   safeNext,
   signInWithGoogle,
@@ -102,8 +104,20 @@ export function LoginPanel() {
           <CircleAlertIcon aria-hidden="true" />
           <AlertContent>
             <AlertDescription className="mt-0 text-danger-ink">
-              O login não está disponível neste ambiente: o Firebase não foi configurado.
+              {authFailureMessage(authFailureKind(auth.error), auth.user?.email)}
             </AlertDescription>
+            {auth.user ? (
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="mt-2 -ml-2 self-start"
+                onClick={() => void auth.signOut()}
+              >
+                <LogOutIcon aria-hidden="true" />
+                Sair
+              </Button>
+            ) : null}
           </AlertContent>
         </Alert>
       ) : null}

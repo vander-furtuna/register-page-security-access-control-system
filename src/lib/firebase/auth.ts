@@ -79,3 +79,34 @@ export function safeNext(next: string | null | undefined): string {
   if (!next || !next.startsWith("/") || next.startsWith("//") || next.startsWith("/login")) return "/";
   return next;
 }
+
+/**
+ * Por que a sessão não pôde ser conferida (`AuthState` com `status: "error"`):
+ * - `config`: faltam as variáveis NEXT_PUBLIC_FIREBASE_* (nem dá para entrar);
+ * - `permission`: entrou, mas as regras do banco recusaram ler `admins/{uid}`
+ *   (ex.: regras do modo de teste vencidas ou `database.rules.json` não publicado);
+ * - `other`: rede ou falha passageira.
+ */
+export type AuthFailureKind = "config" | "permission" | "other";
+
+export function authFailureKind(error: unknown): AuthFailureKind {
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  const code = (error as { code?: unknown } | null)?.code;
+  if (message.includes("Configuração do Firebase ausente")) return "config";
+  if (/permission[_ ]denied/i.test(message) || (typeof code === "string" && /permission/i.test(code))) {
+    return "permission";
+  }
+  return "other";
+}
+
+/** Texto da falha para a tela de login e a do painel. */
+export function authFailureMessage(kind: AuthFailureKind, email?: string | null): string {
+  if (kind === "config") {
+    return "O login não está disponível neste ambiente: o Firebase não foi configurado. Confira as variáveis NEXT_PUBLIC_FIREBASE_* ou use NEXT_PUBLIC_USE_EMULATOR=true.";
+  }
+  const who = email ? `Você entrou como ${email}, mas` : "Você entrou, mas";
+  if (kind === "permission") {
+    return `${who} o banco recusou conferir sua permissão. As regras do Realtime Database deste projeto não liberam a leitura (por exemplo, o modo de teste venceu). Um administrador precisa publicar o database.rules.json do painel.`;
+  }
+  return `${who} não foi possível conferir sua permissão agora. Confira a internet e tente de novo.`;
+}

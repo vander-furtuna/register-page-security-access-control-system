@@ -6,6 +6,8 @@ import { Logo } from "@/components/brand/logo";
 import { Alert, AlertContent, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 
+import { authFailureKind, authFailureMessage } from "@/lib/firebase/auth";
+
 import { useAuth } from "./auth-provider";
 
 /** Tela inteira enquanto a sessão e a permissão são checadas. */
@@ -75,7 +77,7 @@ export function NoPermission({ compact = false }: { compact?: boolean }) {
 /** Firebase sem configuração ou falha ao checar a permissão. */
 export function AuthFailure({ error }: { error: Error }) {
   const auth = useAuth();
-  const missingConfig = error.message.includes("Configuração do Firebase ausente");
+  const kind = authFailureKind(error);
   return (
     <div className="grid min-h-svh place-items-center bg-background p-4">
       <div className="flex w-full max-w-[440px] flex-col gap-4">
@@ -85,9 +87,7 @@ export function AuthFailure({ error }: { error: Error }) {
           <AlertContent>
             <AlertTitle>Não foi possível abrir o painel</AlertTitle>
             <AlertDescription>
-              {missingConfig
-                ? "O Firebase não está configurado neste ambiente. Confira as variáveis NEXT_PUBLIC_FIREBASE_* ou use NEXT_PUBLIC_USE_EMULATOR=true."
-                : "A conexão com o banco falhou ao checar sua permissão. Confira a internet e tente de novo. A porta continua funcionando normalmente."}
+              {authFailureMessage(kind, auth.user?.email)} A porta continua funcionando normalmente.
             </AlertDescription>
           </AlertContent>
         </Alert>
