@@ -147,11 +147,24 @@ export const deviceOutageSchema = z.object({
   queued: z.number().optional(),
 });
 
-/** `devices/<id>/inventory` (firmware 2.1). */
+/**
+ * O RTDB devolve um objeto de chaves numéricas pequenas e seguidas ("1", "2"…) como **lista**
+ * (`[null, "20:12:84:F6"]`). Converte de volta para `{ "1": … }`, ignorando os buracos.
+ */
+export function arrayLikeToRecord(value: unknown): unknown {
+  if (!Array.isArray(value)) return value;
+  const out: Record<string, unknown> = {};
+  value.forEach((item, index) => {
+    if (item !== null && item !== undefined) out[String(index)] = item;
+  });
+  return out;
+}
+
+/** `devices/<id>/inventory` (firmware 2.1). Posições como chave: `fingers["12"]`, `cards["7"]`. */
 export const deviceInventorySchema = z.object({
   updatedAt: z.number(),
-  fingers: z.record(z.string(), z.literal(true)).default({}),
-  cards: z.record(z.string(), z.string()).default({}),
+  fingers: z.preprocess(arrayLikeToRecord, z.record(z.string(), z.literal(true))).default({}),
+  cards: z.preprocess(arrayLikeToRecord, z.record(z.string(), z.string())).default({}),
   masterCard: z.boolean().optional(),
 });
 

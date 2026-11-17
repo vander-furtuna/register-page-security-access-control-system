@@ -1,7 +1,7 @@
 "use client";
 
 import { onAuthStateChanged, type User } from "firebase/auth";
-import { createContext, useContext, useMemo, useSyncExternalStore, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useSyncExternalStore, type ReactNode } from "react";
 
 import { signOut } from "@/lib/firebase/auth";
 import { getFirebaseAuth } from "@/lib/firebase/client";
@@ -71,6 +71,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const current = useSyncExternalStore(session.subscribe, session.get, session.getServer);
   const user = current.status === "user" ? current.user : null;
   const admin = useRtdbValue(user ? paths.admin(user.uid) : null, (raw) => raw === true);
+
+  const failure = current.status === "error" ? current.error : admin.status === "error" ? admin.error : null;
+  useEffect(() => {
+    if (failure) console.error("[auth] Não foi possível conferir a sessão:", failure);
+  }, [failure]);
 
   const value = useMemo<AuthContextValue>(() => {
     const base = { signOut };
