@@ -20,6 +20,15 @@ export type BatchState =
   | { phase: "error"; message: string };
 
 const SEND_ERROR = "Não foi possível enviar o pedido à fechadura. Confira a internet e tente de novo.";
+const TIMEOUT_ERROR =
+  "A fechadura não respondeu em 2 minutos e nada foi alterado. Confira na tela Dispositivo se ela está online e tente de novo.";
+
+/**
+ * Quanto o painel espera a fechadura. O firmware 2.1 recusa (ERROR "expirado") comando parado
+ * há mais de 90 s, então depois disso ele não executa mais: desistir aqui não deixa a porta
+ * com uma remoção que o banco não registrou.
+ */
+export const COMMAND_TIMEOUT_MS = 120_000;
 const APPLY_ERROR =
   "A fechadura concluiu, mas não foi possível atualizar o painel. Recarregue a página e confira o membro.";
 
@@ -72,6 +81,13 @@ export function useCommandBatch(actorUid: string | undefined) {
 
       setState({ phase: "waiting", total: statuses.size, done: 0 });
       let finished = false;
+      const timer = setTimeout(() => {
+        if (finished) return;
+        finished = true;
+        stop();
+        setState({ phase: "error", message: TIMEOUT_ERROR });
+      }, COMMAND_TIMEOUT_MS);
+      unsubscribers.current.push(() => clearTimeout(timer));
       for (const id of statuses.keys()) {
         const off = onValue(ref(getDb(), paths.deviceCommand(id)), (snap) => {
           const parsed = deviceCommandSchema.safeParse(snap.val());
